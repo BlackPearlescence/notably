@@ -1,0 +1,15 @@
+@use "../../styles/shared.scss";
+
+.authHeroContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../../assets/images/sky-3499982_1920.webp");
+    height: 80vh;
+    width: 50%;
+
+    .authMask {
+        z-index: 2;
+    }
+}

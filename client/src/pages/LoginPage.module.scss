@@ -1,0 +1,8 @@
+@use "../styles/shared.scss";
+
+.loginPageContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: none;
+}

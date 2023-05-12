@@ -4,7 +4,6 @@ import './App.scss';
 import { NavigationBar } from './components/bars/NavigationBar';
 import { LandingPage } from './pages/LandingPage';
 import { Footer } from './components/bars/Footer';
-import { LoginModal } from './components/authentication/LoginModal';
 import { Route, Routes } from 'react-router-dom';
 import { LoginPage } from './pages/LoginPage';
 
