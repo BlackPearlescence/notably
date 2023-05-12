@@ -1,22 +1,17 @@
 import { useSelector } from "react-redux";
 import styles from "./LoginModal.module.scss";
-import { selectIsLoginModalShown } from "../../store/slices/authSlice";
-import { useAppSelector } from "../../store/hooks";
+import { hideLoginModal, selectIsLoginModalShown } from "../../store/slices/authSlice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { Modal } from "react-bootstrap";
 
 export const LoginModal = () => {
 
     const isLoginShown: boolean = useAppSelector(selectIsLoginModalShown)
+    const dispatch = useAppDispatch()
 
     return(
-        <div>
-            {isLoginShown && (
-                <div className={styles.modalOverlay}>
-                    <div className={styles.modalContent}>
-                        <h2>Modal Title</h2>
-                        <p>Modal content goes here.</p>
-                    </div>
-                </div>
-            )}
-        </div>
+        <Modal centered show={isLoginShown} onHide={() => dispatch(hideLoginModal())}>
+            <Modal.Header></Modal.Header>
+        </Modal>
     )
 }

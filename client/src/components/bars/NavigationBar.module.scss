@@ -15,14 +15,16 @@
     img {
         width: 185px;
         height: 58px;
+        cursor: pointer;
     }
 
-    a {
+    span {
         text-decoration: none;
         @include shared.body-desktoplarge;
         color: shared.$color-black;
         font-weight: 500;
         transition: color 0.2s ease-in-out;
+        cursor: pointer;
 
         &:hover {
             color: shared.$color-main;
