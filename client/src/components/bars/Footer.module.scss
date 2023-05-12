@@ -1,0 +1,120 @@
+@use "../../styles/shared.scss";
+
+.footerContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-top: shared.$border-width-thick solid shared.$color-main;
+    background-color: shared.$color-white;
+
+    img {
+        width: 185px;
+        height: 58px;
+    }
+
+    .logoContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        span {
+            @include shared.body-desktoplarge;
+            color: shared.$color-primary;
+            font-weight: shared.$font-weight-regular
+        }
+    }
+    
+    .contactContainer {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-content: center;
+        align-items: flex-start;
+
+        span:nth-child(1) {
+            @include shared.body-desktoplarge;
+            color: shared.$color-primary;
+            font-weight: shared.$font-weight-semibold;
+        }
+
+        // Everything after first span
+        span:nth-child(n+2) {
+            @include shared.body-desktopmedium;
+            color: shared.$color-black;
+            font-weight: shared.$font-weight-regular;
+        }
+    }
+
+    .siteLinksContainer {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-content: center;
+        span {
+            @include shared.body-desktoplarge;
+            color: shared.$color-primary;
+            font-weight: shared.$font-weight-semibold;
+        }
+        a {
+            @include shared.body-desktopmedium;
+            text-decoration: none;
+            color: shared.$color-black;
+            font-weight: shared.$font-weight-regular;
+            transition: color 0.2s ease-in-out;
+            &:hover {
+                color: shared.$color-main;
+            }
+        }
+    }
+}
+
+@include shared.mobile {
+    .footerContainer {
+        display: flex;
+        flex-direction: column;
+
+        .logoContainer {
+            margin-top: shared.$padding-mobile-md;
+            margin-bottom: shared.$padding-mobile-md;
+            span {
+                @include shared.body-mobilelarge;
+            }
+        }
+    
+        .contactContainer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            justify-items: center;
+            align-content: center;
+
+            span:nth-child(1) {
+                @include shared.body-mobilelarge;
+                color: shared.$color-primary;
+                font-weight: shared.$font-weight-semibold;
+            }
+    
+            // Everything after first span
+            span:nth-child(n+2) {
+                @include shared.body-mobilemedium;
+                color: shared.$color-black;
+                font-weight: shared.$font-weight-regular;
+            }
+        }
+
+        .siteLinksContainer {
+            span {
+                @include shared.body-mobilelarge;
+            }
+
+            a {
+                @include shared.body-mobilemedium;
+            }
+        }
+    }
+
+    
+}

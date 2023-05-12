@@ -1,0 +1,142 @@
+@use "../../styles/shared.scss";
+
+.navigationBarContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: shared.$padding-desktop-md;
+    padding-right: shared.$padding-desktop-md;
+    padding-top: shared.$padding-desktop-md;
+    padding-bottom: shared.$padding-desktop-md;
+    border-bottom: shared.$border-width-thick solid shared.$color-main;
+
+
+    img {
+        width: 185px;
+        height: 58px;
+    }
+
+    a {
+        text-decoration: none;
+        @include shared.body-desktoplarge;
+        color: shared.$color-black;
+        font-weight: 500;
+        transition: color 0.2s ease-in-out;
+
+        &:hover {
+            color: shared.$color-main;
+        }
+    }
+
+    button {
+        padding-top: shared.$padding-desktop-xs;
+        padding-bottom: shared.$padding-desktop-xs;
+        padding-left: shared.$padding-desktop-xxl;
+        padding-right: shared.$padding-desktop-xxl;
+        @include shared.heading-desktopsmall;
+        color: shared.$color-white;
+        background-color: shared.$color-main;
+        border-radius: shared.$border-radius-lg;
+        border: none;
+        font-weight: shared.$font-weight-medium;
+        box-shadow: shared.$box-shadow-md;
+        transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+            color: shared.$color-main;
+            background-color: shared.$color-white;
+        }
+    }
+}
+
+@include shared.tablet {
+    .navigationBarContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: shared.$padding-tablet-md;
+        padding-right: shared.$padding-tablet-md;
+        padding-top: shared.$padding-tablet-md;
+        padding-bottom: shared.$padding-tablet-md;
+        border-bottom: shared.$border-width-thick solid shared.$color-main;
+        img {
+            width: shared.$box-mobile-md;
+            height: shared.$box-mobile-xs;
+        }
+
+        button {
+            @include shared.heading-tabletsmall;
+        }
+        
+        a:nth-child(n+2) {
+            @include shared.body-tabletlarge;
+            
+            // box-shadow: shared.$box-shadow-md;
+        }
+
+        
+        button {
+            padding-top: shared.$padding-tablet-xs;
+            padding-bottom: shared.$padding-tablet-xs;
+            padding-left: calc(shared.$padding-tablet-xxl * 2);
+            padding-right: calc(shared.$padding-tablet-xxl * 2);
+        }
+    }
+}
+
+@include shared.mobile {
+    .navigationBarContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+            "logo logo"
+            "home features"
+            "about pricing"
+            "button button";
+        grid-gap: shared.$gap-mobile-xs;
+        img {
+            grid-area: logo;
+            width: shared.$box-mobile-md;
+            height: shared.$box-mobile-xs;
+        }
+        
+        a:nth-child(n+2) {
+            @include shared.heading-mobilelarge;
+            // box-shadow: shared.$box-shadow-md;
+        }
+
+        a:nth-child(1) {
+            grid-area: logo;
+        }
+
+        a:nth-child(2) {
+            grid-area: home;
+        }
+
+        a:nth-child(3) {
+            grid-area: features;
+        }
+
+        a:nth-child(4) {
+            grid-area: about;
+        }
+
+        a:nth-child(5) {
+            grid-area: pricing;
+        }
+        
+        button {
+            @include shared.heading-tabletsmall;
+            padding-top: shared.$padding-mobile-xs;
+            padding-bottom: shared.$padding-mobile-xs;
+            padding-left: calc(shared.$padding-mobile-xxl * 2);
+            padding-right: calc(shared.$padding-mobile-xxl * 2);
+            grid-area: button;
+        }
+    }
+}
+

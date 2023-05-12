@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+// Fonts
+$font-family-heading: 'Nunito', sans-serif;
+$font-family: 'Poppins', sans-serif;
+
+// Typography Function
+@mixin typography($font-family, $font-size) {
+  font-family: $font-family;
+  font-size: $font-size;
+}
+
+// Typography
+// Desktop mixins
+@mixin heading-desktoplarge() {
+  font-family: $font-family-heading;
+  font-size: 60px;
+}
+@mixin heading-desktopmedium() {
+  font-family: $font-family-heading;
+  font-size: 48px;
+}
+
+@mixin heading-desktopsmall() {
+  font-family: $font-family-heading;
+  font-size: 36px;
+}
+
+@mixin body-desktoplarge() {
+  font-family: $font-family;
+  font-size: 24px;
+}
+
+@mixin body-desktopmedium() {
+  font-family: $font-family;
+  font-size: 18px;
+}
+
+@mixin body-desktopsmall() {
+  font-family: $font-family;
+  font-size: 16px;
+}
+
+@mixin smalltext-desktoplarge() {
+  font-family: $font-family;
+  font-size: 14px;
+}
+
+@mixin smalltext-desktopmedium() {
+  font-family: $font-family;
+  font-size: 12px;
+}
+
+@mixin smalltext-desktopsmall() {
+  font-family: $font-family;
+  font-size: 10px;
+}
+
+// Tablet mixins
+@mixin heading-tabletlarge() {
+  font-family: $font-family-heading;
+  font-size: 48px;
+}
+
+@mixin heading-tabletmedium() {
+  font-family: $font-family-heading;
+  font-size: 36px;
+}
+
+@mixin heading-tabletsmall() {
+  font-family: $font-family-heading;
+  font-size: 24px;
+}
+
+@mixin body-tabletlarge() {
+  font-family: $font-family;
+  font-size: 18px;
+}
+
+@mixin body-tabletmedium() {
+  font-family: $font-family;
+  font-size: 16px;
+}
+
+@mixin body-tabletsmall() {
+  font-family: $font-family;
+  font-size: 14px;
+}
+
+@mixin smalltext-tabletlarge() {
+  font-family: $font-family;
+  font-size: 12px;
+}
+
+@mixin smalltext-tabletmedium() {
+  font-family: $font-family;
+  font-size: 10px;
+}
+
+@mixin smalltext-tabletsmall() {
+  font-family: $font-family;
+  font-size: 8px;
+}
+
+// Mobile mixins
+@mixin heading-mobilelarge() {
+  font-family: $font-family-heading;
+  font-size: 36px;
+}
+
+@mixin heading-mobilemedium() {
+  font-family: $font-family-heading;
+  font-size: 30px;
+}
+
+@mixin heading-mobilesmall() {
+  font-family: $font-family-heading;
+  font-size: 24px;
+}
+
+@mixin body-mobilelarge() {
+  font-family: $font-family;
+  font-size: 16px;
+}
+
+@mixin body-mobilemedium() {
+  font-family: $font-family;
+  font-size: 14px;
+}
+
+@mixin body-mobilesmall() {
+  font-family: $font-family;
+  font-size: 12px;
+}
+
+@mixin smalltext-mobilelarge() {
+  font-family: $font-family;
+  font-size: 10px;
+}
+
+@mixin smalltext-mobilemedium() {
+  font-family: $font-family;
+  font-size: 8px;
+}
+
+@mixin smalltext-mobilesmall() {
+  font-family: $font-family;
+  font-size: 6px;
+}
+
+// Sizings
+$box-desktop-xs: 120px;
+$box-desktop-sm: 240px;
+$box-desktop-md: 360px;
+$box-desktop-lg: 480px;
+$box-desktop-xl: 600px;
+
+$box-tablet-xs: 100px;
+$box-tablet-sm: 200px;
+$box-tablet-md: 300px;
+$box-tablet-lg: 400px;
+$box-tablet-xl: 500px;
+
+$box-mobile-xs: 80px;
+$box-mobile-sm: 160px;
+$box-mobile-md: 240px;
+$box-mobile-lg: 320px;
+$box-mobile-xl: 400px;
+
+// Spacings
+$padding-desktop-xxs: 4px;
+$padding-desktop-xs: 8px;
+$padding-desktop-sm: 12px;
+$padding-desktop-md: 16px;
+$padding-desktop-lg: 24px;
+$padding-desktop-xl: 32px;
+$padding-desktop-xxl: 48px;
+
+$padding-tablet-xxs: 4px;
+$padding-tablet-xs: 8px;
+$padding-tablet-sm: 12px;
+$padding-tablet-md: 16px;
+$padding-tablet-lg: 20px;
+$padding-tablet-xl: 28px;
+$padding-tablet-xxl: 40px;
+
+$padding-mobile-xxs: 2px;
+$padding-mobile-xs: 4px;
+$padding-mobile-sm: 8px;
+$padding-mobile-md: 12px;
+$padding-mobile-lg: 16px;
+$padding-mobile-xl: 24px;
+$padding-mobile-xxl: 32px;
+
+// Border Radius
+$border-radius-xs: 2px;
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 16px;
+$border-radius-xl: 32px;
+
+// Border Widths
+$border-width-thin: 1px;
+$border-width-medium: 2px;
+$border-width-thick: 4px;
+
+// Box Shadows
+$box-shadow-xs: 0px 1px 2px 0px rgba(0,0,0,0.1);
+$box-shadow-sm: 0px 2px 4px 0px rgba(0,0,0,0.12);
+$box-shadow-md: 0px 4px 6px 0px rgba(0,0,0,0.16);
+$box-shadow-lg: 0px 8px 12px 0px rgba(0,0,0,0.2);
+$box-shadow-xl: 0px 16px 24px 0px rgba(0,0,0,0.24);
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+$font-weight-black: 900;
+
+// Letter Spacing
+$letter-spacing-normal: 0;
+$letter-spacing-wide: 0.025rem;
+$letter-spacing-wider: 0.05rem;
+
+// Gaps
+$gap-desktop-xs: 4px;
+$gap-desktop-sm: 8px;
+$gap-desktop-md: 12px;
+$gap-desktop-lg: 16px;
+$gap-desktop-xl: 24px;
+
+$gap-tablet-xs: 4px;
+$gap-tablet-sm: 8px;
+$gap-tablet-md: 12px;
+$gap-tablet-lg: 16px;
+$gap-tablet-xl: 20px;
+
+$gap-mobile-xs: 2px;
+$gap-mobile-sm: 4px;
+$gap-mobile-md: 8px;
+$gap-mobile-lg: 12px;
+$gap-mobile-xl: 16px;
+
+// Breakpoints
+$breakpoint-desktop: 1388px;
+$breakpoint-tablet: 1024px;
+$breakpoint-mobile: 430px;
+
+// Media Queries
+@mixin desktop {
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: $breakpoint-tablet) and (max-width: calc($breakpoint-desktop - 1px)) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: calc($breakpoint-tablet - 1px)) {
+    @content;
+  }
+}
+
+// Colors
+$color-main: #8DBDFF;
+$color-primary: #010C80;
+$color-secondary: #0080FF;
+$color-accent: #0023FF;
+
+// Neutral Colors
+$color-white: #FFFFFF;
+$color-black: #000000;
+$color-gray: #A0A0A0;
+$color-lightgray: #BDBDBD;
+
+// Note Colors
+$color-note-lightblue: #ADD8E6;
+$color-note-babypink: #F6D6E6;
+$color-note-lavender: #E6E6FA;
+$color-note-mintgreen: #F5FFFA;
+$color-note-palegreen: #98FB98;
+$color-note-lemonchiffon: #FFFACD;
+$color-note-peachpuff: #FFDAB9;
+
+// Annotation Colors
+$color-annotation-coral: rgba(#FF7F50,0.8);
+$color-annotation-skyblue: rgba(#87CEFA,0.8);
+$color-annotation-goldenrod: rgba(#DAA520,0.8);
+$color-annotation-mediumseagreen: rgba(#3CB371,0.8);
+$color-annotation-orchid: rgba(#DA70D6,0.8);

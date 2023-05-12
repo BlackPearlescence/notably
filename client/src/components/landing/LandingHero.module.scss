@@ -1,0 +1,165 @@
+@use "../../styles/shared.scss";
+
+.landingContainer {
+    display: flex;
+    
+    .landingHeroContainer {
+        background-image: url("../../assets/images/blue-5177612_1920.webp");
+        height: 90vh;
+        width: 100%;
+    }
+
+    .landingMask {
+        position:absolute;
+        background-color: rgba(0, 0, 0, 0.5);
+        height: 90vh;
+        width: 100%;
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+
+        p {
+            @include shared.heading-desktoplarge;
+            width: 1000px;
+            height: 200px;
+            color: shared.$color-white;
+            font-weight: shared.$font-weight-semibold;
+
+        }
+
+        .landingCTA {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: calc(shared.$box-desktop-xl * 1.2);
+
+            button {
+                padding-top: shared.$padding-desktop-xs;
+                padding-bottom: shared.$padding-desktop-xs;
+                margin-left: shared.$padding-desktop-xl;
+                margin-right: shared.$padding-desktop-xl;
+
+                border-radius: shared.$border-radius-lg;
+                border: none;
+                font-weight: shared.$font-weight-regular;
+                width: 1500px;
+
+                @include shared.heading-desktopmedium;
+                transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+                &:nth-child(1) {
+                    color: shared.$color-white;
+                    background-color: shared.$color-main;
+                    &:hover {
+                        color: shared.$color-white;
+                        background-color: shared.$color-secondary;
+                    }
+                }
+
+                &:nth-child(2) {
+                    color: shared.$color-black;
+                    background-color: shared.$color-white;
+                    &:hover {
+                        color: shared.$color-white;
+                        background-color: shared.$color-secondary;
+                    }
+                }
+                
+            }
+        }
+    }
+}
+
+@include shared.tablet {
+    .landingContainer {
+        .landingMask {
+            
+            p {
+                @include shared.heading-tabletlarge
+            }
+        }
+            
+    }
+
+}
+
+
+@include shared.mobile {
+    .landingContainer {
+        display: flex;
+        flex-direction: column;
+        .landingHeroContainer {
+            height: 70vh;
+        }
+        .landingMask {
+            position:absolute;
+            background-color: rgba(0, 0, 0, 0.5);
+            height: 70vh;
+            width: 100%;
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+    
+            p {
+                @include shared.heading-mobilesmall;
+                // width: calc(shared.$box-mobile-xl * 0.8);
+                width: 20rem;
+                height: shared.$box-mobile-xs;
+                color: shared.$color-white;
+                font-weight: shared.$font-weight-semibold;
+    
+            }
+    
+            .landingCTA {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                width: calc(shared.$box-mobile-md);
+    
+                button {
+                    padding-top: shared.$padding-mobile-xs;
+                    padding-bottom: shared.$padding-mobile-xs;
+                    margin-left: shared.$padding-mobile-xl;
+                    margin-right: shared.$padding-mobile-xl;
+                    margin-top: calc(shared.$padding-desktop-sm * 2);
+    
+                    border-radius: shared.$border-radius-lg;
+                    border: none;
+                    font-weight: shared.$font-weight-regular;
+                    width: 300px;
+    
+                    @include shared.heading-mobilemedium;
+                    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    
+                    &:nth-child(1) {
+                        color: shared.$color-white;
+                        background-color: shared.$color-main;
+                        &:hover {
+                            color: shared.$color-white;
+                            background-color: shared.$color-secondary;
+                        }
+                    }
+    
+                    &:nth-child(2) {
+                        color: shared.$color-black;
+                        background-color: shared.$color-white;
+                        &:hover {
+                            color: shared.$color-white;
+                            background-color: shared.$color-secondary;
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+}
