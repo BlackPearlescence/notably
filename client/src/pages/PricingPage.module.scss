@@ -1,3 +1,38 @@
+@use "../styles/shared.scss";
+
 .pricingContainer {
-    
+
+    h2 {
+        @include shared.heading-desktopmedium;
+        padding: shared.$padding-desktop-lg;
+        color: shared.$color-primary;
+    }
+    .subOptionsContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+
+        .pricingChoice {
+            width: shared.$box-desktop-sm;
+            transition: border-bottom 0.2s ease;
+            cursor: pointer;
+            h3 {
+                @include shared.heading-desktopsmall;
+                color: shared.$color-primary;
+            }
+        }
+
+        .pricingChoiceActive {
+            width: shared.$box-desktop-sm;
+            border-bottom: shared.$border-width-thick solid shared.$color-primary;
+            transition: border-bottom 0.2s ease;
+            cursor: pointer;
+            h3 {
+                @include shared.heading-desktopsmall;
+                color: shared.$color-primary;
+            }
+        }
+
+    }
 }
