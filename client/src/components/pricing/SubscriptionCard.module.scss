@@ -11,7 +11,18 @@
 
     h3 {
         @include shared.heading-desktopmedium;
+        color: shared.$color-main;
+    }
+
+    h4 {
+        @include shared.heading-desktopsmall;
         color: shared.$color-primary;
+    }
+
+    h6 {
+        @include shared.body-desktopmedium;
+        color: shared.$color-accent;
+        font-weight: shared.$font-weight-regular;
     }
 
     ul {
@@ -22,8 +33,31 @@
             text-align: left;
             width: shared.$box-desktop-sm;
             color: shared.$color-primary;
-            padding: shared.$padding-desktop-sm;
-            @include shared.body-desktopsmall;
+            padding: shared.$padding-desktop-xs;
+            @include shared.body-desktopmedium;
+        }
+    }
+
+    button {
+        @include shared.body-desktoplarge;
+        color: shared.$color-white;
+        background-color: shared.$color-main;
+        border: none;
+        border-radius: shared.$border-radius-md;
+        padding-top: shared.$padding-desktop-sm;
+        padding-bottom: shared.$padding-desktop-sm;
+        padding-left: shared.$padding-desktop-xxl;
+        padding-right: shared.$padding-desktop-xxl;
+        margin-top: shared.$padding-desktop-xs;
+        margin-bottom: shared.$padding-desktop-xs;
+        box-shadow: shared.$box-shadow-lg;
+        font-weight: shared.$font-weight-regular;
+
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: shared.$color-accent;
+            transition: background-color 0.2s ease;
         }
     }
 }
