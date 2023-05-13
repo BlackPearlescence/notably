@@ -35,4 +35,12 @@
         }
 
     }
+
+    .subsContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-start;
+        margin-top: shared.$padding-desktop-lg;
+    }
 }

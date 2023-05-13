@@ -13,10 +13,10 @@ interface SubscriptionCardProps {
 export const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ title, price, subType, discount, features, trial }) => {
 
     return (
-        <div>
+        <div className={styles.subscriptionCardContainer}>
             <h3>{title}</h3>
             <h4>${subType === "monthly" ? `${price}/mo` : `${price}/yr`}</h4>
-            <span>Save ${discount}</span>
+            {discount && <span>Save ${discount}</span>}
             <ul>
                 {features.map(feature => <li>{feature}</li>)}
             </ul>
