@@ -6,7 +6,7 @@
     justify-content: center;
     align-items: center;
     background-color: shared.$color-main;
-    height: 80vh;
+    height: 85vh;
     width: 50%;
 
     form {
@@ -14,5 +14,55 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        width: calc(shared.$box-desktop-md * 1.2);
+        height: calc(shared.$box-desktop-md * 1.2);
+        background-color: shared.$color-white;
+        box-shadow: shared.$box-shadow-lg;
+
+
+        h2 {
+            @include shared.heading-desktopmedium;
+            margin: shared.$gap-desktop-lg;
+            color: shared.$color-primary;
+        }
+        input {
+            margin: shared.$gap-desktop-lg;
+            @include shared.body-desktopmedium;
+            padding: shared.$gap-desktop-sm;
+            width: shared.$box-desktop-md;
+        }
+
+        button {
+            margin: shared.$gap-desktop-sm;
+            @include shared.body-desktopmedium;
+            padding-top: shared.$padding-desktop-xs;
+            padding-bottom: shared.$padding-desktop-xs;
+            padding-left: shared.$padding-desktop-xxl;
+            padding-right: shared.$padding-desktop-xxl;
+            border-radius: shared.$border-radius-md;
+            border: none;
+            background-color: shared.$color-main;
+            color: shared.$color-white;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+            box-shadow: shared.$box-shadow-md;
+
+            &:hover {
+                background-color: shared.$color-primary;
+                color: shared.$color-white;
+            }
+        }
+
+        span {
+            margin: shared.$gap-desktop-lg;
+            @include shared.body-desktopmedium;
+            text-decoration: underline;
+            color: shared.$color-secondary;
+            cursor: pointer;
+            transition: color 0.2s ease-in-out;
+             
+            &:hover {
+                color: shared.$color-accent;
+            }
+        }
     }
 }

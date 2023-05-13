@@ -70,10 +70,22 @@
     }
 }
 
+@include shared.tablet {
+    .footerContainer {
+        
+    }
+}
+
 @include shared.mobile {
     .footerContainer {
         display: flex;
         flex-direction: column;
+        height: 100%;
+
+        img {
+            width: shared.$box-mobile-md;
+            height: shared.$box-mobile-xs;
+        }
 
         .logoContainer {
             margin-top: shared.$padding-mobile-md;
@@ -112,6 +124,12 @@
 
             a {
                 @include shared.body-mobilemedium;
+            }
+        }
+
+        .socialLinksContainer {
+            * {
+                padding: shared.$padding-mobile-xs;
             }
         }
     }

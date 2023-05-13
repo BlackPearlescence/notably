@@ -6,10 +6,59 @@
     justify-content: center;
     align-items: center;
     background-image: url("../../assets/images/sky-3499982_1920.webp");
-    height: 80vh;
+    background-size: cover;
+    height: 85vh;
     width: 50%;
 
     .authMask {
         z-index: 2;
+        background-color: rgb(shared.$color-black, 0.5);
+        color: shared.$color-white;
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        h1 {
+            width: shared.$box-desktop-xl;
+            @include shared.heading-desktopmedium;
+            font-weight: shared.$font-weight-extrabold;
+        }
+    }
+}
+
+@include shared.tablet {
+    .authHeroContainer {
+        width: 100%;
+        height: 100%;
+
+        .authMask {
+
+            h1 {
+                @include shared.heading-tabletsmall;
+                width: shared.$box-tablet-xl;
+                padding-bottom: shared.$gap-tablet-xl;
+            }
+        }
+    }
+}
+
+@include shared.mobile {
+    .authHeroContainer {
+        width: 100%;
+        height: 80vh;
+        .authMask {
+            height: 80vh;
+
+            h1 {
+                @include shared.heading-mobilesmall;
+                width: shared.$box-mobile-xl;
+                padding-bottom: shared.$gap-mobile-xl;
+            }
+
+            
+        }
     }
 }

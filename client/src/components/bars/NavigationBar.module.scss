@@ -92,6 +92,7 @@
 @include shared.mobile {
     .navigationBarContainer {
         display: grid;
+        justify-items: center;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr;
         grid-template-areas:
@@ -104,39 +105,36 @@
             grid-area: logo;
             width: shared.$box-mobile-md;
             height: shared.$box-mobile-xs;
+            
         }
         
-        a:nth-child(n+2) {
-            @include shared.heading-mobilelarge;
+        span:nth-child(n+2) {
+            @include shared.heading-mobilemedium;
             // box-shadow: shared.$box-shadow-md;
         }
 
-        a:nth-child(1) {
-            grid-area: logo;
-        }
-
-        a:nth-child(2) {
+        span:nth-child(2) {
             grid-area: home;
         }
 
-        a:nth-child(3) {
+        span:nth-child(3) {
             grid-area: features;
         }
 
-        a:nth-child(4) {
+        span:nth-child(4) {
             grid-area: about;
         }
 
-        a:nth-child(5) {
+        span:nth-child(5) {
             grid-area: pricing;
         }
         
         button {
-            @include shared.heading-tabletsmall;
+            @include shared.heading-mobilesmall;
             padding-top: shared.$padding-mobile-xs;
             padding-bottom: shared.$padding-mobile-xs;
-            padding-left: calc(shared.$padding-mobile-xxl * 2);
-            padding-right: calc(shared.$padding-mobile-xxl * 2);
+            padding-left: calc(shared.$padding-mobile-xxl * 2.5);
+            padding-right: calc(shared.$padding-mobile-xxl * 2.5);
             grid-area: button;
         }
     }
