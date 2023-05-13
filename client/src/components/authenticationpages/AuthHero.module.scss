@@ -37,7 +37,7 @@
         .authMask {
 
             h1 {
-                @include shared.heading-tabletsmall;
+                @include shared.heading-tabletmedium;
                 width: shared.$box-tablet-xl;
                 padding-bottom: shared.$gap-tablet-xl;
             }
