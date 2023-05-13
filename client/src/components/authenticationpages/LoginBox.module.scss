@@ -9,15 +9,26 @@
     height: 85vh;
     width: 50%;
 
+    
+
     form {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: calc(shared.$box-desktop-md * 1.2);
-        height: calc(shared.$box-desktop-md * 1.2);
+        // width: calc(shared.$box-desktop-md * 1.2);
+        // height: calc(shared.$box-desktop-md * 1.2);
         background-color: shared.$color-white;
         box-shadow: shared.$box-shadow-lg;
+        transition: height 0.2s ease-in-out;
+
+        .errorMessage {
+            display: flex;
+            color: red;
+            font-size: 14px;
+            margin-top: 0px;
+            padding: 0px;
+        }
 
 
         h2 {

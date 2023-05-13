@@ -3,7 +3,7 @@ import { RootState } from "../store";
 
 interface AuthState {
     isLoginModalShown: boolean,
-    loginPageType?: "login" | "register",
+    loginPageType: "login" | "register",
 }
 
 const initialState: AuthState = {

@@ -5,11 +5,36 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: calc(shared.$box-tablet-md * 1.2);
-    height: calc(shared.$box-tablet-md * 1.2);
+    // width: calc(shared.$box-tablet-md * 1.2);
+    // height: calc(shared.$box-tablet-md * 1.2);
+    padding-bottom: shared.$padding-desktop-xs;
+    padding-right: shared.$padding-desktop-md;
+    padding-left: shared.$padding-desktop-md;
     background-color: shared.$color-white;
     box-shadow: shared.$box-shadow-lg;
 
+
+
+    .errorMessage {
+        display: flex;
+        color: red;
+        font-size: 14px;
+        margin-top: 0px;
+        padding: 0px;
+        margin-left: shared.$gap-desktop-lg;
+    }
+
+    .errorField {
+        border: 1px solid red;
+    }
+
+    .errorField:focus {
+        outline: shared.$border-width-thick solid rgba(red, 0.3);
+        border: 1px solid red;
+        border-radius: shared.$border-radius-md;
+        box-shadow: 0 0 3px red;
+        transition: outline 0.1s ease;
+    }
 
     h2 {
         @include shared.heading-tabletmedium;
@@ -21,6 +46,14 @@
         @include shared.body-tabletmedium;
         padding: shared.$gap-tablet-sm;
         width: shared.$box-tablet-md;
+    }
+
+    input:focus {
+        outline: shared.$border-width-thick solid rgba(blue, 0.3);
+        border: 1px solid blue;
+        border-radius: shared.$border-radius-md;
+
+        transition: outline 0.1s ease;
     }
 
     button {
@@ -60,8 +93,8 @@
 
 @include shared.tablet {
     .formContainer {
-        height: calc(shared.$box-tablet-md * 1.4);
-        width: shared.$box-tablet-lg;
+        // height: calc(shared.$box-tablet-md * 1.4);
+        // width: shared.$box-tablet-lg;
 
         h2 {
             @include shared.heading-tabletmedium;
@@ -79,8 +112,8 @@
 
 @include shared.mobile {
     .formContainer {
-        height: calc(shared.$box-mobile-md * 1.6);
-        width: shared.$box-mobile-md;
+        // height: calc(shared.$box-mobile-md * 1.6);
+        // width: shared.$box-mobile-md;
 
         h2 {
             @include shared.heading-mobilemedium;
