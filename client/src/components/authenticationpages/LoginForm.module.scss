@@ -36,6 +36,7 @@
         color: shared.$color-white;
         transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
         box-shadow: shared.$box-shadow-md;
+        font-weight: shared.$font-weight-semibold;
 
         &:hover {
             background-color: shared.$color-primary;
@@ -57,6 +58,41 @@
     }
 }
 
-@include shared.mobile {
+@include shared.tablet {
+    .formContainer {
+        height: calc(shared.$box-tablet-md * 1.4);
+        width: shared.$box-tablet-lg;
 
+        h2 {
+            @include shared.heading-tabletmedium;
+            margin: shared.$gap-tablet-lg;
+            color: shared.$color-primary;
+        }
+        input {
+            margin: shared.$gap-tablet-lg;
+            @include shared.body-tabletmedium;
+            padding: shared.$gap-tablet-sm;
+            width: shared.$box-tablet-md;
+        }
+    }
+}
+
+@include shared.mobile {
+    .formContainer {
+        height: calc(shared.$box-mobile-md * 1.6);
+        width: shared.$box-mobile-md;
+
+        h2 {
+            @include shared.heading-mobilemedium;
+            margin: shared.$gap-mobile-lg;
+            color: shared.$color-primary;
+        }
+        input {
+            margin: shared.$gap-tablet-sm;
+            @include shared.body-mobilemedium;
+            padding: shared.$gap-mobile-sm;
+            width: shared.$box-mobile-sm;
+        }
+
+    }
 }

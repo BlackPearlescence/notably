@@ -54,7 +54,7 @@
 
             h1 {
                 @include shared.heading-mobilesmall;
-                width: shared.$box-mobile-xl;
+                width: shared.$box-mobile-lg;
                 padding-bottom: shared.$gap-mobile-xl;
             }
 
