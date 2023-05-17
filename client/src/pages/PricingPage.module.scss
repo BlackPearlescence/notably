@@ -9,9 +9,46 @@
     }
     .subOptionsContainer {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-around;
         align-items: center;
+
+        .timeFrameOptions {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .smallPricingOptions {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-top: shared.$padding-desktop-lg;
+
+            .smallPlanContainer {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                box-shadow: shared.$box-shadow-md;
+                border-radius: shared.$border-radius-md;
+                // padding: shared.$padding-desktop-xxl;
+                width: calc(shared.$box-tablet-md/2);
+                height: shared.$box-tablet-xs;
+            }
+
+            .smallPlanContainerActive {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                box-shadow: shared.$box-shadow-md;
+                border-radius: shared.$border-radius-md;
+                // padding: shared.$padding-desktop-xxl;
+                width: calc(shared.$box-tablet-md/2);
+                height: shared.$box-tablet-xs;
+            }
+        }
 
         .pricingChoice {
             width: shared.$box-desktop-sm;
@@ -43,4 +80,45 @@
         align-items: flex-start;
         margin-top: shared.$padding-desktop-lg;
     }
+}
+
+@include shared.tablet {
+    .pricingContainer {
+        .subsContainer{
+            display: flex;
+            flex-direction: row;
+        }
+        .subOptionsContainer {
+
+            .pricingChoice {
+                h3 {
+                    @include shared.heading-tabletsmall;
+                }
+            }
+            .pricingChoiceActive {
+                h3 {
+                    @include shared.heading-tabletsmall;
+                }
+            }
+
+            .smallPricingOptions {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                .smallPlanContainer {
+                    margin-left: shared.$gap-tablet-xl;
+                    margin-right: shared.$gap-tablet-xl;
+                }
+
+                .smallPlanContainerActive {
+                    margin-left: shared.$gap-tablet-xl;
+                    margin-right: shared.$gap-tablet-xl;
+                    background-color: shared.$color-main;
+                    color: shared.$color-white;
+                }
+            }
+        }
+        
+    }
+    
 }
