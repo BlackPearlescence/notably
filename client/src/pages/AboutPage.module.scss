@@ -1,0 +1,104 @@
+@use "../styles/shared.scss";
+
+.aboutPageContainer {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+        @include shared.heading-desktoplarge;
+        padding: shared.$padding-desktop-lg;
+        color: shared.$color-primary;
+        font-weight: shared.$font-weight-semibold;
+    }
+    .contentContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: shared.$gap-desktop-xl;
+        margin-bottom: shared.$gap-desktop-xl;
+
+
+        .contentText {
+            @include shared.heading-desktopmedium;
+            font-size: 2.5rem;
+            color: shared.$color-primary;
+            font-weight: shared.$font-weight-semibold;
+            padding: shared.$padding-desktop-lg;
+            text-align: left;
+
+            &:first-letter {
+                initial-letter: 2   ;
+            }
+        }
+        
+        img {
+            object-fit: fill;
+            width: 50%;
+            height: 50%;
+        }
+    }
+}
+
+@include shared.tablet {
+    .aboutPageContainer {
+        .contentContainer {
+            display: flex;
+            flex-direction: column;
+
+            .contentText {
+                @include shared.heading-tabletmedium;
+                font-size: 1.5rem;
+                padding: shared.$padding-tablet-lg;
+                text-align: left;
+
+                &:first-letter {
+                    initial-letter: 2   ;
+                }
+            }
+        }
+
+        .contentContainer:nth-child(3) {
+            flex-direction: column-reverse;
+        }
+    }
+    
+}
+
+@include shared.mobile {
+    .aboutPageContainer {
+        h1 {
+            @include shared.heading-mobilelarge;
+            padding: shared.$padding-mobile-lg;
+        }
+
+        .contentContainer {
+            display: flex;
+            flex-direction: column;
+
+            .contentText {
+                @include shared.heading-mobilemedium;
+                font-size: 1.5rem;
+                padding: shared.$padding-mobile-lg;
+                text-align: left;
+
+                &:first-letter {
+                    initial-letter: 2   ;
+                }
+                
+            }
+
+            img {
+                width: 70%;
+                height: 70%;
+            }
+        }
+
+        .contentContainer:nth-child(3) {
+            flex-direction: column-reverse;
+        }
+
+        
+    }
+    
+}

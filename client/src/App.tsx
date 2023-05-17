@@ -8,6 +8,7 @@ import { Route, Routes } from 'react-router-dom';
 import { LoginPage } from './pages/LoginPage';
 import { PricingPage } from './pages/PricingPage';
 import { FeaturePage } from './pages/FeaturePage';
+import { AboutPage } from './pages/AboutPage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="login" element={<LoginPage />} />
         <Route path="pricing" element={<PricingPage />} />
         <Route path="features" element={<FeaturePage />} />
+        <Route path="about" element={<AboutPage />} />
       </Routes>
       <Footer />
     </div>
