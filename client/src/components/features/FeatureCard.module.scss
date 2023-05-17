@@ -1,1 +1,63 @@
 @use "../../styles/shared.scss";
+
+.featureCardContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: shared.$box-shadow-md;
+    border-radius: shared.$border-radius-xl;
+    width: shared.$box-desktop-lg;
+    height: shared.$box-desktop-lg;
+    padding: shared.$padding-desktop-xl;
+
+
+    h4 {
+        @include shared.heading-desktopsmall;
+        color: shared.$color-primary;
+        font-weight: shared.$font-weight-semibold;
+    }
+
+    li {
+        text-align: left;
+        margin-bottom: shared.$padding-desktop-xs;
+        @include shared.heading-desktopsmall;
+        color: shared.$color-primary;
+    }
+}
+
+@include shared.tablet {
+    .featureCardContainer {
+        width: shared.$box-tablet-lg;
+        height: shared.$box-tablet-lg;
+        padding: shared.$padding-tablet-xl;
+
+
+        h4 {
+            @include shared.heading-tabletsmall;
+        }
+
+        li {
+            margin-bottom: shared.$padding-tablet-xs;
+            @include shared.heading-tabletsmall;
+        }
+    }
+}
+
+@include shared.tablet {
+    .featureCardContainer {
+        width: shared.$box-mobile-lg;
+        height: shared.$box-mobile-lg;
+        padding: shared.$padding-mobile-xl;
+
+
+        h4 {
+            @include shared.heading-mobilesmall;
+        }
+
+        li {
+            margin-bottom: shared.$padding-mobile-xs;
+            @include shared.heading-mobilesmall;
+        }
+    }
+}

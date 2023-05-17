@@ -6,7 +6,7 @@ import { HiOutlineDatabase } from 'react-icons/hi';
 export const FeaturePage: React.FC = () => {
 
     return (
-        <div>
+        <div className={styles.featurePageContainer}>
             <h1>What does Notably have to offer?</h1>
             <h2>Simplicity</h2>
             <div className={styles.cardListContainer}>
@@ -16,7 +16,8 @@ export const FeaturePage: React.FC = () => {
                     "Easily create notes",
                     "Set different colors",
                 ]}>
-                    <HiOutlinePencilSquare size={50} />
+                    <HiOutlinePencilSquare size={100}
+                    color="010C80" />
                 </FeatureCard>
                 <FeatureCard
                 title="Organize"
@@ -24,42 +25,47 @@ export const FeaturePage: React.FC = () => {
                     "Create folders to arrange notes",
                     "Sort existing notes",
                 ]}>
-                    <HiOutlineFolder size={50} />
+                    <HiOutlineFolder size={100}
+                    color="010C80" />
                 </FeatureCard>
                 <FeatureCard
-                title="Organize"
+                title="Storage"
                 points={[
-                    "Create folders to arrange notes",
+                    "Snapshot history for all notes",
                     "Sort existing notes",
                 ]}>
-                    <HiOutlineFolder size={50} />
+                    <HiOutlineDatabase size={100}
+                    color="010C80" />
                 </FeatureCard>
             </div>
             <h2>Collaboration</h2>
             <div className={styles.cardListContainer}>
             <FeatureCard
-                title="Organize"
+                title="Team-Oriented"
                 points={[
-                    "Create folders to arrange notes",
-                    "Sort existing notes",
+                    "Invite people to the same project",
+                    "Manage access rights",
                 ]}>
-                    <HiOutlineFolder size={50} />
+                    <HiOutlineUsers size={100}
+                    color="010C80" />
                 </FeatureCard>
                 <FeatureCard
-                title="Organize"
+                title="Annotate"
                 points={[
-                    "Create folders to arrange notes",
-                    "Sort existing notes",
+                    "Write comments",
+                    "Add suggestions to text",
                 ]}>
-                    <HiOutlineFolder size={50} />
+                    <HiOutlinePencil size={100}
+                    color="010C80" />
                 </FeatureCard>
                 <FeatureCard
-                title="Organize"
+                title="Communicate"
                 points={[
-                    "Create folders to arrange notes",
-                    "Sort existing notes",
+                    "Chat with team members in real-time",
+                    "Reference notes in chat",
                 ]}>
-                    <HiOutlineFolder size={50} />
+                    <HiOutlineChatBubbleLeftEllipsis size={100}
+                    color="010C80" />
                 </FeatureCard>
             </div>
         </div>

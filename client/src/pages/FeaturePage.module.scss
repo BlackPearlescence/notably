@@ -1,1 +1,64 @@
 @use "../styles/shared.scss";
+
+.cardListContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: shared.$box-desktop-xs;
+    margin-bottom: shared.$box-desktop-xs;
+    flex-wrap: wrap;
+
+    
+}
+
+.featurePageContainer {
+    h1 {
+        @include shared.heading-desktoplarge;
+        padding: shared.$padding-desktop-lg;
+        color: shared.$color-primary;
+        font-weight: shared.$font-weight-semibold;
+    }
+    h2 {
+        @include shared.heading-desktoplarge;
+        padding: shared.$padding-desktop-lg;
+        color: shared.$color-secondary;
+        font-weight: shared.$font-weight-semibold;
+    }
+}
+
+@include shared.tablet {
+    .cardListContainer {
+        margin-top: shared.$box-tablet-xs;
+        margin-bottom: shared.$box-tablet-xs;
+    }
+
+    .featurePageContainer {
+        h1 {
+            @include shared.heading-tabletlarge;
+            padding: shared.$padding-tablet-lg;
+        }
+        h2 {
+            @include shared.heading-tabletlarge;
+            padding: shared.$padding-tablet-lg;
+        }
+    }
+}
+
+@include shared.mobile {
+    .cardListContainer {
+        margin-top: shared.$box-mobile-xs;
+        margin-bottom: shared.$box-mobile-xs;
+    }
+
+    .featurePageContainer {
+        h1 {
+            @include shared.heading-mobilelarge;
+            padding: shared.$padding-mobile-lg;
+        }
+        h2 {
+            @include shared.heading-mobilelarge;
+            padding: shared.$padding-mobile-lg;
+        }
+    }
+}
