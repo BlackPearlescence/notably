@@ -7,6 +7,7 @@ import { Footer } from './components/bars/Footer';
 import { Route, Routes } from 'react-router-dom';
 import { LoginPage } from './pages/LoginPage';
 import { PricingPage } from './pages/PricingPage';
+import { FeaturePage } from './pages/FeaturePage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="pricing" element={<PricingPage />} />
+        <Route path="features" element={<FeaturePage />} />
       </Routes>
       <Footer />
     </div>
