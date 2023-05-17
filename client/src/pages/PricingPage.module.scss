@@ -91,11 +91,16 @@
         .subOptionsContainer {
 
             .pricingChoice {
+                width: shared.$box-tablet-sm;
                 h3 {
                     @include shared.heading-tabletsmall;
                 }
             }
             .pricingChoiceActive {
+                width: shared.$box-tablet-sm;
+                border-bottom: shared.$border-width-thick solid shared.$color-primary;
+
+
                 h3 {
                     @include shared.heading-tabletsmall;
                 }
@@ -115,6 +120,54 @@
                     margin-right: shared.$gap-tablet-xl;
                     background-color: shared.$color-main;
                     color: shared.$color-white;
+                }
+            }
+        }
+        
+    }
+    
+}
+
+@include shared.mobile {
+    .pricingContainer {
+        .subsContainer{
+            display: flex;
+            flex-direction: row;
+        }
+        .subOptionsContainer {
+
+            .pricingChoice {
+                width: shared.$box-mobile-sm;
+                h3 {
+                    @include shared.heading-mobilesmall;
+                }
+            }
+            .pricingChoiceActive {
+                width: shared.$box-mobile-sm;
+                border-bottom: shared.$border-width-thick solid shared.$color-primary;
+                h3 {
+                    @include shared.heading-mobilesmall;
+                }
+            }
+
+            .smallPricingOptions {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                .smallPlanContainer {
+                    margin-left: shared.$gap-mobile-xs;
+                    margin-right: shared.$gap-mobile-xs;
+                    width: calc(shared.$box-mobile-sm/2);
+                    height: shared.$box-mobile-xs;
+                }
+
+                .smallPlanContainerActive {
+                    margin-left: shared.$gap-mobile-xs;
+                    margin-right: shared.$gap-mobile-xs;
+                    background-color: shared.$color-main;
+                    color: shared.$color-white;
+                    width: calc(shared.$box-mobile-sm/2);
+                    height: shared.$box-mobile-xs;
                 }
             }
         }

@@ -34,7 +34,7 @@ export const PricingPage = () => {
                     </div>
                 </div>
                 
-                {isTablet && (
+                {(isTablet || isMobile) && (
                 <> {subscriptionType === "monthly" && (
                     <>
                         <div className={styles.smallPricingOptions}>
@@ -189,12 +189,56 @@ export const PricingPage = () => {
             {isMobile && (<>{subscriptionType === "monthly" &&
             <>
                 <div className={styles.subsContainer}>
+                    {tierType === "free" && <SubscriptionCard 
+                    title="Free"
+                    price={0}
+                    subType={subscriptionType}
+                    trial={false}
+                    features={["For personal-use", "Create up to 2 note boards", "Create up to 20 notes per note board"]}
+                    />}
+                    {tierType === "startup" && <SubscriptionCard
+                    title="Startup"
+                    price={5}
+                    subType={subscriptionType}
+                    trial={true}
+                    features={["Ideal for small/startup companies", "Unlimited note boards", "Unlimited notes", "Invite up to 8 collaborators"]}
+                    />}
+                    {tierType === "enterprise" && <SubscriptionCard
+                    title="Enterprise"
+                    price={15}
+                    subType={subscriptionType}
+                    trial={false}
+                    features={["Ideal for enterprise-level environments", "Unlimited note boards", "Unlimited notes", "Unlimited collaborators", "Note snapshots"]}
+                    />}
                 </div>
             </>
             }
             {subscriptionType === "yearly" &&
             <>
                 <div className={styles.subsContainer}>
+                    {tierType === "free" && <SubscriptionCard 
+                    title="Free"
+                    price={0}
+                    subType={subscriptionType}
+                    trial={false}
+                    features={["For personal-use", "Create up to 2 note boards", "Create up to 20 notes per note board"]}
+                    />}
+                    {tierType === "startup" && <SubscriptionCard
+                    title="Startup"
+                    price={50}
+                    discount={10}
+                    subType={subscriptionType}
+                    trial={true}
+                    features={["Ideal for small/startup companies", "Unlimited note boards", "Unlimited notes", "Invite up to 8 collaborators"]}
+                    />}
+                    {tierType === "enterprise" && <SubscriptionCard
+                    title="Enterprise"
+                    price={160}
+                    discount={20}
+                    subType={subscriptionType}
+                    trial={false}
+                    features={["Ideal for enterprise-level environments", "Unlimited note boards", "Unlimited notes", "Unlimited collaborators", "Note snapshots"]}
+                    />}
                 </div>
             </>
             }</>)}
