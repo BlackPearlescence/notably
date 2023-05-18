@@ -1,0 +1,44 @@
+@use "../../styles/shared.scss";
+
+h4 {
+    @include shared.heading-desktopmedium;
+    color: shared.$color-primary;
+    font-weight: shared.$font-weight-semibold;
+}
+
+.infoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h5 {
+        @include shared.heading-desktopsmall;
+        color: shared.$color-secondary;
+        font-weight: shared.$font-weight-semibold;
+    }
+}
+
+@include shared.tablet {
+    h4 {
+        @include shared.heading-tabletmedium;
+    }
+
+    .infoContainer {
+        h5 {
+            @include shared.heading-tabletsmall;
+        }
+    }
+}
+
+@include shared.mobile {
+    h4 {
+        @include shared.heading-mobilemedium;
+    }
+
+    .infoContainer {
+        h5 {
+            @include shared.heading-mobilesmall;
+        }
+    }
+}

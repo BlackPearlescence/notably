@@ -46,7 +46,16 @@ const projectSlice = createSlice({
     }
 })
 
-export const { showCreateProjectModal, hideCreateProjectModal } = projectSlice.actions;
+export const { 
+    showCreateProjectModal, 
+    hideCreateProjectModal, 
+    showViewProjectModal, 
+    hideViewProjectModal,
+    showEditProjectModal,
+    hideEditProjectModal,
+    showDeleteProjectModal,
+    hideDeleteProjectModal,
+  } = projectSlice.actions;
 export const selectIsCreateProjectModalShown = (state: RootState) => state.project.isCreateProjectModalShown;
 export const selectIsViewProjectModalShown = (state: RootState) => state.project.isViewProjectModalShown;
 export const selectIsEditProjectModalShown = (state: RootState) => state.project.isEditProjectModalShown;

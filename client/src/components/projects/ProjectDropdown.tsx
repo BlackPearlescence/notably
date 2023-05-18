@@ -1,10 +1,13 @@
 import { HiMenu, HiOutlineEye, HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
 import styles from "./ProjectDropdown.module.scss";
 import { useEffect, useRef, useState } from "react";
+import { useAppDispatch } from "../../store/hooks";
+import { showViewProjectModal } from "../../store/slices/projectSlice";
 
 export const ProjectDropdown: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
+    const dispatch = useAppDispatch();
 
     const handleProjectDropdownClickOutside = (e: any) => {
         if(menuRef.current && !menuRef.current.contains(e.target)) {
@@ -32,7 +35,7 @@ export const ProjectDropdown: React.FC = () => {
 
             {isOpen && (
                 <div className={styles.projectDropdownContent}>
-                    <div>
+                    <div onClick={() => dispatch(showViewProjectModal())}>
                         <HiOutlineEye size={40} color="010C80"/>
                     </div>
                     <div>

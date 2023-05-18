@@ -13,6 +13,7 @@ import { ThankYouPage } from './pages/ThankYouPage';
 import { NoteTopBar } from './components/bars/NoteTopBar';
 import { ProjectPage } from './pages/ProjectPage';
 import { NewProjectModal } from './components/projects/NewProjectModal';
+import { ViewProjectModal } from './components/projects/ViewProjectModal';
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
         </Route>
       </Routes>
       <NewProjectModal />
+      <ViewProjectModal />
     </div>
   );
 }
