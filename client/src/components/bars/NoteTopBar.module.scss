@@ -1,0 +1,28 @@
+@use "../../styles/shared.scss";
+
+.noteBarContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: shared.$padding-desktop-sm;
+    padding-left: shared.$padding-desktop-md;
+    padding-right: shared.$padding-desktop-md;
+    border-bottom: shared.$border-width-thick solid shared.$color-main;
+    img {
+        width: 13%;
+        height: 13%;
+        cursor: pointer;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: row;
+        
+        div {
+            margin-left: shared.$padding-desktop-sm;
+            margin-right: shared.$padding-desktop-sm;
+            cursor: pointer;
+        }
+    }
+}

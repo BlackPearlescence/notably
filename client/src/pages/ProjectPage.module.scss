@@ -1,0 +1,32 @@
+@use "../styles/shared.scss";
+
+.projectWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: shared.$padding-desktop-md;
+    margin: shared.$padding-desktop-lg;
+
+    .createNewProjectBox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: shared.$box-desktop-md;
+        height: shared.$box-desktop-md;
+        background-color: shared.$color-main;
+        border-radius: shared.$border-radius-md;
+        box-shadow: shared.$box-shadow-lg;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: shared.$color-secondary;
+        }
+        h3 {
+            @include shared.heading-desktopmedium;
+            color: shared.$color-white;
+            font-weight: shared.$font-weight-semibold;
+        }
+    }
+}
