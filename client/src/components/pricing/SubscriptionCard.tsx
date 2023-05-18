@@ -1,5 +1,7 @@
 
+import { useNavigate } from "react-router-dom";
 import styles from "./SubscriptionCard.module.scss";
+
 
 interface SubscriptionCardProps {
     title: string;
@@ -11,7 +13,7 @@ interface SubscriptionCardProps {
 }
 
 export const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ title, price, subType, discount, features, trial }) => {
-
+    const navigate = useNavigate();
     return (
         <div className={styles.subscriptionCardContainer}>
             <h3>{title}</h3>
@@ -20,7 +22,7 @@ export const SubscriptionCard: React.FC<SubscriptionCardProps> = ({ title, price
             <ul>
                 {features.map(feature => <li>{feature}</li>)}
             </ul>
-            {trial && <button>7-Day Free Trial</button>}
+            {trial && (<button onClick={() => navigate("/thanks")}>7-Day Free Trial</button>)}
             {price === 0 ? <button>Go!</button> : <button>Buy "{title}"</button>}
         </div>
     )

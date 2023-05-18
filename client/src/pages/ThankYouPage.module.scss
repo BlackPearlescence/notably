@@ -1,0 +1,71 @@
+@use "../styles/shared.scss";
+
+.thankYouPageContainer {
+    display: flex;
+    flex-direction: column;
+    // width: 100vw;
+    // height: 80%;
+
+    .background {
+        background-image: url("../assets/images/sunset-3292911_1920.webp");
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 90vh;
+    }
+    .backgroundMask {
+        position: absolute;
+        background-color : rgba(0,0,0,0.5);
+        width: 100%;
+        height: 90vh;
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .thankYouCTA {
+            z-index: 10;
+
+            * {
+                margin-bottom: shared.$padding-desktop-xxl;
+                margin-top: shared.$padding-desktop-xxl;
+
+            }
+
+            h1 {
+                @include shared.heading-desktoplarge;
+                color: shared.$color-white;
+                font-weight: shared.$font-weight-semibold;
+            }
+
+            h2 {
+                @include shared.heading-desktopmedium;
+                color: shared.$color-white;
+                padding-left: calc(shared.$padding-desktop-xxl * 6);
+                padding-right: calc(shared.$padding-desktop-xxl * 6);
+            }
+
+            button {
+                @include shared.heading-desktopsmall;
+                color: shared.$color-white;
+                background-color: shared.$color-main;
+                border: none;
+                border-radius: shared.$border-radius-md;
+                padding-top: shared.$padding-desktop-xxs;
+                padding-bottom: shared.$padding-desktop-xxs;
+                padding-bottom: shared.$padding-desktop-xxs;
+                padding-left: shared.$padding-desktop-sm;
+                padding-right: shared.$padding-desktop-xs;
+                transition: background-color 0.2s ease;
+
+                &:hover {
+                    background-color: shared.$color-secondary;
+                    cursor: pointer;
+                }
+                
+            }
+        }
+    }
+    
+}
