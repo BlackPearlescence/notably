@@ -11,7 +11,7 @@ export const NewProjectModal = () => {
 
     }
     return (
-        <Modal show={newProjectModalShowState} onHide={() => dispatch(hideCreateProjectModal())} centered>
+        <Modal show={newProjectModalShowState} onHide={() => dispatch(hideCreateProjectModal())} fluid centered>
             <Modal.Header closeButton>
                 <Modal.Title><h2>New Project</h2></Modal.Title>
             </Modal.Header>

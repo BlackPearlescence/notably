@@ -31,3 +31,36 @@
         }
     }
 }
+
+@include shared.tablet {
+    .projectWrapper {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+
+        .createNewProjectBox {
+            width: shared.$box-tablet-md;
+            height: shared.$box-tablet-md;
+
+            h3 {
+                @include shared.heading-tabletmedium;
+            }
+        }
+    }
+}
+
+@include shared.mobile {
+    .projectWrapper {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+
+        .createNewProjectBox {
+            width: shared.$box-mobile-md;
+            height: shared.$box-mobile-md;
+
+            h3 {
+                @include shared.heading-mobilemedium;
+            }
+        }
+
+    }
+}

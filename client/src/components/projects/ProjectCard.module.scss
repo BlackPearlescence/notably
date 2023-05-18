@@ -41,10 +41,48 @@
     }
 
      h5 {
-        margin-top: shared.$padding-desktop-md;
         @include shared.heading-desktopsmall;
+        margin-top: shared.$padding-desktop-md;
         color: shared.$color-secondary;
         font-weight: shared.$font-weight-regular;
         padding: shared.$padding-desktop-xs;
      }
+}
+
+@include shared.tablet {
+    .projectCardContainer {
+        width: shared.$box-tablet-md;
+        height: shared.$box-tablet-md;
+
+        .titleBar {
+            h4 {
+                @include shared.heading-tabletsmall;
+            }
+        }
+
+        h5 {
+            @include shared.heading-tabletsmall;
+            margin-top: shared.$padding-tablet-md;
+            padding: shared.$padding-tablet-xs;
+        }
+    }
+}
+
+@include shared.mobile {
+    .projectCardContainer {
+        width: shared.$box-mobile-md;
+        height: shared.$box-mobile-md;
+
+        .titleBar {
+            h4 {
+                @include shared.heading-mobilesmall;
+            }
+        }
+
+        h5 {
+            @include shared.heading-mobilesmall;
+            margin-top: shared.$padding-mobile-md;
+            padding: shared.$padding-mobile-xs;
+        }
+    }
 }

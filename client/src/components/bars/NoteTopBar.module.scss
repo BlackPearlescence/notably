@@ -26,3 +26,15 @@
         }
     }
 }
+
+@include shared.mobile {
+    .noteBarContainer {
+        padding: shared.$padding-mobile-sm;
+        padding-left: shared.$padding-mobile-md;
+        padding-right: shared.$padding-mobile-md;
+        img {
+            width: 20%;
+            height: 20%;
+        }
+    }
+}
