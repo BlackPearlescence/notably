@@ -54,7 +54,6 @@
                 border-radius: shared.$border-radius-md;
                 padding-top: shared.$padding-desktop-xxs;
                 padding-bottom: shared.$padding-desktop-xxs;
-                padding-bottom: shared.$padding-desktop-xxs;
                 padding-left: shared.$padding-desktop-sm;
                 padding-right: shared.$padding-desktop-xs;
                 transition: background-color 0.2s ease;
@@ -68,4 +67,67 @@
         }
     }
     
+}
+
+@include shared.tablet {
+    .thankYouPageContainer {
+        .background {
+            height: 90vh;
+        }
+        .backgroundMask {
+            height: 90vh;
+            .thankYouCTA {
+                h1 {
+                    @include shared.heading-tabletlarge;
+                }
+                h2 {
+                    @include shared.heading-tabletmedium;
+                    padding-left: 0;
+                    padding-right: 0;
+                    padding-top: calc(shared.$padding-tablet-md);
+                    // height: 50%;
+                }
+                button {
+                    @include shared.heading-tabletsmall;
+                }
+            }
+        }
+        
+    }
+}
+
+@include shared.mobile {
+    .thankYouPageContainer {
+        .background {
+            height: 90vh;
+        }
+        .backgroundMask {
+            height: 90vh;
+            .thankYouCTA {
+                h1 {
+                    @include shared.heading-mobilesmall;
+                }
+                h2 {
+                    @include shared.heading-mobilemedium;
+                    padding-top: calc(shared.$padding-mobile-sm);
+                    padding-bottom: calc(shared.$padding-mobile-sm);
+                    padding-left: 0;
+                    padding-right: 0;
+    
+                    // padding-left: calc(shared.$padding-tablet-sm);
+                    // padding-right: calc(shared.$padding-tablet-sm);
+    
+                }
+                button {
+                    width: 50%;
+                    @include shared.heading-mobilesmall;
+                    padding-top: shared.$padding-mobile-xxs;
+                    padding-bottom: shared.$padding-mobile-xxs;
+                    padding-left: shared.$padding-mobile-xs;
+                    padding-right: shared.$padding-mobile-xs;
+                }
+            }
+        }
+        
+    }
 }
