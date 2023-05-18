@@ -12,6 +12,7 @@ import { AboutPage } from './pages/AboutPage';
 import { ThankYouPage } from './pages/ThankYouPage';
 import { NoteTopBar } from './components/bars/NoteTopBar';
 import { ProjectPage } from './pages/ProjectPage';
+import { NewProjectModal } from './components/projects/NewProjectModal';
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
           <Route path="projects" element={<ProjectPage />} />
         </Route>
       </Routes>
+      <NewProjectModal />
     </div>
   );
 }

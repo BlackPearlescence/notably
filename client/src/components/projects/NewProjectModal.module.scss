@@ -1,0 +1,59 @@
+@use "../../styles/shared.scss";
+
+h2 {
+    @include shared.heading-desktopsmall;
+    color: shared.$color-primary;
+    font-weight: shared.$font-weight-semibold;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    input {
+        width: shared.$box-desktop-lg;
+        padding: shared.$padding-desktop-xs;
+        @include shared.body-desktopmedium;
+        margin-bottom: shared.$padding-desktop-md;
+    }
+
+    .createControls {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        button {
+            margin-left: shared.$padding-desktop-sm;
+            margin-right: shared.$padding-desktop-sm;
+            @include shared.body-desktoplarge;
+            padding-top: shared.$padding-desktop-xs;
+            padding-bottom: shared.$padding-desktop-xs;
+            padding-left: shared.$padding-desktop-md;
+            padding-right: shared.$padding-desktop-md;
+            border-radius: shared.$border-radius-md;
+            border: none;
+            transition: background-color 0.2s ease;
+            box-shadow: shared.$box-shadow-md; 
+            &:hover {
+                background-color: shared.$color-secondary;
+                color: shared.$color-white;
+            }
+        }
+
+        .createBtn {
+            color: shared.$color-white;
+            background-color: shared.$color-main;
+        }
+
+        .cancelBtn {
+            color: black;
+            background-color: shared.$color-white;
+        }
+
+       
+
+    }
+
+}
