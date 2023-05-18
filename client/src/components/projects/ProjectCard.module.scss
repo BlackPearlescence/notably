@@ -1,0 +1,50 @@
+@use "../../styles/shared.scss";
+
+.projectCardContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: shared.$box-desktop-md;
+    height: shared.$box-desktop-md;
+    background-color: shared.$color-white;
+    border-radius: shared.$border-radius-md;
+    box-shadow: shared.$box-shadow-lg;
+
+    .titleBar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        border-bottom: shared.$border-width-thick solid shared.$color-main;
+        
+        h4 {
+            @include shared.heading-desktopsmall;
+            color: shared.$color-primary;
+            font-weight: shared.$font-weight-semibold;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .menuButton {
+            cursor: pointer;
+        }
+
+        * {
+            // margin-bottom: shared.$padding-desktop-sm;
+            // margin-top: shared.$padding-desktop-sm;
+            // margin-left: shared.$padding-desktop-xs;
+            // margin-right: shared.$padding-desktop-xs;
+        }
+    }
+
+     h5 {
+        margin-top: shared.$padding-desktop-md;
+        @include shared.heading-desktopsmall;
+        color: shared.$color-secondary;
+        font-weight: shared.$font-weight-regular;
+        padding: shared.$padding-desktop-xs;
+     }
+}

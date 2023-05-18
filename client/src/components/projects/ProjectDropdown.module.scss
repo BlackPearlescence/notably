@@ -1,0 +1,28 @@
+@use "../../styles/shared.scss";
+
+.projectDropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+
+    .projectDropdownContent {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        background-color: shared.$color-white;
+        // min-width: 10px;
+        box-shadow: shared.$box-shadow-md;
+        z-index: 1;
+
+        div {
+            padding: shared.$gap-desktop-sm;
+            background-color: shared.$color-white;
+            transition: background-color 0.2s ease;
+
+            &:hover {
+                background-color: shared.$color-secondary;
+                cursor: pointer;
+            }
+        }
+    }
+}

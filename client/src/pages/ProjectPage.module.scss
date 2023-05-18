@@ -6,6 +6,7 @@
     grid-template-rows: auto;
     grid-gap: shared.$padding-desktop-md;
     margin: shared.$padding-desktop-lg;
+    justify-items: center;
 
     .createNewProjectBox {
         display: flex;
