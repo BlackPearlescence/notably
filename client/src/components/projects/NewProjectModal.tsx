@@ -1,14 +1,15 @@
-import { Modal } from "react-bootstrap"
-import { useAppDispatch, useAppSelector } from "../../store/hooks"
-import { hideCreateProjectModal, selectIsCreateProjectModalShown } from "../../store/slices/projectSlice"
-import styles from "./NewProjectModal.module.scss"
+import { Modal } from "react-bootstrap";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { hideCreateProjectModal, selectIsCreateProjectModalShown } from "../../store/slices/projectSlice";
+import styles from "./NewEditProjectModal.module.scss";
+import React, { FormEvent } from "react";
 
 export const NewProjectModal = () => {
     const newProjectModalShowState = useAppSelector(selectIsCreateProjectModalShown)
     const dispatch = useAppDispatch()
 
-    const handleProjectSubmit = () => {
-
+    const handleProjectSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
     }
     return (
         <Modal show={newProjectModalShowState} onHide={() => dispatch(hideCreateProjectModal())} fluid centered>

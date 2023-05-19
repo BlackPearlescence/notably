@@ -14,6 +14,7 @@ import { NoteTopBar } from './components/bars/NoteTopBar';
 import { ProjectPage } from './pages/ProjectPage';
 import { NewProjectModal } from './components/projects/NewProjectModal';
 import { ViewProjectModal } from './components/projects/ViewProjectModal';
+import { RenameProjectModal } from './components/projects/RenameProjectModal';
 
 function App() {
 
@@ -53,6 +54,7 @@ function App() {
       </Routes>
       <NewProjectModal />
       <ViewProjectModal />
+      <RenameProjectModal />
     </div>
   );
 }
