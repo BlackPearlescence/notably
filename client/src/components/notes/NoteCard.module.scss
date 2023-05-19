@@ -37,3 +37,37 @@
     }
 
 }
+
+@include shared.tablet {
+    .noteCardContainer {
+        width: shared.$box-tablet-sm;
+        height: shared.$box-tablet-sm;
+
+        h6 {
+            @include shared.body-tabletsmall;
+        }
+    
+        p {
+            @include shared.body-tabletsmall;
+        }
+    }
+}
+
+@include shared.mobile {
+    .noteCardContainer {
+        width: calc(shared.$box-mobile-xs * 1.5);
+        height: shared.$box-mobile-sm;
+
+        h6 {
+            @include shared.body-mobilesmall;
+            width: 100%;
+            white-space: pre-wrap;
+            margin: 0;
+            padding: shared.$padding-mobile-xs;
+        }
+    
+        p {
+            @include shared.body-mobilesmall;
+        }
+    }
+}

@@ -159,3 +159,114 @@
         }
 
 }
+
+@include shared.tablet {
+    .notePageWrapper {
+        .notesContainer {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+    }
+}
+
+@include shared.mobile {
+    .notePageWrapper {
+        grid-template-areas: 
+        "notesearch notesearch notesearch notesearch notesearch notesearch notesearch notesearch notesearch"
+        "notesearch notesearch notesearch notesearch notesearch notesearch notesearch notesearch notesearch"
+        "notes notes notes notes notes notes notes notes options"
+        "notes notes notes notes notes notes notes notes options"
+        "notes notes notes notes notes notes notes notes options"
+        "notes notes notes notes notes notes notes notes options";
+        .foldersContainer {
+            grid-area: folders;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            .foldersBar {
+                width: 98%;
+                height: 90%;
+                border: shared.$border-width-thin solid shared.$color-primary;
+                border-radius: shared.$border-radius-lg;
+                display: flex;
+                flex-direction: row;
+                box-shadow: shared.$box-shadow-md;
+                justify-items: center;
+                align-items: center;
+                margin-top: shared.$padding-mobile-sm;
+                margin-bottom: shared.$padding-mobile-sm;
+
+                .folders {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+
+                    overflow-x:scroll;
+                    overflow-y:hidden;
+                }
+
+                input {
+                    margin: shared.$padding-mobile-sm;
+                    width: shared.$box-mobile-lg;
+                    @include shared.body-mobilemedium;
+                    border-radius: shared.$border-radius-md;
+                    border: shared.$border-width-thin solid shared.$color-lightgray;
+                }
+                
+
+                
+            }
+
+            ::-webkit-scrollbar {
+                width: 10px;
+                height: 10px;
+                border-bottom-left-radius: shared.$border-radius-lg;
+                border-bottom-right-radius: shared.$border-radius-lg;
+            
+            }
+        
+            ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            }
+        
+            ::-webkit-scrollbar-thumb {
+            background: shared.$color-primary;
+            border-radius: shared.$border-radius-lg;
+            }
+        
+            ::-webkit-scrollbar-thumb:hover {
+            background: shared.$color-accent;
+            }
+        }
+
+        .noteSearchContainer {
+            grid-area: notesearch;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            
+            input {
+                width: calc(shared.$box-mobile-xl * 1.6);
+                padding: shared.$padding-mobile-xs;
+                @include shared.body-mobilemedium;
+                margin-bottom: shared.$padding-mobile-md;
+            }
+        }
+        .notesContainer {
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 10px;
+        }
+
+        .optionsContainer {
+            width: 30px;
+            top: 10vh;
+
+            div {
+                background-color: shared.$color-white;
+            }
+        }
+    }
+}

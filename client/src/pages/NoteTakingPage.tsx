@@ -1,16 +1,32 @@
-import { HiOutlineDocumentAdd, HiOutlineFolderAdd, HiOutlineUserAdd, HiOutlineUserCircle, HiOutlineViewGrid, HiViewList } from "react-icons/hi";
+import { HiOutlineDocumentAdd, HiOutlineFolder, HiOutlineFolderAdd, HiOutlineUserAdd, HiOutlineUserCircle, HiOutlineViewGrid, HiViewList } from "react-icons/hi";
 import { FolderIcon } from "../components/notes/FolderIcon";
 import { NoteCard } from "../components/notes/NoteCard";
 import styles from "./NoteTakingPage.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TiSortAlphabeticallyOutline } from "react-icons/ti";
+import { useMediaQuery } from "react-responsive";
+import { screenSizes } from "../screenSizes";
 
 export const NoteTakingPage = () => {
     const [isListView, setIsListView] = useState(false);
+    const [iconSize, setIconSize] = useState(35);
+    const isDesktop = useMediaQuery({ minWidth: screenSizes.desktopMinimum });
+    const isTablet = useMediaQuery({ minWidth: screenSizes.tabletMinimum, maxWidth: screenSizes.tabletMaximum});
+    const isMobile = useMediaQuery({ maxWidth: screenSizes.mobileMaximum });
+    
+    useEffect(() => {
+            if(isDesktop) {
+                setIconSize(35);
+            } else if(isTablet) {
+                setIconSize(30);
+            } else if(isMobile) {
+                setIconSize(25);
+            }                
+    },[window.innerWidth, window.outerWidth])
 
     return (
         <div className={styles.notePageWrapper}>
-            <div className={styles.foldersContainer}>
+            {isDesktop && (<div className={styles.foldersContainer}>
                 <div className={styles.foldersBar}>
                     <div className={styles.folders}>
                         <FolderIcon />
@@ -27,7 +43,7 @@ export const NoteTakingPage = () => {
                     </div>
                     <input type="text" placeholder="Search folders..." maxLength={50} />
                 </div>
-            </div>
+            </div>)}
 
             <div className={styles.noteSearchContainer}>
                 <input type="text" placeholder="Search notes..." maxLength={50} />
@@ -53,23 +69,28 @@ export const NoteTakingPage = () => {
 
             <div className={styles.optionsContainer}>
                 <div className={styles.optionSidebar}>
+                    {(isTablet || isMobile) && (
+                        <div>
+                            <HiOutlineFolder size={iconSize} color="010C80"/>
+                        </div>
+                    )}
                     <div>
-                        <HiOutlineDocumentAdd size={35} color="010C80"/>
+                        <HiOutlineDocumentAdd size={iconSize} color="010C80"/>
                     </div>
                     <div>
-                        <HiOutlineFolderAdd size={35} color="010C80"/>
+                        <HiOutlineFolderAdd size={iconSize} color="010C80"/>
                     </div>
                     <div>
-                        <HiOutlineUserAdd size={35} color="010C80"/>
+                        <HiOutlineUserAdd size={iconSize} color="010C80"/>
                     </div>
                     <div>
-                        {isListView ? <HiOutlineViewGrid size={35} color="010C80" /> : <HiViewList size={35} color="010C80" />}
+                        {isListView ? <HiOutlineViewGrid size={iconSize} color="010C80" /> : <HiViewList size={iconSize} color="010C80" />}
                     </div>
                     <div>
-                        <HiOutlineUserCircle size={35} color="010C80"/>
+                        <HiOutlineUserCircle size={iconSize} color="010C80"/>
                     </div>
                     <div>
-                        <TiSortAlphabeticallyOutline size={35} color="010C80"/>
+                        <TiSortAlphabeticallyOutline size={iconSize} color="010C80"/>
                     </div>
                 </div>
                 {/* <div className={styles.userSidebar}>
