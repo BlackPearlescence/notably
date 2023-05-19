@@ -48,12 +48,21 @@ export const NoteTakingPage = () => {
             </div>
 
             <div className={styles.optionsContainer}>
+                <div className={styles.optionSidebar}>
 
+                </div>
+                <div className={styles.userSidebar}>
+                    
+                </div>
             </div>
 
-            <div className={styles.usersContainer}>
-
-            </div>
+            {/* <div className={styles.usersContainer}>
+                <div className={styles.userSidebar}>
+                    <img src="https://baconmockup.com/640/360" alt="user profile" />
+                    <img src="https://baconmockup.com/640/360" alt="user profile" />
+                    <img src="https://baconmockup.com/640/360" alt="user profile" />
+                </div>
+            </div> */}
 
         </div>
     )

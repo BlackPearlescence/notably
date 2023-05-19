@@ -3,15 +3,15 @@
 .notePageWrapper {
     display: grid;
     // only last column has to be 1/8th of the width
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(8, 1fr) 80px;
     grid-template-rows: auto;
     grid-template-areas: 
-        "folders folders folders folders folders folders folders folders"
-        "notesearch notesearch notesearch notesearch notesearch notesearch notesearch notesearch"
-        "notes notes notes notes notes notes notes options"
-        "notes notes notes notes notes notes notes options"
-        "notes notes notes notes notes notes notes users"
-        "notes notes notes notes notes notes notes .";
+        "folders folders folders folders folders folders folders folders folders"
+        "notesearch notesearch notesearch notesearch notesearch notesearch notesearch notesearch notesearch"
+        "notes notes notes notes notes notes notes notes options"
+        "notes notes notes notes notes notes notes notes options"
+        "notes notes notes notes notes notes notes notes options"
+        "notes notes notes notes notes notes notes notes options";
 
         & > div {
             // border: 1px solid black;
@@ -109,9 +109,66 @@
 
         .optionsContainer {
             grid-area: options;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+            position: fixed;
+            right: 0;
+            width: 80px;
+            // display: flex;
+            // flex-direction: column;
+            // justify-content: flex-end;
+            // align-content:  flex-start;
+            // justify-items:center;
+            // align-items: center;
+            
+            // width: 20%;
+            // height: 100vh;
+            // position: fixed;
+
+
+            div {
+                // top: calc(100vh - 50%);
+                background-color: shared.$color-white;
+
+                display: flex;
+                flex-direction: row;
+                justify-items: center;
+                align-items: center;
+                justify-content: center;
+                border: shared.$border-width-thin solid shared.$color-primary;
+                border-bottom-left-radius: shared.$border-radius-lg;
+                border-top-left-radius: shared.$border-radius-lg;
+                box-shadow: shared.$box-shadow-md;
+                
+                width: 100%;
+                height: 20%;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+            .optionSidebar {
+                
+            }
+
+            .userSidebar {
+                img {
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 50%;
+                        margin-right: shared.$padding-desktop-sm;
+                    }
+            }
         }
 
-        .usersContainer {
-            grid-area: users;
-        }
+        // .usersContainer {
+        //     grid-area: users;
+
+        //     img {
+        //         width: 30px;
+        //         height: 30px;
+        //         border-radius: 50%;
+        //         margin-right: shared.$padding-desktop-sm;
+        //     }
+        // }
 }
