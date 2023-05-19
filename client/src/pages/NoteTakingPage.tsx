@@ -1,4 +1,5 @@
 import { FolderIcon } from "../components/notes/FolderIcon";
+import { NoteCard } from "../components/notes/NoteCard";
 import styles from "./NoteTakingPage.module.scss";
 
 export const NoteTakingPage = () => {
@@ -29,7 +30,21 @@ export const NoteTakingPage = () => {
             </div>
 
             <div className={styles.notesContainer}>
-
+                <NoteCard />
+                <NoteCard />
+                <NoteCard />
+                <NoteCard />
+                <NoteCard />
+                <NoteCard />
+                <NoteCard />
+                <NoteCard />
+                <NoteCard />
+                <NoteCard />
+                <NoteCard />
+                <NoteCard />
+                <NoteCard />
+                <NoteCard />
+                <NoteCard />
             </div>
 
             <div className={styles.optionsContainer}>

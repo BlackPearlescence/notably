@@ -83,6 +83,10 @@
 
         .noteSearchContainer {
             grid-area: notesearch;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
             
             input {
                 width: calc(shared.$box-desktop-xl * 1.6);
@@ -98,6 +102,9 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             grid-template-rows: auto;
+            padding: shared.$padding-desktop-lg;
+            grid-gap: shared.$gap-desktop-xl;
+            justify-items: center;
         }
 
         .optionsContainer {
