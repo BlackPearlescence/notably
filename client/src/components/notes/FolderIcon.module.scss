@@ -1,0 +1,17 @@
+@use "../../styles/shared.scss";
+
+.folderIconContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    span {
+        @include shared.smalltext-desktoplarge;
+        margin-top: shared.$padding-desktop-xs;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 70%;
+    }
+}

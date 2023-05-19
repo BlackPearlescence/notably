@@ -16,6 +16,7 @@ import { NewProjectModal } from './components/projects/NewProjectModal';
 import { ViewProjectModal } from './components/projects/ViewProjectModal';
 import { RenameProjectModal } from './components/projects/RenameProjectModal';
 import { DeleteConfirmProjectModal } from './components/projects/DeleteConfirmProjectModal';
+import { NoteTakingPage } from './pages/NoteTakingPage';
 
 function App() {
 
@@ -51,6 +52,7 @@ function App() {
         </Route>
         <Route path="/" element={<NoteAppLayout />}>
           <Route path="projects" element={<ProjectPage />} />
+          <Route path="notes" element={<NoteTakingPage />} /> 
         </Route>
       </Routes>
       <NewProjectModal />

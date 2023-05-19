@@ -4,10 +4,11 @@ import { HiPlusCircle } from "react-icons/hi";
 import { ProjectCard } from "../components/projects/ProjectCard";
 import { useAppDispatch } from "../store/hooks";
 import { showCreateProjectModal } from "../store/slices/projectSlice";
+import { useNavigate } from "react-router-dom";
 
 export const ProjectPage: React.FC = () => {
 
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
 
     return (
         <div className={styles.projectWrapper}>

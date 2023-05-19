@@ -1,0 +1,110 @@
+@use "../styles/shared.scss";
+
+.notePageWrapper {
+    display: grid;
+    // only last column has to be 1/8th of the width
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 
+        "folders folders folders folders folders folders folders folders"
+        "notesearch notesearch notesearch notesearch notesearch notesearch notesearch notesearch"
+        "notes notes notes notes notes notes notes options"
+        "notes notes notes notes notes notes notes options"
+        "notes notes notes notes notes notes notes users"
+        "notes notes notes notes notes notes notes .";
+
+        & > div {
+            // border: 1px solid black;
+            width: 100%;
+            height: 100px;
+        }
+
+        .foldersContainer {
+            grid-area: folders;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            .foldersBar {
+                width: 98%;
+                height: 80%;
+                border: shared.$border-width-thin solid shared.$color-primary;
+                border-radius: shared.$border-radius-lg;
+                display: flex;
+                flex-direction: row;
+                box-shadow: shared.$box-shadow-md;
+                justify-items: center;
+                align-items: center;
+
+                .folders {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+
+                    overflow-x:scroll;
+                    overflow-y:hidden;
+                }
+
+                input {
+                    margin: shared.$padding-desktop-sm;
+                    width: shared.$box-desktop-lg;
+                    @include shared.body-desktopmedium;
+                    border-radius: shared.$border-radius-md;
+                    border: shared.$border-width-thin solid shared.$color-lightgray;
+                }
+                
+
+                
+            }
+
+            ::-webkit-scrollbar {
+                width: 10px;
+                height: 10px;
+                border-bottom-left-radius: shared.$border-radius-lg;
+                border-bottom-right-radius: shared.$border-radius-lg;
+            
+            }
+        
+            ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            }
+        
+            ::-webkit-scrollbar-thumb {
+            background: shared.$color-primary;
+            border-radius: shared.$border-radius-lg;
+            }
+        
+            ::-webkit-scrollbar-thumb:hover {
+            background: shared.$color-accent;
+            }
+        }
+
+        .noteSearchContainer {
+            grid-area: notesearch;
+            
+            input {
+                width: calc(shared.$box-desktop-xl * 1.6);
+                padding: shared.$padding-desktop-xs;
+                @include shared.body-desktopmedium;
+                margin-bottom: shared.$padding-desktop-md;
+                border-radius: shared.$border-radius-md;
+                border: shared.$border-width-thin solid shared.$color-lightgray;
+            }
+        }
+        .notesContainer {
+            grid-area: notes;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: auto;
+        }
+
+        .optionsContainer {
+            grid-area: options;
+        }
+
+        .usersContainer {
+            grid-area: users;
+        }
+}
