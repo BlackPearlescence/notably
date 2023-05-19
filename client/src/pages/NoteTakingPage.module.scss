@@ -116,20 +116,8 @@
             position: fixed;
             right: 0;
             width: 80px;
-            // display: flex;
-            // flex-direction: column;
-            // justify-content: flex-end;
-            // align-content:  flex-start;
-            // justify-items:center;
-            // align-items: center;
-            
-            // width: 20%;
-            // height: 100vh;
-            // position: fixed;
 
-
-            div {
-                // top: calc(100vh - 50%);
+            & > div {
                 background-color: shared.$color-white;
 
                 display: flex;
@@ -143,35 +131,29 @@
                 box-shadow: shared.$box-shadow-md;
                 
                 width: 100%;
-                // height: 20%;
-                * {
-                    margin: shared.$padding-desktop-sm;
-                }
-                margin-top: 10px;
-                margin-bottom: 10px;
+                
             }
             .optionSidebar {
+                div {
+                    margin: shared.$padding-desktop-sm;
+                    background-color: shared.$color-white;
+                    width: 100%;
+                    height: 100%;
+                    transition: color 0.2s ease;
+
+                    
+                    &:hover {
+                        *{
+                            color: shared.$color-secondary;
+
+                        }
+                        cursor: pointer;
+                    }
+                    
+                }
                 
             }
 
-            .userSidebar {
-                img {
-                        width: 30px;
-                        height: 30px;
-                        border-radius: 50%;
-                        margin-right: shared.$padding-desktop-sm;
-                    }
-            }
         }
 
-        // .usersContainer {
-        //     grid-area: users;
-
-        //     img {
-        //         width: 30px;
-        //         height: 30px;
-        //         border-radius: 50%;
-        //         margin-right: shared.$padding-desktop-sm;
-        //     }
-        // }
 }

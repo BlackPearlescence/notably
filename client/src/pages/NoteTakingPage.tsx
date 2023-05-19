@@ -53,12 +53,24 @@ export const NoteTakingPage = () => {
 
             <div className={styles.optionsContainer}>
                 <div className={styles.optionSidebar}>
-                    <HiOutlineDocumentAdd size={35} color="010C80"/>
-                    <HiOutlineFolderAdd size={35} color="010C80"/>
-                    <HiOutlineUserAdd size={35} color="010C80"/>
-                    {isListView ? <HiOutlineViewGrid size={35} color="010C80" /> : <HiViewList size={35} color="010C80" />}
-                    <HiOutlineUserCircle size={35} color="010C80"/>
-                    <TiSortAlphabeticallyOutline size={35} color="010C80"/>
+                    <div>
+                        <HiOutlineDocumentAdd size={35} color="010C80"/>
+                    </div>
+                    <div>
+                        <HiOutlineFolderAdd size={35} color="010C80"/>
+                    </div>
+                    <div>
+                        <HiOutlineUserAdd size={35} color="010C80"/>
+                    </div>
+                    <div>
+                        {isListView ? <HiOutlineViewGrid size={35} color="010C80" /> : <HiViewList size={35} color="010C80" />}
+                    </div>
+                    <div>
+                        <HiOutlineUserCircle size={35} color="010C80"/>
+                    </div>
+                    <div>
+                        <TiSortAlphabeticallyOutline size={35} color="010C80"/>
+                    </div>
                 </div>
                 {/* <div className={styles.userSidebar}>
                     <img src="https://baconmockup.com/640/360" alt="user profile" />
