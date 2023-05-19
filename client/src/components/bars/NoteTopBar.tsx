@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./NoteTopBar.module.scss"; 
 import { HiOutlineUser, HiOutlineHome } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+import { UserDropdown } from "./UserDropdown";
 
 export const NoteTopBar: React.FC = () => {
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ export const NoteTopBar: React.FC = () => {
                     <HiOutlineHome size={30} color="010C80"/>
                 </div>
                 <div>
-                    <HiOutlineUser size={30} color="010C80"/>
+                    <UserDropdown />
                 </div>
             </div>
         </div>
