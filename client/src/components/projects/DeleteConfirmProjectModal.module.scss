@@ -1,0 +1,167 @@
+@use "../../styles/shared.scss";
+
+h3 {
+    @include shared.heading-desktopsmall;
+    color: shared.$color-primary;
+    font-weight: shared.$font-weight-semibold;
+}
+
+.deleteProjectContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    * {
+        margin-bottom: shared.$padding-desktop-md;
+    }
+
+    h5 {
+        @include shared.body-desktopmedium;
+        color: shared.$color-primary;
+        font-weight: shared.$font-weight-regular;
+    }
+
+    span {
+        @include shared.body-desktopsmall;
+        // font-size: 0.8rem;
+    }
+
+    .projectNameInput {
+        width: shared.$box-desktop-md;
+        padding: shared.$padding-desktop-xs;
+        @include shared.body-desktopsmall;
+        margin-bottom: shared.$padding-desktop-md;
+    }
+
+    .deleteBtn {
+        @include shared.body-desktoplarge;
+        color: shared.$color-white;
+        background-color: red;
+        padding-top: shared.$padding-desktop-xs;
+        padding-bottom: shared.$padding-desktop-xs;
+        padding-left: shared.$padding-desktop-md;
+        padding-right: shared.$padding-desktop-md;
+        border-radius: shared.$border-radius-md;
+        border: none;
+        transition: background-color 0.2s ease;
+        box-shadow: shared.$box-shadow-md;
+        cursor: pointer;
+        &:hover {
+            background-color: shared.$color-white;
+            color: red;
+        }
+    }
+
+    .deleteBtnDisabled {
+        @include shared.body-desktoplarge;
+        color: red;
+        background-color: shared.$color-white;
+        padding-top: shared.$padding-desktop-xs;
+        padding-bottom: shared.$padding-desktop-xs;
+        padding-left: shared.$padding-desktop-md;
+        padding-right: shared.$padding-desktop-md;
+        border-radius: shared.$border-radius-md;
+        border: red solid shared.$border-width-thin;
+        transition: background-color 0.2s ease;
+        box-shadow: shared.$box-shadow-md;
+        cursor: not-allowed;
+    }
+    
+}
+
+@include shared.tablet {
+    h3 {
+        @include shared.heading-mobilesmall;
+    }
+
+
+    .deleteProjectContainer {
+
+        * {
+            margin-bottom: shared.$padding-tablet-md;
+        }
+
+        h5 {
+            @include shared.body-tabletmedium;
+            color: shared.$color-primary;
+            font-weight: shared.$font-weight-regular;
+        }
+
+        span {
+            @include shared.body-tabletsmall;
+        }
+        .projectNameInput {
+            width: shared.$box-tablet-md;
+            padding: shared.$padding-tablet-xs;
+            @include shared.body-tabletsmall;
+            margin-bottom: shared.$padding-tablet-md;
+        }
+
+        .deleteBtn {
+            @include shared.body-tabletlarge;
+            padding-top: shared.$padding-tablet-xs;
+            padding-bottom: shared.$padding-tablet-xs;
+            padding-left: shared.$padding-tablet-md;
+            padding-right: shared.$padding-tablet-md;
+        }
+
+        .deleteBtnDisabled {
+            @include shared.body-tabletlarge;
+            padding-top: shared.$padding-tablet-xs;
+            padding-bottom: shared.$padding-tablet-xs;
+            padding-left: shared.$padding-tablet-md;
+            padding-right: shared.$padding-tablet-md;
+            border-radius: shared.$border-radius-md;
+
+        }
+    }
+}
+
+@include shared.mobile {
+    h3 {
+        @include shared.heading-mobilesmall;
+    }
+
+
+    .deleteProjectContainer {
+
+        * {
+            margin-bottom: shared.$padding-mobile-md;
+        }
+
+        h5 {
+            @include shared.body-mobilemedium;
+            color: shared.$color-primary;
+            font-weight: shared.$font-weight-regular;
+        }
+
+        span {
+            @include shared.smalltext-mobilelarge;
+        }
+        .projectNameInput {
+            width: shared.$box-mobile-md;
+            padding: shared.$padding-mobile-xs;
+            @include shared.body-mobilesmall;
+            margin-bottom: shared.$padding-mobile-md;
+        }
+
+        .deleteBtn {
+            @include shared.body-mobilelarge;
+            padding-top: shared.$padding-mobile-xs;
+            padding-bottom: shared.$padding-mobile-xs;
+            padding-left: shared.$padding-mobile-md;
+            padding-right: shared.$padding-mobile-md;
+        }
+
+        .deleteBtnDisabled {
+            @include shared.body-mobilelarge;
+            padding-top: shared.$padding-mobile-xs;
+            padding-bottom: shared.$padding-mobile-xs;
+            padding-left: shared.$padding-mobile-md;
+            padding-right: shared.$padding-mobile-md;
+            border-radius: shared.$border-radius-md;
+
+        }
+    }
+}

@@ -20,7 +20,7 @@ export const RenameProjectModal: React.FC = () => {
             </Modal.Header>
             <Modal.Body>
                 <form onSubmit={handleProjectRenameSubmit}>
-                    <input type="text" placeholder="Project Title" maxLength={70} />
+                    <input type="text" placeholder="Project Title" maxLength={50} />
                     <div className={styles.createControls}>
                         <button className={styles.createBtn} type="submit">Rename</button>
                         <button className={styles.cancelBtn} onClick={() => dispatch(hideEditProjectModal())} type="button">Cancel</button>

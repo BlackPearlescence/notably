@@ -18,7 +18,7 @@ export const NewProjectModal = () => {
             </Modal.Header>
             <Modal.Body>
                 <form onSubmit={handleProjectSubmit}>
-                    <input type="text" placeholder="Project Title" maxLength={70} />
+                    <input type="text" placeholder="Project Title" maxLength={50} />
                     <div className={styles.createControls}>
                         <button className={styles.createBtn} type="submit">Create</button>
                         <button className={styles.cancelBtn} onClick={() => dispatch(hideCreateProjectModal())} type="button">Cancel</button>

@@ -15,6 +15,7 @@ import { ProjectPage } from './pages/ProjectPage';
 import { NewProjectModal } from './components/projects/NewProjectModal';
 import { ViewProjectModal } from './components/projects/ViewProjectModal';
 import { RenameProjectModal } from './components/projects/RenameProjectModal';
+import { DeleteConfirmProjectModal } from './components/projects/DeleteConfirmProjectModal';
 
 function App() {
 
@@ -55,6 +56,7 @@ function App() {
       <NewProjectModal />
       <ViewProjectModal />
       <RenameProjectModal />
+      <DeleteConfirmProjectModal />
     </div>
   );
 }

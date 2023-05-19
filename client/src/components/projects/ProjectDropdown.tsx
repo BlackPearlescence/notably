@@ -2,7 +2,7 @@ import { HiMenu, HiOutlineEye, HiOutlinePencil, HiOutlineTrash } from "react-ico
 import styles from "./ProjectDropdown.module.scss";
 import { useEffect, useRef, useState } from "react";
 import { useAppDispatch } from "../../store/hooks";
-import { showEditProjectModal, showViewProjectModal } from "../../store/slices/projectSlice";
+import { showDeleteProjectModal, showEditProjectModal, showViewProjectModal } from "../../store/slices/projectSlice";
 
 export const ProjectDropdown: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +41,7 @@ export const ProjectDropdown: React.FC = () => {
                     <div onClick={() => dispatch(showEditProjectModal())}>
                         <HiOutlinePencil size={40} color="010C80"/>
                     </div>
-                    <div>
+                    <div onClick={() => dispatch(showDeleteProjectModal())}>
                         <HiOutlineTrash size={40} color="010C80"/>
                     </div>
                 </div>
