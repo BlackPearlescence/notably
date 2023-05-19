@@ -12,11 +12,11 @@
         "notes notes notes notes notes notes notes notes options"
         "notes notes notes notes notes notes notes notes options"
         "notes notes notes notes notes notes notes notes options";
-
+    margin-bottom: shared.$padding-desktop-lg;
         & > div {
             // border: 1px solid black;
             width: 100%;
-            height: 100px;
+            height: auto;
         }
 
         .foldersContainer {
@@ -28,7 +28,7 @@
 
             .foldersBar {
                 width: 98%;
-                height: 80%;
+                height: 90%;
                 border: shared.$border-width-thin solid shared.$color-primary;
                 border-radius: shared.$border-radius-lg;
                 display: flex;
@@ -36,6 +36,8 @@
                 box-shadow: shared.$box-shadow-md;
                 justify-items: center;
                 align-items: center;
+                margin-top: shared.$padding-desktop-sm;
+                margin-bottom: shared.$padding-desktop-sm;
 
                 .folders {
                     display: flex;
@@ -139,13 +141,13 @@
                     background-color: shared.$color-white;
                     width: 100%;
                     height: 100%;
-                    transition: color 0.2s ease;
-
+                    * {
+                        transition: color 0.2s ease;
+                    }
                     
                     &:hover {
-                        *{
+                        * {
                             color: shared.$color-secondary;
-
                         }
                         cursor: pointer;
                     }

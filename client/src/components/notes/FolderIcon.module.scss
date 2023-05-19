@@ -7,8 +7,9 @@
     align-items: center;
 
     span {
-        @include shared.smalltext-desktoplarge;
-        margin-top: shared.$padding-desktop-xs;
+        @include shared.smalltext-desktopmedium;
+        padding-top: shared.$padding-desktop-xs;
+        padding-bottom: shared.$padding-desktop-xs;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
