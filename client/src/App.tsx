@@ -1,6 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.scss';
+import 'draft-js/dist/Draft.css';
+import 'quill/dist/quill.snow.css'; // Import Quill's CSS styles
+
 import { NavigationBar } from './components/bars/NavigationBar';
 import { LandingPage } from './pages/LandingPage';
 import { Footer } from './components/bars/Footer';
@@ -17,6 +20,7 @@ import { ViewProjectModal } from './components/projects/ViewProjectModal';
 import { RenameProjectModal } from './components/projects/RenameProjectModal';
 import { DeleteConfirmProjectModal } from './components/projects/DeleteConfirmProjectModal';
 import { NoteTakingPage } from './pages/NoteTakingPage';
+import { CreateNoteModal } from './components/notes/CreateNoteModal';
 
 function App() {
 
@@ -59,6 +63,7 @@ function App() {
       <ViewProjectModal />
       <RenameProjectModal />
       <DeleteConfirmProjectModal />
+      <CreateNoteModal />
     </div>
   );
 }

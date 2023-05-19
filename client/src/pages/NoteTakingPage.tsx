@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { TiSortAlphabeticallyOutline } from "react-icons/ti";
 import { useMediaQuery } from "react-responsive";
 import { screenSizes } from "../screenSizes";
+import { useAppDispatch } from "../store/hooks";
+import { showCreateNoteModal } from "../store/slices/noteSlice";
 
 export const NoteTakingPage = () => {
     const [isListView, setIsListView] = useState(false);
@@ -13,6 +15,7 @@ export const NoteTakingPage = () => {
     const isDesktop = useMediaQuery({ minWidth: screenSizes.desktopMinimum });
     const isTablet = useMediaQuery({ minWidth: screenSizes.tabletMinimum, maxWidth: screenSizes.tabletMaximum});
     const isMobile = useMediaQuery({ maxWidth: screenSizes.mobileMaximum });
+    const dispatch = useAppDispatch();
     
     useEffect(() => {
             if(isDesktop) {
@@ -75,7 +78,7 @@ export const NoteTakingPage = () => {
                         </div>
                     )}
                     <div>
-                        <HiOutlineDocumentAdd size={iconSize} color="010C80"/>
+                        <HiOutlineDocumentAdd size={iconSize} color="010C80" onClick={() => dispatch(showCreateNoteModal())}/>
                     </div>
                     <div>
                         <HiOutlineFolderAdd size={iconSize} color="010C80"/>
