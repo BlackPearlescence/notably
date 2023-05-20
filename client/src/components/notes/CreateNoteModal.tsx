@@ -2,6 +2,7 @@ import { FC, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { hideCreateNoteModal, selectIsCreateNoteModalShown } from "../../store/slices/noteSlice"
+import ReactQuill from "react-quill";
 
 export const CreateNoteModal: FC = () => {
 
@@ -11,6 +12,7 @@ export const CreateNoteModal: FC = () => {
         title: "",
         content: ""
     })
+    const [value, setValue] = useState<string>("");
 
     return (
         <Modal show={createNoteModalShowState} onHide={() => dispatch(hideCreateNoteModal())} centered>
@@ -24,6 +26,7 @@ export const CreateNoteModal: FC = () => {
                     onChange={(e) => setNoteForm({...noteForm, [e.target.name]: e.target.value})} />
                 </Modal.Header>
                 <Modal.Body>
+                    <ReactQuill theme="snow" value={value} onChange={setValue} />
                 </Modal.Body>
             </form>
         </Modal>
