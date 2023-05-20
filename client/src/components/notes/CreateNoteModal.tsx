@@ -15,19 +15,12 @@ export const CreateNoteModal: FC = () => {
     const [value, setValue] = useState<string>("");
 
     return (
-        <Modal show={createNoteModalShowState} onHide={() => dispatch(hideCreateNoteModal())} centered>
+        <Modal show={createNoteModalShowState} onHide={() => dispatch(hideCreateNoteModal())} centered size="lg">
             <form>
-                <Modal.Header closeButton>
-                    <input 
-                    name="title" 
-                    type="text" 
-                    value={noteForm.title}
-                    maxLength={50}
-                    onChange={(e) => setNoteForm({...noteForm, [e.target.name]: e.target.value})} />
-                </Modal.Header>
-                <Modal.Body>
-                    <ReactQuill theme="snow" value={value} onChange={setValue} />
-                </Modal.Body>
+                <input type="text" />
+                <ReactQuill theme="snow" value={value} onChange={setValue} style={{ width: "750px"}} />
+                <button type="submit" >Save</button>
+                <button>Close</button>
             </form>
         </Modal>
     )
