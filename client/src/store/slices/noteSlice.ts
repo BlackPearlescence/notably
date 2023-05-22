@@ -6,6 +6,7 @@ interface NoteState {
     isViewNoteModalShown: boolean,
     isEditNoteModalShown: boolean,
     isDeleteNoteModalShown: boolean,
+    isNoteModalShown: boolean,
 }
 
 const initialState: NoteState = {
@@ -13,6 +14,7 @@ const initialState: NoteState = {
     isViewNoteModalShown: false,
     isEditNoteModalShown: false,
     isDeleteNoteModalShown: false,
+    isNoteModalShown: false,
 }
 
 const noteSlice = createSlice({
@@ -43,6 +45,12 @@ const noteSlice = createSlice({
         hideDeleteNoteModal: (state) => {
             state.isDeleteNoteModalShown = false;
         },
+        showNoteModal: (state) => {
+            state.isNoteModalShown = true;
+        },
+        hideNoteModal: (state) => {
+            state.isNoteModalShown = false;
+        }
     }
 })
 
@@ -55,11 +63,14 @@ export const {
     hideEditNoteModal,
     showDeleteNoteModal,
     hideDeleteNoteModal,
+    showNoteModal,
+    hideNoteModal
 } = noteSlice.actions;
 
 export const selectIsCreateNoteModalShown = (state: RootState) => state.note.isCreateNoteModalShown;
 export const selectIsViewNoteModalShown = (state: RootState) => state.note.isViewNoteModalShown;
 export const selectIsEditNoteModalShown = (state: RootState) => state.note.isEditNoteModalShown;
 export const selectIsDeleteNoteModalShown = (state: RootState) => state.note.isDeleteNoteModalShown;
+export const selectIsNoteModalShown = (state: RootState) => state.note.isNoteModalShown;
 
 export default noteSlice.reducer;

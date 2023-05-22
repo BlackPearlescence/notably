@@ -7,7 +7,7 @@ import { TiSortAlphabeticallyOutline } from "react-icons/ti";
 import { useMediaQuery } from "react-responsive";
 import { screenSizes } from "../screenSizes";
 import { useAppDispatch } from "../store/hooks";
-import { showCreateNoteModal } from "../store/slices/noteSlice";
+import { showNoteModal } from "../store/slices/noteSlice";
 
 export const NoteTakingPage = () => {
     const [isListView, setIsListView] = useState(false);
@@ -78,7 +78,7 @@ export const NoteTakingPage = () => {
                         </div>
                     )}
                     <div>
-                        <HiOutlineDocumentAdd size={iconSize} color="010C80" onClick={() => dispatch(showCreateNoteModal())}/>
+                        <HiOutlineDocumentAdd size={iconSize} color="010C80" onClick={() => dispatch(showNoteModal())}/>
                     </div>
                     <div>
                         <HiOutlineFolderAdd size={iconSize} color="010C80"/>
@@ -110,7 +110,6 @@ export const NoteTakingPage = () => {
                     <img src="https://baconmockup.com/640/360" alt="user profile" />
                 </div>
             </div> */}
-
         </div>
     )
 }

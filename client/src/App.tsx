@@ -20,7 +20,7 @@ import { ViewProjectModal } from './components/projects/ViewProjectModal';
 import { RenameProjectModal } from './components/projects/RenameProjectModal';
 import { DeleteConfirmProjectModal } from './components/projects/DeleteConfirmProjectModal';
 import { NoteTakingPage } from './pages/NoteTakingPage';
-import { CreateNoteModal } from './components/notes/CreateNoteModal';
+import { NoteModal } from './components/notes/NoteModal';
 
 function App() {
 
@@ -63,7 +63,7 @@ function App() {
       <ViewProjectModal />
       <RenameProjectModal />
       <DeleteConfirmProjectModal />
-      <CreateNoteModal />
+      <NoteModal />
     </div>
   );
 }
