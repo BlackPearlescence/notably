@@ -1,0 +1,16 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/app.ts",
+    "dev": "tsc --watch | nodemon --watch ./src --exec node ./src/app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prisma": "^4.14.1"
+  }
+}
