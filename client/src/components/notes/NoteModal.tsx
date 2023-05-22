@@ -6,6 +6,8 @@ import ReactQuill from "react-quill";
 import styles from "./NoteModal.module.scss"
 import { MdOutlineColorLens } from "react-icons/md";
 import { AiFillSave } from "react-icons/ai";
+import parse from 'html-react-parser';
+
 
 export const NoteModal: FC = () => {
 
@@ -13,7 +15,7 @@ export const NoteModal: FC = () => {
     const dispatch = useAppDispatch()
     const [noteValue, setNoteValue] = useState<string>("");
     const [noteTitle, setNoteTitle] = useState<string>("");
-    const [isEditingMode, setIsEditingMode] = useState<boolean>(false);
+    const [isEditingMode, setIsEditingMode] = useState<boolean>(true);
 
     const handleNoteValueChange = (e: string) => {
         console.log(e)
@@ -41,7 +43,12 @@ export const NoteModal: FC = () => {
                         </div>
                     </div>
                 </div>
-                <ReactQuill theme="snow" value={noteValue} onChange={handleNoteValueChange} style={{ width: "750px"}} />
+                {isEditingMode && <ReactQuill theme="snow" value={noteValue} onChange={handleNoteValueChange} style={{ width: "750px"}} /> }
+                {!isEditingMode && (
+                    <div className={styles.notePreview}>
+                        {parse(noteValue)}
+                    </div>
+                )}
                 <div className={styles.editControls}>
                     <button type="submit" >Save</button>
                     <button>Discard</button>
