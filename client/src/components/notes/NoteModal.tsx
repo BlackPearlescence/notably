@@ -28,7 +28,8 @@ export const NoteModal: FC = () => {
         setNoteTitle(e.target.value)
     }
 
-    const handleModeChange = () => {
+    const handleModeChange = (e: any) => {
+        e.preventDefault()
         setIsEditingMode(!isEditingMode)
     }
 
@@ -39,7 +40,7 @@ export const NoteModal: FC = () => {
         dispatch(hideNoteModal())
     }
 
-    
+
     return (
         <Modal show={noteModalShownState} onHide={() => dispatch(hideNoteModal())} centered size="lg">
             <Modal.Body className={styles.customModal}>
@@ -74,7 +75,7 @@ export const NoteModal: FC = () => {
                     </div>
                 ) : 
                     <div className={styles.viewControls}>
-                        <button onClick={() => setIsEditingMode(true)}>Edit</button>
+                        <button onClick={handleModeChange}>Edit</button>
                         <button onClick={() => dispatch(hideNoteModal())}>Close</button>
                     </div>
                 }
