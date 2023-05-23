@@ -25,6 +25,13 @@
                 outline: none;
             }
         }
+
+        h2 {
+            @include shared.heading-desktopsmall;
+            margin: shared.$padding-desktop-md;
+            margin-top: shared.$padding-desktop-lg;
+            margin-bottom: shared.$padding-desktop-lg;
+        }
         .editToolbar {
             display: flex;
             flex-direction: row;
@@ -79,6 +86,47 @@
                 transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
                 &:hover {
                     background-color: red;
+                    color: shared.$color-white;
+                }
+            }
+        }
+    }
+
+    .viewControls {
+        margin: shared.$padding-desktop-md;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        button {
+            @include shared.body-desktopmedium;
+            margin-right: shared.$padding-desktop-md;
+            margin-left: shared.$padding-desktop-md;
+            padding-top: shared.$padding-desktop-xs;
+            padding-bottom: shared.$padding-desktop-xs;
+            padding-left: shared.$padding-desktop-lg;
+            padding-right: shared.$padding-desktop-lg;
+            border: none;
+            border-radius: shared.$border-radius-md;
+            box-shadow: shared.$box-shadow-md;
+            width: shared.$box-desktop-md;
+
+            &:nth-child(1) {
+                background-color: shared.$color-primary;
+                color: shared.$color-white;
+                transition: background-color 0.2s ease-in-out;
+                &:hover {
+                    background-color: shared.$color-accent;
+                }
+            }
+
+            &:nth-child(2) {
+                background-color: shared.$color-white;
+                color: shared.$color-accent;
+                border: shared.$border-width-thin solid shared.$color-accent;
+                transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+                &:hover {
+                    background-color: shared.$color-accent;
                     color: shared.$color-white;
                 }
             }

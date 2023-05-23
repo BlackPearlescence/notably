@@ -1,5 +1,5 @@
 import express from 'express';
-import {PrismaCli}
+import {PrismaClient } from '@prisma/client';
 const app = express();
 
 

@@ -7,6 +7,7 @@ import styles from "./NoteModal.module.scss"
 import { MdOutlineColorLens } from "react-icons/md";
 import { AiFillSave } from "react-icons/ai";
 import parse from 'html-react-parser';
+import { HiOutlinePencil } from "react-icons/hi";
 
 
 export const NoteModal: FC = () => {
@@ -27,21 +28,31 @@ export const NoteModal: FC = () => {
         setNoteTitle(e.target.value)
     }
 
+    const handleModeChange = () => {
+        setIsEditingMode(!isEditingMode)
+    }
+
 
     return (
         <Modal show={noteModalShownState} onHide={() => dispatch(hideNoteModal())} centered size="lg">
             <Modal.Body className={styles.customModal}>
             <form className={styles.noteForm}>
                 <div className={styles.editHeader}>
-                    <input type="text" placeholder="Untitled Note..." maxLength={50} onChange={handleNoteTitleChange} value={noteTitle}/>
+                    {isEditingMode ? 
+                    <input type="text" placeholder="Untitled Note..." maxLength={50} onChange={handleNoteTitleChange} value={noteTitle}/> 
+                    :
+                    <h2>{noteTitle}</h2>
+                    }
                     <div className={styles.editToolbar}>
-                        <div>
-                            <MdOutlineColorLens />
+                        {isEditingMode && (
+                            <div>
+                                <MdOutlineColorLens />
+                            </div>
+                        )}
+                        <div onClick={handleModeChange}>
+                            {isEditingMode ? <AiFillSave /> : <HiOutlinePencil />} 
                         </div>
-                        <div>
-                            <AiFillSave />
-                        </div>
-                    </div>
+                    </div>          
                 </div>
                 {isEditingMode && <ReactQuill theme="snow" value={noteValue} onChange={handleNoteValueChange} style={{ width: "750px"}} /> }
                 {!isEditingMode && (
@@ -49,10 +60,18 @@ export const NoteModal: FC = () => {
                         {parse(noteValue)}
                     </div>
                 )}
-                <div className={styles.editControls}>
-                    <button type="submit" >Save</button>
-                    <button>Discard</button>
-                </div>
+                {isEditingMode ? (
+                    <div className={styles.editControls}>
+                        <button type="submit" >Save</button>
+                        <button>Discard</button>
+                    </div>
+                ) : 
+                    <div className={styles.viewControls}>
+                        <button type="submit" >Edit</button>
+                        <button>Close</button>
+                    </div>
+                }
+                
             </form>
             </Modal.Body>
             
