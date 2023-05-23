@@ -50,6 +50,11 @@
         }
     }
 
+    .notePreview {
+        display: flex;
+        width: 100%;
+    }
+
     .editControls {
         margin: shared.$padding-desktop-md;
         display: flex;

@@ -32,11 +32,18 @@ export const NoteModal: FC = () => {
         setIsEditingMode(!isEditingMode)
     }
 
+    const handleNoteSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        console.log(noteValue)
+        console.log(noteTitle)
+        dispatch(hideNoteModal())
+    }
 
+    
     return (
         <Modal show={noteModalShownState} onHide={() => dispatch(hideNoteModal())} centered size="lg">
             <Modal.Body className={styles.customModal}>
-            <form className={styles.noteForm}>
+            <form className={styles.noteForm} onSubmit={handleNoteSubmit}>
                 <div className={styles.editHeader}>
                     {isEditingMode ? 
                     <input type="text" placeholder="Untitled Note..." maxLength={50} onChange={handleNoteTitleChange} value={noteTitle}/> 
@@ -58,17 +65,17 @@ export const NoteModal: FC = () => {
                 {!isEditingMode && (
                     <div className={styles.notePreview}>
                         {parse(noteValue)}
-                    </div>
+                    </div>  
                 )}
                 {isEditingMode ? (
                     <div className={styles.editControls}>
                         <button type="submit" >Save</button>
-                        <button>Discard</button>
+                        <button onClick={() => dispatch(hideNoteModal())}>Discard</button>
                     </div>
                 ) : 
                     <div className={styles.viewControls}>
-                        <button type="submit" >Edit</button>
-                        <button>Close</button>
+                        <button onClick={() => setIsEditingMode(true)}>Edit</button>
+                        <button onClick={() => dispatch(hideNoteModal())}>Close</button>
                     </div>
                 }
                 
