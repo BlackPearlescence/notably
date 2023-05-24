@@ -1,11 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+import axios from "axios";
 
 interface ProjectState {
     isCreateProjectModalShown: boolean,
     isViewProjectModalShown: boolean,
     isEditProjectModalShown: boolean,
     isDeleteProjectModalShown: boolean,
+    projectError: string | null,
+    projectStatus: "idle" | "loading" | "succeeded" | "failed",
+    projects: any[],
 }
 
 const initialState: ProjectState = {
@@ -13,7 +17,20 @@ const initialState: ProjectState = {
     isViewProjectModalShown: false,
     isEditProjectModalShown: false,
     isDeleteProjectModalShown: false,
+    projectError: null,
+    projectStatus: "idle",
+    projects: [],
 }
+
+export const getProjects = createAsyncThunk(
+    "project/getProjects",
+    async () => {
+        const response = await axios.get("/projects");
+        const projects = await response.data;
+        return projects;
+    }
+)
+
 
 const projectSlice = createSlice({
     name: "project",
@@ -43,6 +60,23 @@ const projectSlice = createSlice({
         hideDeleteProjectModal: (state) => {
             state.isDeleteProjectModalShown = false;
         },
+    },
+    extraReducers: (builder) => {
+        builder.addCase(getProjects.fulfilled, (state, action) => {
+            console.log(action.payload);
+            state.projectStatus = "succeeded";
+            state.projects = action.payload;
+        })
+        // builder.addCase(getProjects.rejected, (state, action) => {
+        //     console.log(action.payload);
+        //     state.projectStatus = "failed";
+        //     state.projectError = action.error.message || null;
+        // }),
+        // builder.addCase(getProjects.pending, (state, action) => {
+        //     console.log(action.payload);
+        //     state.projectStatus = "loading";
+        //     state.projectError = null;
+        // })
     }
 })
 
