@@ -4,7 +4,7 @@ import { HiMenu } from "react-icons/hi";
 import { ProjectDropdown } from "./ProjectDropdown";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store/hooks";
-import { selectProject } from "../../store/slices/projectSlice";
+import { getProject } from "../../store/slices/projectSlice";
 
 interface ProjectCardProps {
     project: any;
@@ -19,10 +19,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     const dispatch = useAppDispatch();
 
     const handleProjectFocus = () => {
-        dispatch(selectProject({
-            id: project.id,
-            title: project.title,
-        }))
+        dispatch(getProject(
+            project.id,
+        ))
     }
 
     // const handleProjectNoFocus = () => {

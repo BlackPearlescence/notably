@@ -15,6 +15,8 @@ interface ProjectState {
     deleteProjectError: string | null,
     deleteProjectStatus: "idle" | "loading" | "succeeded" | "failed",
     selectedProject: any,
+    getProjectStatus: "idle" | "loading" | "succeeded" | "failed",
+    getProjectError: string | null,
 }
 
 const initialState: ProjectState = {
@@ -30,12 +32,23 @@ const initialState: ProjectState = {
     deleteProjectError: null,
     deleteProjectStatus: "idle",
     selectedProject: null,
+    getProjectStatus: "idle",
+    getProjectError: null
 }
 
 export const getProjects = createAsyncThunk(
     "project/getProjects",
     async () => {
         const resp = await axios.get("/projects");
+        const projects = await resp.data;
+        return projects;
+    }
+)
+
+export const getProject = createAsyncThunk(
+    "project/getProject",
+    async (id: number) => {
+        const resp = await axios.get(`/projects/${id}`)
         const projects = await resp.data;
         return projects;
     }
@@ -91,9 +104,6 @@ export const projectSlice = createSlice({
         hideDeleteProjectModal: (state) => {
             state.isDeleteProjectModalShown = false;
         },
-        selectProject: (state, action) => {
-            state.selectedProject = action.payload;
-        }
     },
     extraReducers: (builder) => {
         builder.addCase(getProjects.fulfilled, (state, action) => {
@@ -140,6 +150,20 @@ export const projectSlice = createSlice({
             console.log(action.payload);
             state.deleteProjectStatus = "loading";
             state.deleteProjectError = null;
+        }),
+        builder.addCase(getProject.fulfilled, (state, action) => {
+            console.log(action.payload);
+            state.getProjectStatus = "succeeded";
+            state.selectedProject = action.payload;
+        }),
+        builder.addCase(getProject.pending, (state, action) => {
+            console.log(action.payload);
+            state.getProjectStatus = "loading";
+        })
+        builder.addCase(getProject.rejected, (state, action) => {
+            console.log(action.payload);
+            state.getProjectStatus = "failed";
+            state.getProjectError = action.error.message || null;
         })
     }
 })
@@ -153,7 +177,6 @@ export const {
     hideEditProjectModal,
     showDeleteProjectModal,
     hideDeleteProjectModal,
-    selectProject,
   } = projectSlice.actions;
 export const selectIsCreateProjectModalShown = (state: RootState) => state.project.isCreateProjectModalShown;
 export const selectIsViewProjectModalShown = (state: RootState) => state.project.isViewProjectModalShown;
