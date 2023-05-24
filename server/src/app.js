@@ -16,10 +16,12 @@ const express_1 = __importDefault(require("express"));
 const client_1 = require("@prisma/client");
 const noteRouter_1 = require("./routers/noteRouter");
 require('dotenv').config();
+const morgan_1 = __importDefault(require("morgan"));
 const app = (0, express_1.default)();
 const prisma = new client_1.PrismaClient();
 const DATABASE_URL = process.env.DATABASE_URL;
 app.use(express_1.default.json());
+app.use((0, morgan_1.default)("dev"));
 app.use("/notes", noteRouter_1.noteRouter);
 app.get('/', (req, res) => {
     res.send('Hello World!');
