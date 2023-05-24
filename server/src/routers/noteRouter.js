@@ -27,6 +27,20 @@ exports.noteRouter.get("/:id", (req, res, next) => {
         next(new Error("No note exists with that id"));
     }
 });
+// noteRouter.post("/", (req, res, next) => {
+//     const { title, content, color, userId, }
+//     try {
+//         const note = myPrisma.note.create({
+//             data: {
+//                 title: req.body.title,
+//                 body: req.body.body
+//             }
+//         })
+//         res.status(StatusCodes.CREATED).json(note);
+//     } catch (err) {
+//         next(err);
+//     }
+// })
 exports.noteRouter.use((err, req, res, next) => {
     switch (err.message) {
         case "No notes exist":

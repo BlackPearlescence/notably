@@ -4,6 +4,7 @@ import { noteRouter } from './routers/noteRouter';
 require('dotenv').config();
 import morgan from 'morgan';
 import { myPrisma } from './myPrisma';
+import { projectRouter } from './routers/projectRouter';
 
 const app = express();
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -11,6 +12,7 @@ const DATABASE_URL = process.env.DATABASE_URL;
 app.use(express.json());
 app.use(morgan("dev"));
 app.use("/notes", noteRouter)
+app.use("/projects", projectRouter)
 
 app.get('/', (req, res, next) => {
     res.send('Hello World!');
