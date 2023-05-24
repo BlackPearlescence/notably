@@ -94,5 +94,6 @@ export const selectIsCreateProjectModalShown = (state: RootState) => state.proje
 export const selectIsViewProjectModalShown = (state: RootState) => state.project.isViewProjectModalShown;
 export const selectIsEditProjectModalShown = (state: RootState) => state.project.isEditProjectModalShown;
 export const selectIsDeleteProjectModalShown = (state: RootState) => state.project.isDeleteProjectModalShown;
+export const selectProjects = (state: RootState) => state.project.projects;
 
 export default projectSlice.reducer;
