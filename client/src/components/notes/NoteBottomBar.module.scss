@@ -1,0 +1,50 @@
+@use "../../styles/shared.scss";
+
+// This is the toolbar that appears at the bottom of the note on the view page. This should only appear when the note is hovered over.
+// The toolbar should appear over the note.
+.toolbarContainer {
+    width: 100%;
+    height: calc(shared.$box-desktop-xs / 3);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    bottom: 20%;
+    z-index: 5;
+    background-color: shared.$color-white;
+    border-radius: shared.$border-radius-lg;
+    box-shadow: shared.$box-shadow-md;
+    transition: opacity 0.2s ease-in-out;
+
+    .toolButton {
+        * {
+            @include shared.heading-desktopsmall;
+            color: shared.$color-primary;
+            transition: color 0.2s ease-in-out;
+            &:hover {
+                * {
+                    color: shared.$color-accent;
+                }   
+            }
+        }
+    }
+}
+
+.toolbarContainerHidden {
+    width: 100%;
+    height: calc(shared.$box-desktop-xs / 2);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+    bottom: 20%;
+    z-index: 5;
+    background-color: shared.$color-white;
+    border-radius: shared.$border-radius-lg;
+    box-shadow: shared.$box-shadow-md;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    pointer-events: none;
+}

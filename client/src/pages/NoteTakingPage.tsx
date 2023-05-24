@@ -10,7 +10,7 @@ import { useAppDispatch } from "../store/hooks";
 import { showNoteModal } from "../store/slices/noteSlice";
 
 export const NoteTakingPage = () => {
-    const [isListView, setIsListView] = useState(false);
+    const [isColorView, setIsColorView] = useState<boolean>(false);
     const [iconSize, setIconSize] = useState(35);
     const isDesktop = useMediaQuery({ minWidth: screenSizes.desktopMinimum });
     const isTablet = useMediaQuery({ minWidth: screenSizes.tabletMinimum, maxWidth: screenSizes.tabletMaximum});
@@ -27,9 +27,13 @@ export const NoteTakingPage = () => {
             }                
     },[window.innerWidth, window.outerWidth])
 
+    const handleViewChange = () => {
+        setIsColorView(!isColorView);
+    }
+
     return (
         <div className={styles.notePageWrapper}>
-            {isDesktop && (<div className={styles.foldersContainer}>
+            {/* {isDesktop && (<div className={styles.foldersContainer}>
                 <div className={styles.foldersBar}>
                     <div className={styles.folders}>
                         <FolderIcon />
@@ -46,7 +50,7 @@ export const NoteTakingPage = () => {
                     </div>
                     <input type="text" placeholder="Search folders..." maxLength={50} />
                 </div>
-            </div>)}
+            </div>)} */}
 
             <div className={styles.noteSearchContainer}>
                 <input type="text" placeholder="Search notes..." maxLength={50} />
@@ -72,22 +76,22 @@ export const NoteTakingPage = () => {
 
             <div className={styles.optionsContainer}>
                 <div className={styles.optionSidebar}>
-                    {(isTablet || isMobile) && (
+                    {/* {(isTablet || isMobile) && (
                         <div>
                             <HiOutlineFolder size={iconSize} color="010C80"/>
                         </div>
-                    )}
+                    )} */}
                     <div>
                         <HiOutlineDocumentAdd size={iconSize} color="010C80" onClick={() => dispatch(showNoteModal())}/>
                     </div>
-                    <div>
+                    {/* <div>
                         <HiOutlineFolderAdd size={iconSize} color="010C80"/>
-                    </div>
+                    </div> */}
                     <div>
                         <HiOutlineUserAdd size={iconSize} color="010C80"/>
                     </div>
-                    <div>
-                        {isListView ? <HiOutlineViewGrid size={iconSize} color="010C80" /> : <HiViewList size={iconSize} color="010C80" />}
+                    <div onClick={handleViewChange}>
+                        {isColorView ? <HiOutlineViewGrid size={iconSize} color="010C80" /> : <HiViewList size={iconSize} color="010C80" />}
                     </div>
                     <div>
                         <HiOutlineUserCircle size={iconSize} color="010C80"/>

@@ -1,40 +1,49 @@
 @use "../../styles/shared.scss";
 
 .noteCardContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: shared.$box-desktop-sm;
-    height: shared.$box-desktop-sm;
-    box-shadow: shared.$box-shadow-md;
-    border-radius: shared.$border-radius-sm;
+    height: shared.$box-desktop-sm; 
+    
 
-    h6 {
-        @include shared.body-desktopsmall;
-        color: shared.$color-primary;
-        font-weight: shared.$font-weight-semibold;
-        margin-bottom: shared.$padding-desktop-xs;
-        width: 100%;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        padding-left: shared.$padding-desktop-lg;
-        padding-right: shared.$padding-desktop-lg;
-        padding-top: shared.$padding-desktop-xs;
-        padding-bottom: shared.$padding-desktop-xs;
+    .noteInfoContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: shared.$box-desktop-sm;
+        height: shared.$box-desktop-sm;
+        cursor: pointer;
+        box-shadow: shared.$box-shadow-md;
+        border-radius: shared.$border-radius-sm;
 
+        h6 {
+            @include shared.body-desktopsmall;
+            color: shared.$color-primary;
+            font-weight: shared.$font-weight-semibold;
+            margin-bottom: shared.$padding-desktop-xs;
+            width: 100%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            padding-left: shared.$padding-desktop-lg;
+            padding-right: shared.$padding-desktop-lg;
+            padding-top: shared.$padding-desktop-xs;
+            padding-bottom: shared.$padding-desktop-xs;
+    
+        }
+    
+        p {
+            @include shared.body-desktopsmall;
+            color: shared.$color-primary;
+            font-weight: shared.$font-weight-regular;
+            margin-bottom: shared.$padding-desktop-xs;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
     }
 
-    p {
-        @include shared.body-desktopsmall;
-        color: shared.$color-primary;
-        font-weight: shared.$font-weight-regular;
-        margin-bottom: shared.$padding-desktop-xs;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
+    
 
 }
 
