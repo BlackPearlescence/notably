@@ -2,17 +2,17 @@ import { Modal } from "react-bootstrap";
 import React, { FC, useEffect, useState } from "react";
 import styles from "./DeleteConfirmProjectModal.module.scss";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { hideDeleteProjectModal, selectIsDeleteProjectModalShown } from "../../store/slices/projectSlice";
+import { deleteProject, hideDeleteProjectModal, selectIsDeleteProjectModalShown, selectSelectedProject } from "../../store/slices/projectSlice";
 
 export const DeleteConfirmProjectModal: FC = () => {
     const [doesProjectNameMatch, setDoesProjectNameMatch] = useState(false);
     const [projectName, setProjectName] = useState("");
     const deleteConfirmProjectModalState = useAppSelector(selectIsDeleteProjectModalShown)
     const dispatch = useAppDispatch()
-    const projectTestName = "ffffffffffffffffffffffffffffffffffffffffffffffffff";
+    const selectedProjectState = useAppSelector(selectSelectedProject)
 
     useEffect(() => {
-        if(projectName === projectTestName) {
+        if(selectedProjectState !== null && projectName === selectedProjectState.title) {
             setDoesProjectNameMatch(true)
         } else {
             setDoesProjectNameMatch(false)
@@ -20,6 +20,12 @@ export const DeleteConfirmProjectModal: FC = () => {
     },[projectName])
 
     const handleDeleteProjectHide = () => {
+        dispatch(hideDeleteProjectModal())
+        setProjectName("")
+    }
+
+    const handleDeleteProject = () => {
+        dispatch(deleteProject(selectedProjectState.id))
         dispatch(hideDeleteProjectModal())
         setProjectName("")
     }
@@ -32,7 +38,7 @@ export const DeleteConfirmProjectModal: FC = () => {
             <Modal.Body>
                 <div className={styles.deleteProjectContainer}>
                     <h5>Type project name to enable delete.</h5>
-                    <span>"{projectTestName}"</span>
+                    <span>"{selectedProjectState && selectedProjectState.title}"</span>
                     <input
                     className={styles.projectNameInput}
                     type="text" 
@@ -40,7 +46,10 @@ export const DeleteConfirmProjectModal: FC = () => {
                     maxLength={50} 
                     onChange={(e) => setProjectName(e.target.value)}
                     value={projectName}/>
-                    <button className={doesProjectNameMatch ? styles.deleteBtn : styles.deleteBtnDisabled} disabled={doesProjectNameMatch ? false : true}>Delete</button>
+                    <button 
+                    className={doesProjectNameMatch ? styles.deleteBtn : styles.deleteBtnDisabled} 
+                    disabled={doesProjectNameMatch ? false : true}
+                    onClick={handleDeleteProject}>Delete</button>
                 </div>
             </Modal.Body>
         </Modal>

@@ -10,6 +10,11 @@ interface ProjectState {
     projectError: string | null,
     projectStatus: "idle" | "loading" | "succeeded" | "failed",
     projects: any[],
+    addProjectError: string | null,
+    addProjectStatus: "idle" | "loading" | "succeeded" | "failed",
+    deleteProjectError: string | null,
+    deleteProjectStatus: "idle" | "loading" | "succeeded" | "failed",
+    selectedProject: any,
 }
 
 const initialState: ProjectState = {
@@ -19,20 +24,46 @@ const initialState: ProjectState = {
     isDeleteProjectModalShown: false,
     projectError: null,
     projectStatus: "idle",
+    addProjectError: null,
+    addProjectStatus: "idle",
     projects: [],
+    deleteProjectError: null,
+    deleteProjectStatus: "idle",
+    selectedProject: null,
 }
 
 export const getProjects = createAsyncThunk(
     "project/getProjects",
     async () => {
-        const response = await axios.get("/projects");
-        const projects = await response.data;
+        const resp = await axios.get("/projects");
+        const projects = await resp.data;
         return projects;
     }
 )
 
+export const addProject = createAsyncThunk(
+    "project/addProject",
+    async (title: string) => {
+        const resp = await axios.post("/projects", {
+            title: title,
+        });
+        const project = await resp.data;
+        return project;
+    }
+)
 
-const projectSlice = createSlice({
+export const deleteProject = createAsyncThunk(
+    "project/deleteProject",
+    async (id: number) => {
+        const resp = await axios.delete(`/projects/${id}`);
+        const project = await resp.data;
+        return project;
+    }
+)
+
+
+
+export const projectSlice = createSlice({
     name: "project",
     initialState,
     reducers: {
@@ -60,6 +91,9 @@ const projectSlice = createSlice({
         hideDeleteProjectModal: (state) => {
             state.isDeleteProjectModalShown = false;
         },
+        selectProject: (state, action) => {
+            state.selectedProject = action.payload;
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(getProjects.fulfilled, (state, action) => {
@@ -67,16 +101,46 @@ const projectSlice = createSlice({
             state.projectStatus = "succeeded";
             state.projects = action.payload;
         })
-        // builder.addCase(getProjects.rejected, (state, action) => {
-        //     console.log(action.payload);
-        //     state.projectStatus = "failed";
-        //     state.projectError = action.error.message || null;
-        // }),
-        // builder.addCase(getProjects.pending, (state, action) => {
-        //     console.log(action.payload);
-        //     state.projectStatus = "loading";
-        //     state.projectError = null;
-        // })
+        builder.addCase(getProjects.rejected, (state, action) => {
+            console.log(action.payload);
+            state.projectStatus = "failed";
+            state.projectError = action.error.message || null;
+        }),
+        builder.addCase(getProjects.pending, (state, action) => {
+            console.log(action.payload);
+            state.projectStatus = "loading";
+            state.projectError = null;
+        }),
+        builder.addCase(addProject.fulfilled, (state, action) => {
+            console.log(action.payload);
+            state.addProjectStatus = "succeeded";
+            state.projects.push(action.payload);
+        }),
+        builder.addCase(addProject.rejected, (state, action) => {
+            console.log(action.payload);
+            state.addProjectStatus = "failed";
+            state.addProjectError = action.error.message || null;
+        }),
+        builder.addCase(addProject.pending, (state, action) => {
+            console.log(action.payload);
+            state.addProjectStatus = "loading";
+            state.addProjectError = null;
+        }),
+        builder.addCase(deleteProject.fulfilled, (state, action) => {
+            console.log(action.payload);
+            state.deleteProjectStatus = "succeeded";
+            state.projects = state.projects.filter((project) => project.id !== action.payload.id);
+        }),
+        builder.addCase(deleteProject.rejected, (state, action) => {
+            console.log(action.payload);
+            state.deleteProjectStatus = "failed";
+            state.deleteProjectError = action.error.message || null;
+        }),
+        builder.addCase(deleteProject.pending, (state, action) => {
+            console.log(action.payload);
+            state.deleteProjectStatus = "loading";
+            state.deleteProjectError = null;
+        })
     }
 })
 
@@ -89,11 +153,13 @@ export const {
     hideEditProjectModal,
     showDeleteProjectModal,
     hideDeleteProjectModal,
+    selectProject,
   } = projectSlice.actions;
 export const selectIsCreateProjectModalShown = (state: RootState) => state.project.isCreateProjectModalShown;
 export const selectIsViewProjectModalShown = (state: RootState) => state.project.isViewProjectModalShown;
 export const selectIsEditProjectModalShown = (state: RootState) => state.project.isEditProjectModalShown;
 export const selectIsDeleteProjectModalShown = (state: RootState) => state.project.isDeleteProjectModalShown;
 export const selectProjects = (state: RootState) => state.project.projects;
+export const selectSelectedProject = (state: RootState) => state.project.selectedProject;
 
 export default projectSlice.reducer;

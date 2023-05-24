@@ -26,6 +26,7 @@
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
+            margin: shared.$padding-desktop-xs;
         }
 
         .menuButton {
@@ -42,7 +43,7 @@
 
      h5 {
         @include shared.heading-desktopsmall;
-        margin-top: shared.$padding-desktop-md;
+        margin-top: shared.$padding-desktop-xxs;
         color: shared.$color-secondary;
         font-weight: shared.$font-weight-regular;
         padding: shared.$padding-desktop-xs;
@@ -57,12 +58,14 @@
         .titleBar {
             h4 {
                 @include shared.heading-tabletsmall;
+                margin: shared.$padding-tablet-xs;
+
             }
         }
 
         h5 {
             @include shared.heading-tabletsmall;
-            margin-top: shared.$padding-tablet-md;
+            margin-top: shared.$padding-tablet-xxs;
             padding: shared.$padding-tablet-xs;
         }
     }
@@ -76,12 +79,14 @@
         .titleBar {
             h4 {
                 @include shared.heading-mobilesmall;
+                margin: shared.$padding-mobile-xs;
+
             }
         }
 
         h5 {
             @include shared.heading-mobilesmall;
-            margin-top: shared.$padding-mobile-md;
+            margin-top: shared.$padding-mobile-xxs;
             padding: shared.$padding-mobile-xs;
         }
     }
