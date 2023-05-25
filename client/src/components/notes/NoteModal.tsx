@@ -19,6 +19,7 @@ export const NoteModal: FC = () => {
     const [noteTitle, setNoteTitle] = useState<string>("");
     const [isEditingMode, setIsEditingMode] = useState<boolean>(true);
     const [colorPickerShown, setColorPickerShown] = useState<boolean>(false);
+    const [color, setColor] = useState<string>("");
 
     const handleNoteValueChange = (e: string) => {
         console.log(e)
@@ -46,6 +47,18 @@ export const NoteModal: FC = () => {
         dispatch(showColorModal())
     }
 
+    const handleColorClick = (e: any) => {
+        console.log(e)
+        // setColor(e)
+    }
+
+    const handleColorClickOutside = (e: React.FocusEvent<HTMLDivElement>) => {
+        if(e.currentTarget.contains(e.relatedTarget)) {
+            return
+        }
+        setColorPickerShown(false)
+    }
+
 
     return (
         <Modal show={noteModalShownState} onHide={() => dispatch(hideNoteModal())} centered size="lg">
@@ -57,14 +70,15 @@ export const NoteModal: FC = () => {
                     :
                     <h2>{noteTitle}</h2>
                     }
-                    <div className={styles.editToolbar}>
+                    <div className={styles.editToolbar} 
+>
                         {isEditingMode && (
                             <div>
                                 <MdOutlineColorLens 
                                 onClick={() => setColorPickerShown(!colorPickerShown)}
-                                onBlur={() => setColorPickerShown(false)}
+                                
                                 tabIndex={0}/>
-                                {colorPickerShown && (<ColorPickerDropdown />)}
+                                {colorPickerShown && (<ColorPickerDropdown onColorClick={handleColorClick} />)}
                             </div>
                         )}
                         <div onClick={handleModeChange}>

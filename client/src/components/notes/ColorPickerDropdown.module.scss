@@ -12,16 +12,20 @@
     z-index: 20;
     padding: shared.$padding-desktop-xxs;
     cursor: none;
+    // width: shared.$box-desktop-md;
 
     .colorCircle {
-        border-radius: shared.$border-radius-xl;
-        width:shared.$padding-desktop-xxl;
-        height:shared.$padding-desktop-xxl;
+        justify-items: center;
+        align-items: center;
+        border-radius: 10px;
+        
+        padding: shared.$padding-desktop-xxs;
         border: none;
+        z-index: 21;
     }
 
     .colorCircle:nth-child(1) {
-        background-color: white;
+        background-color: shared.$color-white;
         border: shared.$border-width-thin solid black;
     }
 
