@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 import { TiSortAlphabeticallyOutline } from "react-icons/ti";
 import { useMediaQuery } from "react-responsive";
 import { screenSizes } from "../screenSizes";
-import { useAppDispatch } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { showNoteModal } from "../store/slices/noteSlice";
+import { selectSelectedProject } from "../store/slices/projectSlice";
 
 export const NoteTakingPage = () => {
     const [isColorView, setIsColorView] = useState<boolean>(false);
@@ -16,6 +17,7 @@ export const NoteTakingPage = () => {
     const isTablet = useMediaQuery({ minWidth: screenSizes.tabletMinimum, maxWidth: screenSizes.tabletMaximum});
     const isMobile = useMediaQuery({ maxWidth: screenSizes.mobileMaximum });
     const dispatch = useAppDispatch();
+    const currentProjectState = useAppSelector(selectSelectedProject)
     
     useEffect(() => {
             if(isDesktop) {
@@ -29,6 +31,10 @@ export const NoteTakingPage = () => {
 
     const handleViewChange = () => {
         setIsColorView(!isColorView);
+    }
+
+    if(!currentProjectState){
+        return <div>Loading...</div>
     }
 
     return (
@@ -57,21 +63,7 @@ export const NoteTakingPage = () => {
             </div>
 
             <div className={styles.notesContainer}>
-                <NoteCard />
-                <NoteCard />
-                <NoteCard />
-                <NoteCard />
-                <NoteCard />
-                <NoteCard />
-                <NoteCard />
-                <NoteCard />
-                <NoteCard />
-                <NoteCard />
-                <NoteCard />
-                <NoteCard />
-                <NoteCard />
-                <NoteCard />
-                <NoteCard />
+                {currentProjectState.notes ? currentProjectState.notes.map((note: any) => <NoteCard key={note.id} note={note} />) : <div>No notes</div>}
             </div>
 
             <div className={styles.optionsContainer}>

@@ -1,0 +1,55 @@
+@use "../../styles/shared.scss";
+
+.colorWrapper {
+    position:absolute;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: shared.$padding-desktop-xs;
+    background-color: shared.$color-white;
+    border-radius: shared.$border-radius-md;
+    box-shadow: shared.$box-shadow-md;
+    z-index: 20;
+    padding: shared.$padding-desktop-xxs;
+    cursor: none;
+
+    .colorCircle {
+        border-radius: shared.$border-radius-xl;
+        width:shared.$padding-desktop-xxl;
+        height:shared.$padding-desktop-xxl;
+        border: none;
+    }
+
+    .colorCircle:nth-child(1) {
+        background-color: white;
+        border: shared.$border-width-thin solid black;
+    }
+
+    .colorCircle:nth-child(2) {
+        background-color: shared.$color-note-lightblue;
+    }
+    
+    .colorCircle:nth-child(3) {
+        background-color: shared.$color-note-babypink;
+    }
+
+    .colorCircle:nth-child(4) {
+        background-color: shared.$color-note-lavender;
+    }
+    
+    .colorCircle:nth-child(5) {
+        background-color: shared.$color-note-mintgreen;
+    }
+
+    .colorCircle:nth-child(6) {
+        background-color: shared.$color-note-palegreen;
+    }
+
+    .colorCircle:nth-child(7) {
+        background-color: shared.$color-note-lemonchiffon;
+    }
+
+    .colorCircle:nth-child(8) {
+        background-color: shared.$color-note-peachpuff;
+    }
+}

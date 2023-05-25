@@ -30,7 +30,7 @@ model Note {
   snapshots Snapshot[]
   projectId Int
   project Project @relation(fields: [projectId], references: [id])
-  actions Action[]
+  actions Action[] 
 }
 
 model Snapshot {

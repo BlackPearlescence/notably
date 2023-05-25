@@ -23,6 +23,8 @@ export const RenameProjectModal: React.FC = () => {
             title: projectTitle
         }
         dispatch(updateProject(updatedProject))
+        setProjectTitle("")
+        dispatch(hideEditProjectModal())
     }
     return (
         <Modal show={projectEditModalShowState} onHide={() => dispatch(hideEditProjectModal())} fluid centered>

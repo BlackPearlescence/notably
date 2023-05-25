@@ -1,13 +1,14 @@
 import { FC, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
-import { hideNoteModal, selectIsEditNoteModalShown, selectIsNoteModalShown } from "../../store/slices/noteSlice"
+import { hideNoteModal, selectIsEditNoteModalShown, selectIsNoteModalShown, showColorModal } from "../../store/slices/noteSlice"
 import ReactQuill from "react-quill";
 import styles from "./NoteModal.module.scss"
 import { MdOutlineColorLens } from "react-icons/md";
 import { AiFillSave } from "react-icons/ai";
 import parse from 'html-react-parser';
 import { HiOutlinePencil } from "react-icons/hi";
+import { ColorPickerDropdown } from "./ColorPickerDropdown";
 
 
 export const NoteModal: FC = () => {
@@ -17,6 +18,7 @@ export const NoteModal: FC = () => {
     const [noteValue, setNoteValue] = useState<string>("");
     const [noteTitle, setNoteTitle] = useState<string>("");
     const [isEditingMode, setIsEditingMode] = useState<boolean>(true);
+    const [colorPickerShown, setColorPickerShown] = useState<boolean>(false);
 
     const handleNoteValueChange = (e: string) => {
         console.log(e)
@@ -40,6 +42,10 @@ export const NoteModal: FC = () => {
         dispatch(hideNoteModal())
     }
 
+    const handleShowColorModal = () => {
+        dispatch(showColorModal())
+    }
+
 
     return (
         <Modal show={noteModalShownState} onHide={() => dispatch(hideNoteModal())} centered size="lg">
@@ -54,7 +60,11 @@ export const NoteModal: FC = () => {
                     <div className={styles.editToolbar}>
                         {isEditingMode && (
                             <div>
-                                <MdOutlineColorLens />
+                                <MdOutlineColorLens 
+                                onClick={() => setColorPickerShown(!colorPickerShown)}
+                                onBlur={() => setColorPickerShown(false)}
+                                tabIndex={0}/>
+                                {colorPickerShown && (<ColorPickerDropdown />)}
                             </div>
                         )}
                         <div onClick={handleModeChange}>

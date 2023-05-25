@@ -2,7 +2,10 @@ import { FC, useState } from "react";
 import styles from "./NoteCard.module.scss";
 import { NoteBottomBar } from "./NoteBottomBar";
 
-export const NoteCard: FC = () => {
+interface NoteCardProps {
+    note: any;
+}
+export const NoteCard: FC<NoteCardProps> = ({ note }) => {
     const [isHovered, setIsHovered] = useState<boolean>(false);
     return (
         <div 

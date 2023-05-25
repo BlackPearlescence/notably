@@ -12,6 +12,8 @@ export const NewProjectModal = () => {
     const handleProjectSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         dispatch(addProject(projectTitle))
+        setProjectTitle("")
+        dispatch(hideCreateProjectModal())
     }
 
     const handleProjectTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

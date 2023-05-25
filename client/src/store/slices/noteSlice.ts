@@ -7,6 +7,7 @@ interface NoteState {
     isEditNoteModalShown: boolean,
     isDeleteNoteModalShown: boolean,
     isNoteModalShown: boolean,
+    isColorModalShown: boolean,
 }
 
 const initialState: NoteState = {
@@ -15,6 +16,7 @@ const initialState: NoteState = {
     isEditNoteModalShown: false,
     isDeleteNoteModalShown: false,
     isNoteModalShown: false,
+    isColorModalShown: false,
 }
 
 const noteSlice = createSlice({
@@ -50,6 +52,12 @@ const noteSlice = createSlice({
         },
         hideNoteModal: (state) => {
             state.isNoteModalShown = false;
+        },
+        showColorModal: (state) => {
+            state.isColorModalShown = true;
+        },
+        hideColorModal: (state) => {
+            state.isColorModalShown = false;
         }
     }
 })
@@ -64,7 +72,9 @@ export const {
     showDeleteNoteModal,
     hideDeleteNoteModal,
     showNoteModal,
-    hideNoteModal
+    hideNoteModal,
+    showColorModal,
+    hideColorModal,
 } = noteSlice.actions;
 
 export const selectIsCreateNoteModalShown = (state: RootState) => state.note.isCreateNoteModalShown;
@@ -72,5 +82,6 @@ export const selectIsViewNoteModalShown = (state: RootState) => state.note.isVie
 export const selectIsEditNoteModalShown = (state: RootState) => state.note.isEditNoteModalShown;
 export const selectIsDeleteNoteModalShown = (state: RootState) => state.note.isDeleteNoteModalShown;
 export const selectIsNoteModalShown = (state: RootState) => state.note.isNoteModalShown;
+export const selectColorModalShown = (state: RootState) => state.note.isColorModalShown;
 
 export default noteSlice.reducer;
