@@ -17,6 +17,8 @@ interface ProjectState {
     selectedProject: any,
     getProjectStatus: "idle" | "loading" | "succeeded" | "failed",
     getProjectError: string | null,
+    updateProjectStatus: "idle" | "loading" | "succeeded" | "failed",
+    updateProjectError: string | null,
 }
 
 const initialState: ProjectState = {
@@ -33,7 +35,9 @@ const initialState: ProjectState = {
     deleteProjectStatus: "idle",
     selectedProject: null,
     getProjectStatus: "idle",
-    getProjectError: null
+    getProjectError: null,
+    updateProjectStatus: "idle",
+    updateProjectError: null,
 }
 
 export const getProjects = createAsyncThunk(
@@ -74,7 +78,16 @@ export const deleteProject = createAsyncThunk(
     }
 )
 
-
+export const updateProject = createAsyncThunk(
+    "project/updateProject",
+    async (project: any) => {
+        const resp = await axios.put(`/projects/${project.id}`, {
+            title: project.title,
+        });
+        const updatedProject = await resp.data;
+        return updatedProject;
+    }
+)
 
 export const projectSlice = createSlice({
     name: "project",
@@ -164,6 +177,22 @@ export const projectSlice = createSlice({
             console.log(action.payload);
             state.getProjectStatus = "failed";
             state.getProjectError = action.error.message || null;
+        })
+        builder.addCase(updateProject.fulfilled, (state, action) => {
+            console.log(action.payload);
+            state.updateProjectStatus = "succeeded";
+            const index = state.projects.findIndex((project) => project.id === action.payload.id);
+            state.projects[index] = action.payload;
+        }),
+        builder.addCase(updateProject.rejected, (state, action) => {
+            console.log(action.payload);
+            state.updateProjectStatus = "failed";
+            state.updateProjectError = action.error.message || null;
+        }),
+        builder.addCase(updateProject.pending, (state, action) => {
+            console.log(action.payload);
+            state.updateProjectStatus = "loading";
+            state.updateProjectError = null;
         })
     }
 })
