@@ -30,7 +30,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
     return (
         <div 
         className={styles.projectCardContainer} 
-        onDoubleClick={() => navigate("/notes")}
+        onDoubleClick={() => navigate(`/notes/${project.id}`)}
         onClick={handleProjectFocus}>
             <div className={styles.titleBar}>
                 <h4>{project.title}</h4>

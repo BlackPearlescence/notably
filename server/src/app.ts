@@ -11,7 +11,6 @@ const DATABASE_URL = process.env.DATABASE_URL;
 
 app.use(express.json());
 app.use(morgan("dev"));
-app.use("/notes", noteRouter)
 app.use("/projects", projectRouter)
 
 app.get('/', (req, res, next) => {

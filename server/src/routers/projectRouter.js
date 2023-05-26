@@ -13,7 +13,8 @@ exports.projectRouter = void 0;
 const express_1 = require("express");
 const myPrisma_1 = require("../myPrisma");
 const http_status_codes_1 = require("http-status-codes");
-exports.projectRouter = (0, express_1.Router)();
+const noteRouter_1 = require("./noteRouter");
+exports.projectRouter = (0, express_1.Router)({ mergeParams: true });
 exports.projectRouter.get('/', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const projects = yield myPrisma_1.myPrisma.project.findMany();
@@ -23,11 +24,11 @@ exports.projectRouter.get('/', (req, res, next) => __awaiter(void 0, void 0, voi
         next(new Error("No projects exist"));
     }
 }));
-exports.projectRouter.get("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.projectRouter.get("/:projectId", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const project = yield myPrisma_1.myPrisma.project.findUnique({
             where: {
-                id: parseInt(req.params.id)
+                id: parseInt(req.params.projectId)
             }
         });
         res.status(http_status_codes_1.StatusCodes.OK).json(project);
@@ -36,6 +37,7 @@ exports.projectRouter.get("/:id", (req, res, next) => __awaiter(void 0, void 0, 
         next(new Error("No project exists with that id"));
     }
 }));
+exports.projectRouter.use("/:projectId/notes", noteRouter_1.noteRouter);
 exports.projectRouter.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     // Make title a string
     const { title } = req.body;
@@ -51,12 +53,12 @@ exports.projectRouter.post("/", (req, res, next) => __awaiter(void 0, void 0, vo
         next(new Error("Failed to create project"));
     }
 }));
-exports.projectRouter.put("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.projectRouter.put("/:projectId", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { title } = req.body;
     try {
         const project = yield myPrisma_1.myPrisma.project.update({
             where: {
-                id: parseInt(req.params.id)
+                id: parseInt(req.params.projectId)
             },
             data: {
                 title: title,
@@ -68,11 +70,11 @@ exports.projectRouter.put("/:id", (req, res, next) => __awaiter(void 0, void 0, 
         next(new Error("Failed to update project"));
     }
 }));
-exports.projectRouter.delete("/:id", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.projectRouter.delete("/:projectId", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const project = yield myPrisma_1.myPrisma.project.delete({
             where: {
-                id: parseInt(req.params.id)
+                id: parseInt(req.params.projectId)
             }
         });
         res.status(http_status_codes_1.StatusCodes.OK).json(project);

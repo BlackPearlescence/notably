@@ -56,7 +56,7 @@ function App() {
         </Route>
         <Route path="/" element={<NoteAppLayout />}>
           <Route path="projects" element={<ProjectPage />} />
-          <Route path="notes" element={<NoteTakingPage />} /> 
+          <Route path="notes/:projectId" element={<NoteTakingPage />} /> 
         </Route>
       </Routes>
       <NewProjectModal />

@@ -3,8 +3,11 @@ import { Router } from 'express';
 import { myPrisma } from '../myPrisma';
 import { StatusCodes } from 'http-status-codes';
 import { Project } from '@prisma/client';
+import { noteRouter } from './noteRouter';
 
-export const projectRouter = Router();
+export const projectRouter = Router({ mergeParams: true });
+
+
 
 projectRouter.get('/', async (req, res, next) => {
     try {
@@ -15,11 +18,11 @@ projectRouter.get('/', async (req, res, next) => {
     }
 });
 
-projectRouter.get("/:id", async (req, res, next) => {
+projectRouter.get("/:projectId", async (req, res, next) => {
     try {
         const project = await myPrisma.project.findUnique({
             where: {
-                id: parseInt(req.params.id)
+                id: parseInt(req.params.projectId)
             }
         })
         res.status(StatusCodes.OK).json(project);
@@ -27,6 +30,8 @@ projectRouter.get("/:id", async (req, res, next) => {
         next(new Error("No project exists with that id"));
     }
 })
+
+projectRouter.use("/:projectId/notes", noteRouter)
 
 projectRouter.post("/", async (req, res, next) => {
     // Make title a string
@@ -44,12 +49,12 @@ projectRouter.post("/", async (req, res, next) => {
     }
 })
 
-projectRouter.put("/:id", async (req, res, next) => {
+projectRouter.put("/:projectId", async (req, res, next) => {
     const { title } = req.body;
     try {
         const project = await myPrisma.project.update({
             where: {
-                id: parseInt(req.params.id)
+                id: parseInt(req.params.projectId)
             },
             data: {
                 title: title,
@@ -61,11 +66,11 @@ projectRouter.put("/:id", async (req, res, next) => {
     }
 })
 
-projectRouter.delete("/:id", async (req, res, next) => {
+projectRouter.delete("/:projectId", async (req, res, next) => {
     try {
         const project = await myPrisma.project.delete({
             where: {
-                id: parseInt(req.params.id)
+                id: parseInt(req.params.projectId)
             }
         })
         res.status(StatusCodes.OK).json(project);

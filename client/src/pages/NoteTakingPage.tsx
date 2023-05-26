@@ -7,8 +7,10 @@ import { TiSortAlphabeticallyOutline } from "react-icons/ti";
 import { useMediaQuery } from "react-responsive";
 import { screenSizes } from "../screenSizes";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { showNoteModal } from "../store/slices/noteSlice";
+import { getNotes, selectNotes, showNoteModal } from "../store/slices/noteSlice";
 import { selectSelectedProject } from "../store/slices/projectSlice";
+import { current } from "@reduxjs/toolkit";
+import { useParams } from "react-router-dom";
 
 export const NoteTakingPage = () => {
     const [isColorView, setIsColorView] = useState<boolean>(false);
@@ -17,8 +19,16 @@ export const NoteTakingPage = () => {
     const isTablet = useMediaQuery({ minWidth: screenSizes.tabletMinimum, maxWidth: screenSizes.tabletMaximum});
     const isMobile = useMediaQuery({ maxWidth: screenSizes.mobileMaximum });
     const dispatch = useAppDispatch();
+    const notesState = useAppSelector(selectNotes)
     const currentProjectState = useAppSelector(selectSelectedProject)
+    const { id } = useParams();
     
+    useEffect(() => {
+        if(id) {
+            dispatch(getNotes(parseInt(id)))
+        } 
+    },[])
+
     useEffect(() => {
             if(isDesktop) {
                 setIconSize(35);
