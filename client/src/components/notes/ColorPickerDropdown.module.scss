@@ -2,11 +2,12 @@
 
 .colorWrapper {
     position:absolute;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    grid-gap: shared.$padding-desktop-xs;
-    background-color: shared.$color-white;
+    right: 0;
+    // display: grid;
+    // grid-template-columns: 1fr 1fr;
+    // grid-template-rows: auto;
+    // grid-gap: shared.$padding-desktop-xs;
+    background-color: #F5F5F5;
     border-radius: shared.$border-radius-md;
     box-shadow: shared.$box-shadow-md;
     z-index: 20;

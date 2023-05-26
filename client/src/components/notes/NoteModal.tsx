@@ -70,13 +70,11 @@ export const NoteModal: FC = () => {
                     :
                     <h2>{noteTitle}</h2>
                     }
-                    <div className={styles.editToolbar} 
->
+                    <div className={styles.editToolbar}>
                         {isEditingMode && (
                             <div>
                                 <MdOutlineColorLens 
                                 onClick={() => setColorPickerShown(!colorPickerShown)}
-                                
                                 tabIndex={0}/>
                                 {colorPickerShown && (<ColorPickerDropdown onColorClick={handleColorClick} />)}
                             </div>
