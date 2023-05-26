@@ -42,6 +42,7 @@ export const getNotes  = createAsyncThunk(
 export const createNote = createAsyncThunk(
     "note/createNote",
     async (note: any) => {
+        console.log(note)
         const resp = await axios.post(`/projects/${note.projectId}/notes`, note);
         const newNote = await resp.data;
         return newNote;

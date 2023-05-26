@@ -39,6 +39,7 @@ interface notePostRequestParams {
 noteRouter.post("/", async (req: Request<notePostRequestParams,any,any>, res, next) => {
     const { title, content, color } = req.body;
     const { projectId } = req.params;
+    console.log(projectId)
     try {
 
         // Create the note
@@ -47,11 +48,17 @@ noteRouter.post("/", async (req: Request<notePostRequestParams,any,any>, res, ne
                 title: title,
                 content: content,
                 color: color,
+
                 project: {
                     connect: {
                         id: parseInt(projectId)
                     }
-                }
+                },
+                createdBy: {
+                    connect: {
+                        id: 1
+                    }
+                },
             }
         })
 

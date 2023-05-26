@@ -39,6 +39,7 @@ exports.noteRouter.get("/:noteId", (req, res, next) => __awaiter(void 0, void 0,
 exports.noteRouter.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { title, content, color } = req.body;
     const { projectId } = req.params;
+    console.log(projectId);
     try {
         // Create the note
         const note = yield myPrisma_1.myPrisma.note.create({
@@ -50,7 +51,12 @@ exports.noteRouter.post("/", (req, res, next) => __awaiter(void 0, void 0, void 
                     connect: {
                         id: parseInt(projectId)
                     }
-                }
+                },
+                createdBy: {
+                    connect: {
+                        id: 1
+                    }
+                },
             }
         });
         res.status(http_status_codes_1.StatusCodes.CREATED).json(req.body);

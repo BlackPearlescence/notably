@@ -8,7 +8,7 @@ import { useMediaQuery } from "react-responsive";
 import { screenSizes } from "../screenSizes";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { getNotes, selectNotes, showNoteModal } from "../store/slices/noteSlice";
-import { selectSelectedProject } from "../store/slices/projectSlice";
+import { getProject, selectSelectedProject } from "../store/slices/projectSlice";
 import { current } from "@reduxjs/toolkit";
 import { useParams } from "react-router-dom";
 
@@ -21,11 +21,13 @@ export const NoteTakingPage = () => {
     const dispatch = useAppDispatch();
     const notesState = useAppSelector(selectNotes)
     const currentProjectState = useAppSelector(selectSelectedProject)
-    const { id } = useParams();
+    const { projectId } = useParams();
     
     useEffect(() => {
-        if(id) {
-            dispatch(getNotes(parseInt(id)))
+        console.log(projectId)
+        if(projectId) {
+            dispatch(getProject(parseInt(projectId)))
+            dispatch(getNotes(parseInt(projectId)))
         } 
     },[])
 

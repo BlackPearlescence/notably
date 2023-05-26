@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
-import { hideNoteModal, selectIsEditNoteModalShown, selectIsNoteModalShown, showColorModal } from "../../store/slices/noteSlice"
+import { createNote, getNotes, hideNoteModal, selectIsEditNoteModalShown, selectIsNoteModalShown, showColorModal } from "../../store/slices/noteSlice"
 import ReactQuill from "react-quill";
 import styles from "./NoteModal.module.scss"
 import { MdOutlineColorLens } from "react-icons/md";
@@ -10,21 +10,31 @@ import parse from 'html-react-parser';
 import { HiOutlinePencil } from "react-icons/hi";
 import { ColorPickerDropdown } from "./ColorPickerDropdown";
 import { Color } from "../../constants/colors";
+import { selectSelectedProject } from "../../store/slices/projectSlice";
+import { useParams } from "react-router-dom";
 
 
 export const NoteModal: FC = () => {
 
+    const { projectId } = useParams<{projectId: string}>()
     const noteModalShownState = useAppSelector(selectIsNoteModalShown)
+    const currentProjectState = useAppSelector(selectSelectedProject)
     const dispatch = useAppDispatch()
     const [noteValue, setNoteValue] = useState<string>("");
     const [noteTitle, setNoteTitle] = useState<string>("");
     const [isEditingMode, setIsEditingMode] = useState<boolean>(true);
     const [colorPickerShown, setColorPickerShown] = useState<boolean>(false);
-    const [color, setColor] = useState<string>("");
+    const [color, setColor] = useState<string>("#ffffff");
     const [colorStyle, setColorStyle] = useState<string>("");
 
+    // useEffect(() => {
+    //     if (projectId) {
+    //         dispatch(getNotes(parseInt(projectId)))
+    //     }
+    // },[])
+
     useEffect(() => {
-        console.log(color)
+        console.log(projectId)
         switch(color) {
             case Color.WHITE:
                 setColorStyle(styles.customModalWhite)
@@ -81,6 +91,13 @@ export const NoteModal: FC = () => {
         e.preventDefault()
         console.log(noteValue)
         console.log(noteTitle)
+        console.log(projectId)
+        dispatch(createNote({
+            title: noteTitle,
+            content: noteValue,
+            color: color,
+            projectId: currentProjectState.id
+        }))
         dispatch(hideNoteModal())
     }
 
