@@ -1,8 +1,46 @@
 @use "../../styles/shared.scss";
 
-.customModal {
-    background-color: #F6D6E6;
+.customModalWhite {
+    background-color: shared.$color-white;
 }
+
+.customModalLightBlue {
+    background-color: shared.$color-note-lightblue;
+}
+
+.customModalBabyPink {
+    background-color: shared.$color-note-babypink;
+}
+
+.customModalLavender {
+    background-color: shared.$color-note-lavender;
+}
+
+.customModalMintGreen {
+    background-color: shared.$color-note-mintgreen;
+}
+
+.customModalPaleGreen {
+    background-color: shared.$color-note-palegreen;
+}
+
+.customModalLemonChiffon {
+    background-color: shared.$color-note-lemonchiffon;
+}
+
+.customModalPeachPuff {
+    background-color: shared.$color-note-peachpuff;
+}
+
+.customModalLightCoral {
+    background-color: shared.$color-note-lightcoral;
+}
+
+.customModalThistle {
+    background-color: shared.$color-note-thistle;
+}
+
+
 
 
 

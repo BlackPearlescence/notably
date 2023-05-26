@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
 import { hideNoteModal, selectIsEditNoteModalShown, selectIsNoteModalShown, showColorModal } from "../../store/slices/noteSlice"
@@ -9,6 +9,7 @@ import { AiFillSave } from "react-icons/ai";
 import parse from 'html-react-parser';
 import { HiOutlinePencil } from "react-icons/hi";
 import { ColorPickerDropdown } from "./ColorPickerDropdown";
+import { Color } from "../../constants/colors";
 
 
 export const NoteModal: FC = () => {
@@ -20,6 +21,46 @@ export const NoteModal: FC = () => {
     const [isEditingMode, setIsEditingMode] = useState<boolean>(true);
     const [colorPickerShown, setColorPickerShown] = useState<boolean>(false);
     const [color, setColor] = useState<string>("");
+    const [colorStyle, setColorStyle] = useState<string>("");
+
+    useEffect(() => {
+        console.log(color)
+        switch(color) {
+            case Color.WHITE:
+                setColorStyle(styles.customModalWhite)
+                break;
+            case Color.LIGHTBLUE:
+                setColorStyle(styles.customModalLightBlue)
+                break;
+            case Color.BABYPINK:
+                setColorStyle(styles.customModalBabyPink)
+                break;
+            case Color.LAVENDER:
+                setColorStyle(styles.customModalLavender)
+                break;
+            case Color.MINTGREEN:
+                setColorStyle(styles.customModalMintGreen)
+                break;
+            case Color.PALEGREEN:
+                setColorStyle(styles.customModalPaleGreen)
+                break;
+            case Color.LEMONCHIFFON:
+                setColorStyle(styles.customModalLemonChiffon)
+                break;
+            case Color.PEACHPUFF:
+                setColorStyle(styles.customModalPeachPuff)
+                break;
+            case Color.LIGHTCORAL:
+                setColorStyle(styles.customModalLightCoral)
+                break;
+            case Color.THISTLE:
+                setColorStyle(styles.customModalThistle)
+                break;
+            default:
+                setColorStyle(styles.customModalWhite)
+                break;
+        }
+    },[color])
 
     const handleNoteValueChange = (e: string) => {
         console.log(e)
@@ -62,7 +103,7 @@ export const NoteModal: FC = () => {
 
     return (
         <Modal show={noteModalShownState} onHide={() => dispatch(hideNoteModal())} centered size="lg">
-            <Modal.Body className={styles.customModal}>
+            <Modal.Body className={colorStyle}>
             <form className={styles.noteForm} onSubmit={handleNoteSubmit}>
                 <div className={styles.editHeader}>
                     {isEditingMode ? 
@@ -76,7 +117,7 @@ export const NoteModal: FC = () => {
                                 <MdOutlineColorLens 
                                 onClick={() => setColorPickerShown(!colorPickerShown)}
                                 tabIndex={0}/>
-                                {colorPickerShown && (<ColorPickerDropdown onColorClick={handleColorClick} />)}
+                                {colorPickerShown && (<ColorPickerDropdown color={color} setColor={setColor} />)}
                             </div>
                         )}
                         <div onClick={handleModeChange}>
