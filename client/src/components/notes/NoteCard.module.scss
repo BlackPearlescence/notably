@@ -10,11 +10,12 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: shared.$box-desktop-sm;
-        height: shared.$box-desktop-sm;
+        width: 100%;
+        height: 100%;
         cursor: pointer;
         box-shadow: shared.$box-shadow-md;
         border-radius: shared.$border-radius-sm;
+
 
         h6 {
             @include shared.body-desktopsmall;
