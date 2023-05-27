@@ -94,7 +94,7 @@ noteRouter.delete("/:noteId", async (req, res, next) => {
 })
 
 noteRouter.put("/:noteId", async (req, res, next) => {
-    const { title, content } = req.body;
+    const { title, content, color } = req.body;
     try {
         const note = await myPrisma.note.update({
             where: {
@@ -102,7 +102,8 @@ noteRouter.put("/:noteId", async (req, res, next) => {
             },
             data: {
                 title: title,
-                content: content
+                content: content,
+                color: color
             }
         })
         res.status(StatusCodes.OK).json(note)

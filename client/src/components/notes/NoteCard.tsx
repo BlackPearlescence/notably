@@ -20,7 +20,6 @@ export const NoteCard: FC<NoteCardProps> = ({ note }) => {
 
     const handleMouseLeave = () => {
         setIsHovered(false)
-        dispatch(selectNote(null))
     }
     return (
         <div 

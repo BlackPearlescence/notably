@@ -89,7 +89,7 @@ exports.noteRouter.delete("/:noteId", (req, res, next) => __awaiter(void 0, void
     }
 }));
 exports.noteRouter.put("/:noteId", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { title, content } = req.body;
+    const { title, content, color } = req.body;
     try {
         const note = yield myPrisma_1.myPrisma.note.update({
             where: {
@@ -97,7 +97,8 @@ exports.noteRouter.put("/:noteId", (req, res, next) => __awaiter(void 0, void 0,
             },
             data: {
                 title: title,
-                content: content
+                content: content,
+                color: color
             }
         });
         res.status(http_status_codes_1.StatusCodes.OK).json(note);

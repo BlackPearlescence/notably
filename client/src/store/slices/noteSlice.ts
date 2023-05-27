@@ -14,8 +14,11 @@ interface NoteState {
     notesError: string | null,
     createNoteStatus: "idle" | "loading" | "succeeded" | "failed",
     createNoteError: string | null,
+    updateNoteStatus: "idle" | "loading" | "succeeded" | "failed",
+    updateNoteError: string | null,
     selectNote: any,
     isEdit: boolean,
+    isNewNote: boolean,
 }
 
 const initialState: NoteState = {
@@ -32,6 +35,9 @@ const initialState: NoteState = {
     createNoteError: null,
     selectNote: null,
     isEdit: true,
+    isNewNote: true,
+    updateNoteStatus: "idle",
+    updateNoteError: null,
 }
 
 export const getNotes  = createAsyncThunk(
@@ -59,6 +65,15 @@ export const removeNote = createAsyncThunk(
         const resp = await axios.delete(`/projects/${note.projectId}/notes/${note.id}`);
         const deletedNote = await resp.data;
         return deletedNote;
+    }
+)
+
+export const updateNote = createAsyncThunk(
+    "note/updateNote",
+    async (note: any) => {
+        const resp = await axios.put(`/projects/${note.projectId}/notes/${note.id}`,note)
+        const updatedNote = await resp.data;
+        return updatedNote;
     }
 )
 
@@ -110,6 +125,12 @@ const noteSlice = createSlice({
         },
         toViewMode: (state) => {
             state.isEdit = false;
+        },
+        makeNewNote: (state) => {
+            state.isNewNote = true;
+        },
+        updateExistingNote: (state) => {
+            state.isNewNote = false;
         }
     },
     extraReducers: (builder) => {
@@ -139,6 +160,16 @@ const noteSlice = createSlice({
         }),
         builder.addCase(removeNote.rejected, (state, action) => {
             state.createNoteStatus = "failed";
+        }),
+        builder.addCase(updateNote.fulfilled, (state, action) => {
+            const index = state.notes.findIndex((note) => note.id === action.payload.id);
+            state.notes[index] = action.payload;
+        }),
+        builder.addCase(updateNote.pending, (state, action) => {
+            state.updateNoteStatus = "loading";
+        }),
+        builder.addCase(updateNote.rejected, (state, action) => {
+            state.updateNoteError = "failed";
         })
     },
 
@@ -160,6 +191,8 @@ export const {
     selectNote,
     toEditMode,
     toViewMode,
+    makeNewNote,
+    updateExistingNote
 } = noteSlice.actions;
 
 export const selectIsCreateNoteModalShown = (state: RootState) => state.note.isCreateNoteModalShown;
@@ -171,5 +204,6 @@ export const selectColorModalShown = (state: RootState) => state.note.isColorMod
 export const selectNotes = (state: RootState) => state.note.notes;
 export const selectSelectedNote = (state: RootState) => state.note.selectNote;
 export const selectIsEdit = (state: RootState) => state.note.isEdit;
+export const selectIsNewNote = (state: RootState) => state.note.isNewNote;
 
 export default noteSlice.reducer;

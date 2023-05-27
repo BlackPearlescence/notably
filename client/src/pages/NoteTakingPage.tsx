@@ -7,7 +7,7 @@ import { TiSortAlphabeticallyOutline } from "react-icons/ti";
 import { useMediaQuery } from "react-responsive";
 import { screenSizes } from "../screenSizes";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { getNotes, selectNote, selectNotes, selectSelectedNote, showNoteModal, toEditMode } from "../store/slices/noteSlice";
+import { getNotes, selectNote, selectNotes, selectSelectedNote, showNoteModal, toEditMode, updateExistingNote } from "../store/slices/noteSlice";
 import { getProject, selectSelectedProject } from "../store/slices/projectSlice";
 import { current } from "@reduxjs/toolkit";
 import { useParams } from "react-router-dom";
@@ -51,6 +51,7 @@ export const NoteTakingPage = () => {
 
     const handleAddNote = () => {
         dispatch(toEditMode())
+        dispatch(updateExistingNote())
         dispatch(showNoteModal())
         dispatch(selectNote({
             title: "",

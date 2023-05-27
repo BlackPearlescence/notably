@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
-import { createNote, getNotes, hideNoteModal, selectIsEdit, selectIsEditNoteModalShown, selectIsNoteModalShown, selectSelectedNote, showColorModal } from "../../store/slices/noteSlice"
+import { createNote, getNotes, hideNoteModal, selectIsEdit, selectIsEditNoteModalShown, selectIsNewNote, selectIsNoteModalShown, selectSelectedNote, showColorModal, updateNote } from "../../store/slices/noteSlice"
 import ReactQuill from "react-quill";
 import styles from "./NoteModal.module.scss"
 import { MdOutlineColorLens } from "react-icons/md";
@@ -22,6 +22,7 @@ export const NoteModal: FC = () => {
     const currentProjectState = useAppSelector(selectSelectedProject)
     const currentNoteState = useAppSelector(selectSelectedNote)
     const isEditModeState = useAppSelector(selectIsEdit)
+    const isNewNoteState = useAppSelector(selectIsNewNote)
     const dispatch = useAppDispatch()
     const [noteValue, setNoteValue] = useState<string>("");
     const [noteTitle, setNoteTitle] = useState<string>("");
@@ -29,6 +30,7 @@ export const NoteModal: FC = () => {
     const [colorPickerShown, setColorPickerShown] = useState<boolean>(false);
     const [color, setColor] = useState<string>("#ffffff");
     const [colorStyle, setColorStyle] = useState<string>("");
+    const [isNewNote, setIsNewNote] = useState<boolean>(true)
 
     useEffect(() => {
         if(currentNoteState) {
@@ -37,6 +39,7 @@ export const NoteModal: FC = () => {
             setColor(currentNoteState.color)
         }
         setIsEditingMode(isEditModeState)
+        setIsNewNote(isNewNoteState)
     },[currentNoteState])
     useEffect(() => {
         console.log(projectId)
@@ -97,12 +100,24 @@ export const NoteModal: FC = () => {
         console.log(noteValue)
         console.log(noteTitle)
         console.log(projectId)
-        dispatch(createNote({
-            title: noteTitle,
-            content: noteValue,
-            color: color,
-            projectId: currentProjectState.id
-        }))
+        console.log(currentNoteState)
+        if(isNewNote) {
+            dispatch(createNote({
+                title: noteTitle,
+                content: noteValue,
+                color: color,
+                projectId: currentProjectState.id
+            }))
+        } else {
+            dispatch(updateNote({
+                id: currentNoteState.id,
+                title: noteTitle,
+                content: noteValue,
+                color: color,
+                projectId: currentProjectState.id
+            }))
+        }
+        
         dispatch(hideNoteModal())
     }
 
