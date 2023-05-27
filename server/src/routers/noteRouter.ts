@@ -74,9 +74,22 @@ noteRouter.post("/", async (req: Request<noteRequestParams,any,any>, res, next) 
             }
         })
 
-        res.status(StatusCodes.CREATED).json(req.body);
+        res.status(StatusCodes.CREATED).json(note);
     } catch (err) {
         next(err)
+    }
+})
+
+noteRouter.delete("/:noteId", async (req, res, next) => {
+    try {
+        const note = await myPrisma.note.delete({
+            where: {
+                id: parseInt(req.params.noteId)
+            }
+        })
+        res.status(StatusCodes.OK).json(note);
+    } catch (err) {
+        next(err);
     }
 })
 

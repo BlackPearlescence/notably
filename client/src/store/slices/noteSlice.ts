@@ -14,6 +14,7 @@ interface NoteState {
     notesError: string | null,
     createNoteStatus: "idle" | "loading" | "succeeded" | "failed",
     createNoteError: string | null,
+    selectNote: any,
 }
 
 const initialState: NoteState = {
@@ -28,6 +29,7 @@ const initialState: NoteState = {
     notesError: null,
     createNoteStatus: "idle",
     createNoteError: null,
+    selectNote: null,
 }
 
 export const getNotes  = createAsyncThunk(
@@ -46,6 +48,15 @@ export const createNote = createAsyncThunk(
         const resp = await axios.post(`/projects/${note.projectId}/notes`, note);
         const newNote = await resp.data;
         return newNote;
+    }
+)
+
+export const removeNote = createAsyncThunk(
+    "note/removeNote",
+    async (note: any) => {
+        const resp = await axios.delete(`/projects/${note.projectId}/notes/${note.id}`);
+        const deletedNote = await resp.data;
+        return deletedNote;
     }
 )
 
@@ -88,6 +99,9 @@ const noteSlice = createSlice({
         },
         hideColorModal: (state) => {
             state.isColorModalShown = false;
+        },
+        selectNote: (state, action) => {    
+            state.selectNote = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -108,6 +122,15 @@ const noteSlice = createSlice({
         }),
         builder.addCase(createNote.rejected, (state, action) => {
             state.createNoteStatus = "failed";
+        }),
+        builder.addCase(removeNote.fulfilled, (state, action) => {
+            state.notes = state.notes.filter((note) => note.id !== action.payload.id);
+        }),
+        builder.addCase(removeNote.pending, (state, action) => {
+            state.createNoteStatus = "loading";
+        }),
+        builder.addCase(removeNote.rejected, (state, action) => {
+            state.createNoteStatus = "failed";
         })
     },
 
@@ -126,6 +149,7 @@ export const {
     hideNoteModal,
     showColorModal,
     hideColorModal,
+    selectNote
 } = noteSlice.actions;
 
 export const selectIsCreateNoteModalShown = (state: RootState) => state.note.isCreateNoteModalShown;
@@ -135,5 +159,6 @@ export const selectIsDeleteNoteModalShown = (state: RootState) => state.note.isD
 export const selectIsNoteModalShown = (state: RootState) => state.note.isNoteModalShown;
 export const selectColorModalShown = (state: RootState) => state.note.isColorModalShown;
 export const selectNotes = (state: RootState) => state.note.notes;
+export const selectSelectedNote = (state: RootState) => state.note.selectNote;
 
 export default noteSlice.reducer;
