@@ -3,6 +3,7 @@ import styles from "./LoginForm.module.scss";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { selectLoginPageType, toggleLoginPageType } from "../../store/slices/authSlice";
 import { ErrorMessage, Field, Form, Formik, useFormik } from "formik";
+import axios from "axios";
 
 interface AuthFormValues {
     email: string;
@@ -16,6 +17,10 @@ export const LoginForm: React.FC = () => {
     const [emailFieldStyle, setEmailFieldStyle] = useState<string>("");
     const [passwordFieldStyle, setPasswordFieldStyle] = useState<string>("");
     const [confirmPasswordFieldStyle, setConfirmPasswordFieldStyle] = useState<string>("");
+    const [authForm, setAuthForm] = useState<any>({
+        email: "",
+        password: ""
+    });
 
     const dispatch = useAppDispatch();
     const initialValues: AuthFormValues = {
@@ -26,10 +31,28 @@ export const LoginForm: React.FC = () => {
 
     const handleSubmit = (values: AuthFormValues) => {
         console.log(values);
+        if (loginPageType === "login") {
+            // dispatch(login(values))
+            console.log("login")
+        } else {
+            // dispatch(register(values))
+            const registerProcess = async () => {
+                try{
+                    const resp = await axios.post("/auth/register", authForm)
+                    const token = await resp.data;
+                    console.log(token)
+                } catch (err) {
+                    console.error(err)
+                }
+                
+            }
+            registerProcess();
+        }
     }
 
     const validateAuthForm = (values: AuthFormValues) => {
         const errors = {} as AuthFormValues;
+        console.log(values)
         if (!values.email) {
             errors.email = "Email is required";
             setEmailFieldStyle(styles.errorField)
@@ -59,6 +82,14 @@ export const LoginForm: React.FC = () => {
 
         return errors;
     }
+
+    const handleAuthFormChange = (e: any) => {
+        setAuthForm({
+            ...authForm,
+            [e.target.name]: e.target.value
+        })
+        console.log(authForm)
+    }
     
     return(
         <Formik initialValues={initialValues} onSubmit={handleSubmit} validate={validateAuthForm}>
@@ -67,11 +98,11 @@ export const LoginForm: React.FC = () => {
                     <>
                         <h2>Sign In</h2>
                         <div>
-                            <Field name="email" type="text" placeholder="Email Address" className={emailFieldStyle} />
+                            <Field name="loginEmail" type="text" placeholder="Email Address" className={emailFieldStyle} />
                             <ErrorMessage name="email" component="div" className={styles.errorMessage}  />
                         </div>
                         <div>
-                            <Field name="password" type="password" placeholder="Password" className={passwordFieldStyle} />
+                            <Field name="loginPassword" type="password" placeholder="Password" className={passwordFieldStyle} />
                             <ErrorMessage name="password" component="div" className={styles.errorMessage} />
                         </div>
                         <button type="submit">Log In</button>
@@ -82,11 +113,19 @@ export const LoginForm: React.FC = () => {
                     <>
                         <h2>Sign Up</h2>
                         <div>
-                            <Field name="email" type="text" placeholder="Email Address" className={emailFieldStyle}/>
+                            <Field 
+                            name="email" 
+                            type="text" 
+                            placeholder="Email Address" 
+                            className={emailFieldStyle}/>
                             <ErrorMessage name="email" component="div"  className={styles.errorMessage}/>
                         </div>
                         <div>
-                            <Field name="password" type="password" placeholder="Password" className={passwordFieldStyle}/>
+                            <Field 
+                            name="password" 
+                            type="password" 
+                            placeholder="Password" 
+                            className={passwordFieldStyle}/>
                             <ErrorMessage name="password" component="div"  className={styles.errorMessage}/>
                         </div>
                         <div>

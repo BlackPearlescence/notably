@@ -16,8 +16,18 @@ const http_status_codes_1 = require("http-status-codes");
 exports.noteRouter = (0, express_1.Router)({ mergeParams: true });
 exports.noteRouter.get('/', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const notes = myPrisma_1.myPrisma.note.findMany();
-        res.status(http_status_codes_1.StatusCodes.OK).json(notes);
+        const project = yield myPrisma_1.myPrisma.project.findUnique({
+            where: {
+                id: parseInt(req.params.projectId)
+            },
+            include: {
+                notes: true
+            }
+        });
+        if (!project) {
+            return next(new Error("No project exists with that id"));
+        }
+        res.status(http_status_codes_1.StatusCodes.OK).json(project.notes);
     }
     catch (err) {
         next(new Error("No notes exist"));

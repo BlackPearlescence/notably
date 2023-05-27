@@ -8,11 +8,13 @@ require('dotenv').config();
 const morgan_1 = __importDefault(require("morgan"));
 const myPrisma_1 = require("./myPrisma");
 const projectRouter_1 = require("./routers/projectRouter");
+const authRouter_1 = require("./routers/authRouter");
 const app = (0, express_1.default)();
 const DATABASE_URL = process.env.DATABASE_URL;
 app.use(express_1.default.json());
 app.use((0, morgan_1.default)("dev"));
 app.use("/projects", projectRouter_1.projectRouter);
+app.use("/auth", authRouter_1.authRouter);
 app.get('/', (req, res, next) => {
     res.send('Hello World!');
 });

@@ -75,7 +75,7 @@ export const NoteTakingPage = () => {
             </div>
 
             <div className={styles.notesContainer}>
-                {currentProjectState.notes ? currentProjectState.notes.map((note: any) => <NoteCard key={note.id} note={note} />) : <div>No notes</div>}
+                {notesState ? notesState.map((note: any) => <NoteCard key={note.id} note={note} />) : <div>No notes</div>}
             </div>
 
             <div className={styles.optionsContainer}>

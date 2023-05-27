@@ -5,12 +5,27 @@ import { StatusCodes } from 'http-status-codes';
 
 export const noteRouter = Router({ mergeParams: true });
 
+interface noteRequestParams {
+    noteId: string;
+    projectId: string;
+}
 
 
-noteRouter.get('/', async (req, res, next) => {
+noteRouter.get('/', async (req: Request<noteRequestParams,any,any>, res, next) => {
     try {
-        const notes = myPrisma.note.findMany()
-        res.status(StatusCodes.OK).json(notes);
+        const project = await myPrisma.project.findUnique({
+            where: {
+                id: parseInt(req.params.projectId)
+            },
+            include: {
+                notes: true
+            }
+        })
+
+        if (!project) {
+            return next(new Error("No project exists with that id"));
+        }
+        res.status(StatusCodes.OK).json(project.notes);
     } catch (err) {
         next(new Error("No notes exist"));
     }
@@ -29,14 +44,11 @@ noteRouter.get("/:noteId", async (req, res, next) => {
     }
 })
 
-interface notePostRequestParams {
-    noteId: string;
-    projectId: string;
-}
 
 
 
-noteRouter.post("/", async (req: Request<notePostRequestParams,any,any>, res, next) => {
+
+noteRouter.post("/", async (req: Request<noteRequestParams,any,any>, res, next) => {
     const { title, content, color } = req.body;
     const { projectId } = req.params;
     console.log(projectId)

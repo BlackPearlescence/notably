@@ -1,6 +1,8 @@
 import { FC, useState } from "react";
 import styles from "./NoteCard.module.scss";
 import { NoteBottomBar } from "./NoteBottomBar";
+import parse from 'html-react-parser';
+
 
 interface NoteCardProps {
     note: any;
@@ -14,17 +16,8 @@ export const NoteCard: FC<NoteCardProps> = ({ note }) => {
         onMouseLeave={() => setIsHovered(false)}
         >
             <div className={styles.noteInfoContainer}>
-                <h6>Insanely Long Note Card Title Yeah Whatever Whatever Whatever!</h6>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                    Quisquam, voluptatum. Quisquam, voluptatum. Quisquam, voluptatum.
-                    Quisquam, voluptatum. Quisquam, voluptatum. Quisquam, voluptatum.
-                    Quisquam, voluptatum. Quisquam, voluptatum. Quisquam, voluptatum.
-                    Quisquam, voluptatum. Quisquam, voluptatum. Quisquam, voluptatum.
-                    Quisquam, voluptatum. Quisquam, voluptatum. Quisquam, voluptatum.
-                    Quisquam, voluptatum. Quisquam, voluptatum. Quisquam, voluptatum.
-                    Quisquam, voluptatum. Quisquam, voluptatum. Quisquam, voluptatum.
-                </p>
+                <h6>{note.title}</h6>
+                <p>{parse(note.content)}</p>
             </div>
             {isHovered && <NoteBottomBar isHovered={isHovered}/>}
         </div>
