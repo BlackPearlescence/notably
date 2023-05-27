@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
-import { createNote, getNotes, hideNoteModal, selectIsEditNoteModalShown, selectIsNoteModalShown, selectSelectedNote, showColorModal } from "../../store/slices/noteSlice"
+import { createNote, getNotes, hideNoteModal, selectIsEdit, selectIsEditNoteModalShown, selectIsNoteModalShown, selectSelectedNote, showColorModal } from "../../store/slices/noteSlice"
 import ReactQuill from "react-quill";
 import styles from "./NoteModal.module.scss"
 import { MdOutlineColorLens } from "react-icons/md";
@@ -14,12 +14,14 @@ import { selectSelectedProject } from "../../store/slices/projectSlice";
 import { useParams } from "react-router-dom";
 
 
+
 export const NoteModal: FC = () => {
 
     const { projectId } = useParams<{projectId: string}>()
     const noteModalShownState = useAppSelector(selectIsNoteModalShown)
     const currentProjectState = useAppSelector(selectSelectedProject)
     const currentNoteState = useAppSelector(selectSelectedNote)
+    const isEditModeState = useAppSelector(selectIsEdit)
     const dispatch = useAppDispatch()
     const [noteValue, setNoteValue] = useState<string>("");
     const [noteTitle, setNoteTitle] = useState<string>("");
@@ -34,6 +36,7 @@ export const NoteModal: FC = () => {
             setNoteTitle(currentNoteState.title)
             setColor(currentNoteState.color)
         }
+        setIsEditingMode(isEditModeState)
     },[currentNoteState])
     useEffect(() => {
         console.log(projectId)

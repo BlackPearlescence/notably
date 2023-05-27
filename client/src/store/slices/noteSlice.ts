@@ -15,6 +15,7 @@ interface NoteState {
     createNoteStatus: "idle" | "loading" | "succeeded" | "failed",
     createNoteError: string | null,
     selectNote: any,
+    isEdit: boolean,
 }
 
 const initialState: NoteState = {
@@ -30,6 +31,7 @@ const initialState: NoteState = {
     createNoteStatus: "idle",
     createNoteError: null,
     selectNote: null,
+    isEdit: true,
 }
 
 export const getNotes  = createAsyncThunk(
@@ -102,6 +104,12 @@ const noteSlice = createSlice({
         },
         selectNote: (state, action) => {    
             state.selectNote = action.payload;
+        },
+        toEditMode: (state) => {
+            state.isEdit = true;
+        },
+        toViewMode: (state) => {
+            state.isEdit = false;
         }
     },
     extraReducers: (builder) => {
@@ -149,7 +157,9 @@ export const {
     hideNoteModal,
     showColorModal,
     hideColorModal,
-    selectNote
+    selectNote,
+    toEditMode,
+    toViewMode,
 } = noteSlice.actions;
 
 export const selectIsCreateNoteModalShown = (state: RootState) => state.note.isCreateNoteModalShown;
@@ -160,5 +170,6 @@ export const selectIsNoteModalShown = (state: RootState) => state.note.isNoteMod
 export const selectColorModalShown = (state: RootState) => state.note.isColorModalShown;
 export const selectNotes = (state: RootState) => state.note.notes;
 export const selectSelectedNote = (state: RootState) => state.note.selectNote;
+export const selectIsEdit = (state: RootState) => state.note.isEdit;
 
 export default noteSlice.reducer;
