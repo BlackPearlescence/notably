@@ -22,6 +22,8 @@
             @include shared.heading-desktopsmall;
             color: shared.$color-primary;
             transition: color 0.2s ease-in-out;
+            cursor: pointer;
+
             &:hover {
                 * {
                     color: shared.$color-accent;

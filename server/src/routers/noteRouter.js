@@ -88,6 +88,24 @@ exports.noteRouter.delete("/:noteId", (req, res, next) => __awaiter(void 0, void
         next(err);
     }
 }));
+exports.noteRouter.put("/:noteId", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { title, content } = req.body;
+    try {
+        const note = yield myPrisma_1.myPrisma.note.update({
+            where: {
+                id: parseInt(req.params.noteId)
+            },
+            data: {
+                title: title,
+                content: content
+            }
+        });
+        res.status(http_status_codes_1.StatusCodes.OK).json(note);
+    }
+    catch (err) {
+        next(err);
+    }
+}));
 // noteRouter.post("/", (req, res, next) => {
 //     const { title, content, color, userId, }
 //     try {
