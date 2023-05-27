@@ -1,12 +1,12 @@
 import { FC, useEffect, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { useAppDispatch, useAppSelector } from "../../store/hooks"
-import { createNote, getNotes, hideNoteModal, selectIsEditNoteModalShown, selectIsNoteModalShown, showColorModal } from "../../store/slices/noteSlice"
+import { createNote, getNotes, hideNoteModal, selectIsEditNoteModalShown, selectIsNoteModalShown, selectSelectedNote, showColorModal } from "../../store/slices/noteSlice"
 import ReactQuill from "react-quill";
 import styles from "./NoteModal.module.scss"
 import { MdOutlineColorLens } from "react-icons/md";
 import { AiFillSave } from "react-icons/ai";
-import parse from 'html-react-parser';
+    import parse from 'html-react-parser';
 import { HiOutlinePencil } from "react-icons/hi";
 import { ColorPickerDropdown } from "./ColorPickerDropdown";
 import { Color } from "../../constants/colors";
@@ -19,6 +19,7 @@ export const NoteModal: FC = () => {
     const { projectId } = useParams<{projectId: string}>()
     const noteModalShownState = useAppSelector(selectIsNoteModalShown)
     const currentProjectState = useAppSelector(selectSelectedProject)
+    const currentNoteState = useAppSelector(selectSelectedNote)
     const dispatch = useAppDispatch()
     const [noteValue, setNoteValue] = useState<string>("");
     const [noteTitle, setNoteTitle] = useState<string>("");
@@ -27,12 +28,13 @@ export const NoteModal: FC = () => {
     const [color, setColor] = useState<string>("#ffffff");
     const [colorStyle, setColorStyle] = useState<string>("");
 
-    // useEffect(() => {
-    //     if (projectId) {
-    //         dispatch(getNotes(parseInt(projectId)))
-    //     }
-    // },[])
-
+    useEffect(() => {
+        if(currentNoteState) {
+            setNoteValue(currentNoteState.content)
+            setNoteTitle(currentNoteState.title)
+            setColor(currentNoteState.color)
+        }
+    },[currentNoteState])
     useEffect(() => {
         console.log(projectId)
         switch(color) {

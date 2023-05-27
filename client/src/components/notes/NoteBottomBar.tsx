@@ -2,7 +2,7 @@ import { HiOutlineEye, HiOutlinePencil, HiTrash } from "react-icons/hi";
 import styles from "./NoteBottomBar.module.scss";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { removeNote, selectSelectedNote } from "../../store/slices/noteSlice";
+import { removeNote, selectSelectedNote, showNoteModal } from "../../store/slices/noteSlice";
 import { selectSelectedProject } from "../../store/slices/projectSlice";
 
 interface NoteBottomBarProps {
@@ -18,9 +18,14 @@ export const NoteBottomBar: React.FC<NoteBottomBarProps> = ({ isHovered }) => {
             id: currentNoteState.id
         }))
     }
+
+    const handleNoteView = () => {
+        dispatch(showNoteModal())
+    }
+
     return (
         <div className={styles.toolbarContainer}>
-            <div className={styles.toolButton}>
+            <div className={styles.toolButton} onClick={handleNoteView}>
                 <HiOutlineEye />
             </div>
             <div className={styles.toolButton}>

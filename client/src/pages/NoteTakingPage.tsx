@@ -7,7 +7,7 @@ import { TiSortAlphabeticallyOutline } from "react-icons/ti";
 import { useMediaQuery } from "react-responsive";
 import { screenSizes } from "../screenSizes";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { getNotes, selectNotes, showNoteModal } from "../store/slices/noteSlice";
+import { getNotes, selectNote, selectNotes, selectSelectedNote, showNoteModal } from "../store/slices/noteSlice";
 import { getProject, selectSelectedProject } from "../store/slices/projectSlice";
 import { current } from "@reduxjs/toolkit";
 import { useParams } from "react-router-dom";
@@ -49,6 +49,15 @@ export const NoteTakingPage = () => {
         return <div>Loading...</div>
     }
 
+    const handleAddNote = () => {
+        dispatch(showNoteModal())
+        dispatch(selectNote({
+            title: "",
+            content: "",
+            color: "#ffffff"
+        }))
+    }
+
     return (
         <div className={styles.notePageWrapper}>
             {/* {isDesktop && (<div className={styles.foldersContainer}>
@@ -86,7 +95,7 @@ export const NoteTakingPage = () => {
                         </div>
                     )} */}
                     <div>
-                        <HiOutlineDocumentAdd size={iconSize} color="010C80" onClick={() => dispatch(showNoteModal())}/>
+                        <HiOutlineDocumentAdd size={iconSize} color="010C80" onClick={handleAddNote}/>
                     </div>
                     {/* <div>
                         <HiOutlineFolderAdd size={iconSize} color="010C80"/>
