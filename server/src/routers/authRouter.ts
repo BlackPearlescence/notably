@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Request, Router } from 'express';
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import passport from "passport";
@@ -6,6 +6,7 @@ import { myPrisma } from '../myPrisma';
 import { Strategy as MyStrategy } from "passport-local";
 import { StatusCodes } from 'http-status-codes';
 import { User } from '@prisma/client';
+import { verifyToken } from '../verifyToken';
 require('dotenv').config();
 
 export const authRouter = Router();
@@ -70,6 +71,21 @@ authRouter.post("/login", async (req, res, next) => {
             return res.json({ message: "Successfully logged in."})
         });
     })(req, res)
+})
+
+authRouter.get("/check", verifyToken, async (req: Request, res, next) => {
+    const userId = req.userId
+    console.log(userId)
+    try {
+        const user = await myPrisma.user.findUnique({
+            where: {
+                id: parseInt(userId as string)
+            }
+        })
+        res.status(StatusCodes.OK).json(user)
+    } catch (err) {
+        next(new Error("Failed to verify token"))
+    }
 })
 
 // authRouter.post("/register", async (req, res, next) => {

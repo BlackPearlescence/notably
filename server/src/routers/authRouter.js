@@ -20,6 +20,7 @@ const passport_1 = __importDefault(require("passport"));
 const myPrisma_1 = require("../myPrisma");
 const passport_local_1 = require("passport-local");
 const http_status_codes_1 = require("http-status-codes");
+const verifyToken_1 = require("../verifyToken");
 require('dotenv').config();
 exports.authRouter = (0, express_1.Router)();
 passport_1.default.use(new passport_local_1.Strategy({ usernameField: "email" }, (email, password, done) => __awaiter(void 0, void 0, void 0, function* () {
@@ -76,6 +77,21 @@ exports.authRouter.post("/login", (req, res, next) => __awaiter(void 0, void 0, 
             return res.json({ message: "Successfully logged in." });
         });
     })(req, res);
+}));
+exports.authRouter.get("/check", verifyToken_1.verifyToken, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const userId = req.userId;
+    console.log(userId);
+    try {
+        const user = yield myPrisma_1.myPrisma.user.findUnique({
+            where: {
+                id: parseInt(userId)
+            }
+        });
+        res.status(http_status_codes_1.StatusCodes.OK).json(user);
+    }
+    catch (err) {
+        next(new Error("Failed to verify token"));
+    }
 }));
 // authRouter.post("/register", async (req, res, next) => {
 //     const { email, password } = req.body;
