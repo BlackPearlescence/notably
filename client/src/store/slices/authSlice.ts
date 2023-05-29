@@ -24,11 +24,19 @@ export const attemptToLogin = createAsyncThunk(
     "auth/attemptToLogin",
     async (loginValues: any) => {
         const resp = await api.post("/auth/login", loginValues)
-        const userData = await resp.data;
-        return userData
+        const message = await resp.data;
+        return message
     }
 )
 
+export const checkIfLoggedIn = createAsyncThunk(
+    "auth/checkIfLoggedIn",
+    async () => {
+        const resp = await api.get("/auth/check");
+        const userData = await resp.data;
+        return userData;
+    }
+)
 
 const authSlice = createSlice({
     name: "auth",
@@ -52,14 +60,26 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(attemptToLogin.fulfilled, (state, action) => {
-            state.userData = action.payload;
+            console.log(action.payload)
             state.isLoggedIn = true;
         }),
         builder.addCase(attemptToLogin.pending, (state, action) => {
             state.userDataStatus = "loading";
         }),
         builder.addCase(attemptToLogin.rejected, (state, action) => {
+            state.userDataError = "failed";
+        }),
+        builder.addCase(checkIfLoggedIn.fulfilled, (state, action) => {
+            console.log(action)
+            state.userData = action.payload;
+            state.isLoggedIn = true;
             state.userDataStatus = "succeeded";
+
+        }),
+        builder.addCase(checkIfLoggedIn.pending, (state, action) => {
+            state.userDataStatus = "loading";
+        }),
+        builder.addCase(checkIfLoggedIn.rejected, (state, action) => {
             state.userDataError = "failed";
         })
     }
@@ -68,7 +88,7 @@ const authSlice = createSlice({
 export const { showLoginModal, hideLoginModal, toggleLoginPageType } = authSlice.actions;
 export const selectIsLoginModalShown = (state: RootState) => state.auth.isLoginModalShown;
 export const selectLoginPageType = (state: RootState) => state.auth.loginPageType;
-export const selectisLoggedIn = (state: RootState) => state.auth.isLoggedIn;
+export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
 export const selectUserData = (state: RootState) => state.auth.userData;
 
 export default authSlice.reducer;

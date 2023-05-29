@@ -12,17 +12,22 @@
   "license": "ISC",
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/cookie-parser": "^1.4.3",
     "@types/morgan": "^1.9.4",
     "@types/passport-jwt": "^3.0.8",
+    "@types/passport-local": "^1.0.35",
     "prisma": "^4.14.1"
   },
   "dependencies": {
     "@prisma/client": "^4.14.1",
     "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",
     "http-status-codes": "^2.2.0",
     "jsonwebtoken": "^9.0.0",
     "morgan": "^1.10.0",
-    "passport-jwt": "^4.0.1"
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0"
   }
 }

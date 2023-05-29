@@ -7,6 +7,7 @@ import { Strategy as MyStrategy } from "passport-local";
 import { StatusCodes } from 'http-status-codes';
 import { User } from '@prisma/client';
 import { verifyToken } from '../verifyToken';
+import cookieParser from "cookie-parser";
 require('dotenv').config();
 
 export const authRouter = Router();
@@ -72,6 +73,8 @@ authRouter.post("/login", async (req, res, next) => {
         });
     })(req, res)
 })
+
+authRouter.use(cookieParser())
 
 authRouter.get("/check", verifyToken, async (req: Request, res, next) => {
     const userId = req.userId

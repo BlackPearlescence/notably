@@ -21,6 +21,7 @@ const myPrisma_1 = require("../myPrisma");
 const passport_local_1 = require("passport-local");
 const http_status_codes_1 = require("http-status-codes");
 const verifyToken_1 = require("../verifyToken");
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 require('dotenv').config();
 exports.authRouter = (0, express_1.Router)();
 passport_1.default.use(new passport_local_1.Strategy({ usernameField: "email" }, (email, password, done) => __awaiter(void 0, void 0, void 0, function* () {
@@ -78,6 +79,7 @@ exports.authRouter.post("/login", (req, res, next) => __awaiter(void 0, void 0, 
         });
     })(req, res);
 }));
+exports.authRouter.use((0, cookie_parser_1.default)());
 exports.authRouter.get("/check", verifyToken_1.verifyToken, (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const userId = req.userId;
     console.log(userId);

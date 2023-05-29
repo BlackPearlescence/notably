@@ -12,6 +12,7 @@ declare global {
             userId: string | (() => string) | undefined;
         }
     }
+    
 }
 
 // export const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
@@ -39,6 +40,13 @@ declare global {
 //     }
 // }
 
+interface JwtPayload {
+    id: string,
+    email: string,
+    iat: number,
+    exp: number,
+}
+
 export const verifyToken = async (req: Request, res: Response , next: NextFunction) => {
     const token = req.cookies.notejwt;
     console.log(token);
@@ -46,8 +54,9 @@ export const verifyToken = async (req: Request, res: Response , next: NextFuncti
         return next(new Error("No token provided"));
     } 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET!, { ignoreExpiration: false });
-        req.userId = decoded.sub;
+        const decoded  = jwt.verify(token, process.env.JWT_SECRET!, { ignoreExpiration: false }) as JwtPayload;
+        console.log(decoded)
+        req.userId = decoded.id as string;
         next();
     } catch (err) {
         if (err instanceof Error) {

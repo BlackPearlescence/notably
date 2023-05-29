@@ -15,28 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.verifyToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 require("dotenv").config();
-// export const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
-//     const bearerHeader = req.headers["authorization"];
-//     if (typeof bearerHeader !== "undefined") {
-//         const bearer = bearerHeader.split(" ");
-//         const bearerToken = bearer[1];
-//         req.token = bearerToken;
-//         jwt.verify(req.token, process.env.JWT_SECRET!, (err, authData) => {
-//             if (err) {
-//                 if (err.name === "TokenExpiredError") {
-//                     res.status(StatusCodes.UNAUTHORIZED).json({ error: "JWT token has expired" })
-//                 } else {
-//                     res.status(StatusCodes.FORBIDDEN).json({ error: "Forbidden" })
-//                 }
-//             } else {
-//                 req.authData = authData
-//                 next()
-//             }
-//         })
-//     } else {
-//         res.status(StatusCodes.FORBIDDEN).json({ error: "Forbidden" })
-//     }
-// }
 const verifyToken = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const token = req.cookies.notejwt;
     console.log(token);
@@ -45,7 +23,8 @@ const verifyToken = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
     }
     try {
         const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET, { ignoreExpiration: false });
-        req.userId = decoded.sub;
+        console.log(decoded);
+        req.userId = decoded.id;
         next();
     }
     catch (err) {
