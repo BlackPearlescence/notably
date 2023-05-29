@@ -95,6 +95,22 @@ exports.authRouter.get("/check", verifyToken_1.verifyToken, (req, res, next) => 
         next(new Error("Failed to verify token"));
     }
 }));
+exports.authRouter.get("/login-sitekey", (req, res, next) => {
+    try {
+        res.status(http_status_codes_1.StatusCodes.OK).json({ sitekey: process.env.HCAPTCHA_LOGIN_SITEKEY });
+    }
+    catch (err) {
+        next(new Error("Could not send login sitekey"));
+    }
+});
+exports.authRouter.get("/register-sitekey", (req, res, next) => {
+    try {
+        res.status(http_status_codes_1.StatusCodes.OK).json({ sitekey: process.env.HCAPTCHA_REGISTRATION_SITEKEY });
+    }
+    catch (err) {
+        next(new Error("Could not send registration sitekey"));
+    }
+});
 // authRouter.post("/register", async (req, res, next) => {
 //     const { email, password } = req.body;
 //     try{

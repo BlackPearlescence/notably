@@ -15,7 +15,7 @@ export const NavigationBar = () => {
 
     useEffect(() => {
         dispatch(checkIfLoggedIn())
-    },[])
+    },[isLoggedInState])
 
     return(
         <div className={styles.navigationBarContainer}>

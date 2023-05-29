@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 import styles from "./LoginForm.module.scss";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { attemptToLogin, selectLoginPageType, toggleLoginPageType } from "../../store/slices/authSlice";
@@ -21,6 +22,46 @@ export const LoginForm: React.FC = () => {
         email: "",
         password: ""
     });
+    const [loginToken, setLoginToken] = useState<string | null>(null)
+    const [registerToken, setRegisterToken] = useState<string | null>(null)
+    const [loginSiteKey, setLoginSiteKey] = useState<string>("")
+    const [registerSiteKey, setRegisterSiteKey] = useState<string>("")
+    const loginCaptchaRef = useRef<HCaptcha>(null);
+    const registerCaptchaRef = useRef<HCaptcha>(null);
+
+    useEffect(() => {
+        const getLoginSiteKey = async () => {
+            const resp = await axios.get("/auth/login-sitekey");
+            const key = await resp.data;
+            console.log(key)
+            setLoginSiteKey(key.sitekey)
+        }
+        getLoginSiteKey()
+        const getRegisterSiteKey = async () => {
+            const resp = await axios.get("/auth/register-sitekey");
+            const key = await resp.data;
+            setRegisterSiteKey(key.sitekey);
+        }
+        getRegisterSiteKey()
+    },[])
+
+    useEffect(() => {
+        console.log(`hCaptcha Token: ${loginToken}`)
+    },[loginToken])
+
+    const onLoginLoad = () => {
+        if (loginCaptchaRef.current) {
+            loginCaptchaRef.current.execute()
+        }
+    };
+
+    const onRegisterLoad = () => {
+        if(registerCaptchaRef.current) {
+            registerCaptchaRef.current.execute()
+        }
+    }
+
+    
 
     const dispatch = useAppDispatch();
     const initialValues: AuthFormValues = {
@@ -109,8 +150,12 @@ export const LoginForm: React.FC = () => {
                             <Field name="password" type="password" placeholder="Password" className={passwordFieldStyle} />
                             <ErrorMessage name="password" component="div" className={styles.errorMessage} />
                         </div>
-                        <button type="submit">Log In</button>
                         <span onClick={() => dispatch(toggleLoginPageType())}>New User? Sign up here!</span>
+                        {loginSiteKey && (
+                            <HCaptcha sitekey={loginSiteKey} onLoad={onLoginLoad} onVerify={setLoginToken} ref={loginCaptchaRef} />
+
+                        )}
+                        <button type="submit">Log In</button>
                     </>
                 )}
                 {loginPageType === "register" && (
@@ -136,8 +181,12 @@ export const LoginForm: React.FC = () => {
                             <Field name="confirmPassword" type="password" placeholder="Confirm Password" className={confirmPasswordFieldStyle} />
                             <ErrorMessage name="confirmPassword" component="div" className={styles.errorMessage}/>
                         </div>
-                        <button type="submit">Sign Up</button>
                         <span onClick={() => dispatch(toggleLoginPageType())}>Returning User? Sign in here!</span>
+                        {registerSiteKey && (
+                            <HCaptcha sitekey={registerSiteKey} onLoad={onRegisterLoad} onVerify={setRegisterToken} ref={registerCaptchaRef} />
+
+                        )}
+                        <button type="submit">Sign Up</button>
                     </>
                 )}
             </Form>
