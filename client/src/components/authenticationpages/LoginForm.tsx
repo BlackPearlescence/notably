@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./LoginForm.module.scss";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { selectLoginPageType, toggleLoginPageType } from "../../store/slices/authSlice";
+import { attemptToLogin, selectLoginPageType, toggleLoginPageType } from "../../store/slices/authSlice";
 import { ErrorMessage, Field, Form, Formik, useFormik } from "formik";
 import axios from "axios";
 
@@ -30,15 +30,16 @@ export const LoginForm: React.FC = () => {
     }
 
     const handleSubmit = (values: AuthFormValues) => {
-        console.log(values);
+        // console.log(values);
         if (loginPageType === "login") {
             // dispatch(login(values))
-            console.log("login")
+            console.log("blah")
+            dispatch(attemptToLogin(values))
         } else {
             // dispatch(register(values))
             const registerProcess = async () => {
                 try{
-                    const resp = await axios.post("/auth/register", authForm)
+                    const resp = await axios.post("/auth/register", values)
                     const token = await resp.data;
                     console.log(token)
                 } catch (err) {
@@ -65,20 +66,23 @@ export const LoginForm: React.FC = () => {
         } else {
             setPasswordFieldStyle("")
         }
-        if (!values.confirmPassword) {
-            errors.confirmPassword = "Password confirmation is required";
-            setConfirmPasswordFieldStyle(styles.errorField)
-        } else {
-            setConfirmPasswordFieldStyle("")
+        if(loginPageType === "register") {
+            if (!values.confirmPassword) {
+                errors.confirmPassword = "Password confirmation is required";
+                setConfirmPasswordFieldStyle(styles.errorField)
+            } else {
+                setConfirmPasswordFieldStyle("")
+            }
+            if (loginPageType === "register" && values.password !== values.confirmPassword) {
+                errors.confirmPassword = "Passwords must match";
+                setPasswordFieldStyle(styles.errorField)
+                setConfirmPasswordFieldStyle(styles.errorField)
+            } else {
+                setPasswordFieldStyle("")
+                setConfirmPasswordFieldStyle("")
+            }
         }
-        if (loginPageType === "register" && values.password !== values.confirmPassword) {
-            errors.confirmPassword = "Passwords must match";
-            setPasswordFieldStyle(styles.errorField)
-            setConfirmPasswordFieldStyle(styles.errorField)
-        } else {
-            setPasswordFieldStyle("")
-            setConfirmPasswordFieldStyle("")
-        }
+        
 
         return errors;
     }
@@ -98,11 +102,11 @@ export const LoginForm: React.FC = () => {
                     <>
                         <h2>Sign In</h2>
                         <div>
-                            <Field name="loginEmail" type="text" placeholder="Email Address" className={emailFieldStyle} />
+                            <Field name="email" type="text" placeholder="Email Address" className={emailFieldStyle} />
                             <ErrorMessage name="email" component="div" className={styles.errorMessage}  />
                         </div>
                         <div>
-                            <Field name="loginPassword" type="password" placeholder="Password" className={passwordFieldStyle} />
+                            <Field name="password" type="password" placeholder="Password" className={passwordFieldStyle} />
                             <ErrorMessage name="password" component="div" className={styles.errorMessage} />
                         </div>
                         <button type="submit">Log In</button>
