@@ -8,6 +8,9 @@ import { StatusCodes } from 'http-status-codes';
 import { User } from '@prisma/client';
 import { verifyToken } from '../verifyToken';
 import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
+import cors from "cors";
+import hcaptcha from "express-hcaptcha";
 require('dotenv').config();
 
 export const authRouter = Router();
