@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import api from "../../utils/instance"
+import Cookies from "js-cookie";
 
 interface AuthState {
     isLoginModalShown: boolean,
@@ -35,6 +36,16 @@ export const checkIfLoggedIn = createAsyncThunk(
         const resp = await api.get("/auth/check");
         const userData = await resp.data;
         return userData;
+    }
+)
+
+export const attemptToLogout = createAsyncThunk(
+    "auth/attemptToLogout",
+    async () => {
+        const token = Cookies.get("notejwt");
+        const resp = await api.post("/auth/logout");
+        Cookies.remove("notejwt");
+        return resp.data;
     }
 )
 
@@ -80,6 +91,15 @@ const authSlice = createSlice({
             state.userDataStatus = "loading";
         }),
         builder.addCase(checkIfLoggedIn.rejected, (state, action) => {
+            state.userDataError = "failed";
+        }),
+        builder.addCase(attemptToLogout.fulfilled, (state, action) => {
+            state.isLoggedIn = false;
+        }),
+        builder.addCase(attemptToLogout.pending, (state, action) => {
+            state.userDataStatus = "loading";
+        }),
+        builder.addCase(attemptToLogout.rejected, (state, action) => {
             state.userDataError = "failed";
         })
     }

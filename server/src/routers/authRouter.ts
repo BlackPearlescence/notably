@@ -94,6 +94,16 @@ authRouter.get("/check", verifyToken, async (req: Request, res, next) => {
     }
 })
 
+authRouter.post("/logout", (req, res, next) => {
+    try {
+        const token = req.cookies.notejwt
+        res.clearCookie("notejwt")
+        res.status(StatusCodes.OK).json({ message: "Successfully logged out."})
+    } catch (err) {
+        next(new Error("Failed to logout"))
+    }
+})
+
 authRouter.get("/login-sitekey", (req, res, next) => {
     try {
         res.status(StatusCodes.OK).json({ sitekey: process.env.HCAPTCHA_LOGIN_SITEKEY  })

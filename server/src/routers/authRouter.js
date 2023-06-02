@@ -96,6 +96,16 @@ exports.authRouter.get("/check", verifyToken_1.verifyToken, (req, res, next) => 
         next(new Error("Failed to verify token"));
     }
 }));
+exports.authRouter.post("/logout", (req, res, next) => {
+    try {
+        const token = req.cookies.notejwt;
+        res.clearCookie("notejwt");
+        res.status(http_status_codes_1.StatusCodes.OK).json({ message: "Successfully logged out." });
+    }
+    catch (err) {
+        next(new Error("Failed to logout"));
+    }
+});
 exports.authRouter.get("/login-sitekey", (req, res, next) => {
     try {
         res.status(http_status_codes_1.StatusCodes.OK).json({ sitekey: process.env.HCAPTCHA_LOGIN_SITEKEY });

@@ -3,6 +3,7 @@ import { useAppDispatch } from "../../store/hooks";
 import styles from "./UserDropdown.module.scss";
 import { HiLogout } from "react-icons/hi";
 import { HiOutlineCog } from "react-icons/hi";
+import { attemptToLogout } from "../../store/slices/authSlice";
 
 
 export const UserDropdown = () => {
@@ -23,6 +24,10 @@ export const UserDropdown = () => {
         setIsOpen(!isOpen);
     }
 
+    const handleUserLogout = (e: any) => {
+        dispatch(attemptToLogout())
+    }
+
     useEffect(() => {
         document.addEventListener("click", handleProjectDropdownClickOutside);
 
@@ -39,7 +44,7 @@ export const UserDropdown = () => {
                     <div>
                         <span>Welcome, User!</span>
                     </div>
-                    <div>
+                    <div onClick={handleUserLogout}>
                         <HiLogout size={40} color="010C80"/>
                         <span>Logout</span>
                     </div>

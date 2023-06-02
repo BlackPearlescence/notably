@@ -47,7 +47,12 @@ function App() {
   // }
   useEffect(() => {
     dispatch(checkIfLoggedIn())
-},[])
+    if(isLoggedInState) {
+      navigate("/projects")
+    } else {
+      navigate("/")
+    }
+},[isLoggedInState])
 
   const NoteAppLayout = () => {
     return (
