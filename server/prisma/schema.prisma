@@ -14,6 +14,9 @@ model Project {
   id    Int      @id @default(autoincrement())
   title  String
   notes Note[]
+  userId Int
+  createdBy User @relation("projects", fields: [userId], references: [id])
+  collaborators User[] @relation("sharedProjects")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -52,7 +55,9 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   notes Note[]
+  projects Project[] @relation("projects")
   actions Action[]
+  sharedProjects Project[] @relation("sharedProjects")
 }
 
 model Action {
