@@ -15,6 +15,7 @@ export const NoteCard: FC<NoteCardProps> = ({ note }) => {
 
     const handleMouseEnter = () => {
         setIsHovered(true)
+        console.log(note)       
         dispatch(selectNote(note))
     }
 

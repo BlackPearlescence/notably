@@ -71,7 +71,7 @@ export const getSharedProjects = createAsyncThunk(
 export const getProject = createAsyncThunk(
     "project/getProject",
     async (id: number) => {
-        const resp = await axios.get(`/projects/${id}`)
+        const resp = await axios.get(`/projects/project/${id}`)
         const projects = await resp.data;
         return projects;
     }

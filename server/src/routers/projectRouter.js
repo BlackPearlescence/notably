@@ -78,7 +78,7 @@ exports.projectRouter.get("/sharedprojects/:userId", (req, res, next) => __await
         next(new Error("Failed to find user"));
     }
 }));
-exports.projectRouter.get("/:projectId", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.projectRouter.get("/project/:projectId", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const project = yield myPrisma_1.myPrisma.project.findUnique({
             where: {

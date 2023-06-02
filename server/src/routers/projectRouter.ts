@@ -71,7 +71,7 @@ projectRouter.get("/sharedprojects/:userId", async (req, res, next) => {
     }
 })
 
-projectRouter.get("/:projectId", async (req, res, next) => {
+projectRouter.get("/project/:projectId", async (req, res, next) => {
     try {
         const project = await myPrisma.project.findUnique({
             where: {
