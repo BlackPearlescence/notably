@@ -25,6 +25,19 @@ exports.projectRouter.get('/', (req, res, next) => __awaiter(void 0, void 0, voi
     }
 }));
 exports.projectRouter.get("/myprojects", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userId } = req.body;
+    try {
+        const user = yield myPrisma_1.myPrisma.user.findUnique({
+            where: {
+                id: parseInt(req.body.userId)
+            }
+        });
+        if (user) {
+            res.status(http_status_codes_1.StatusCodes.OK).json(user.projects);
+        }
+    }
+    finally {
+    }
 }));
 exports.projectRouter.get("/sharedprojects", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
 }));
