@@ -18,6 +18,13 @@ projectRouter.get('/', async (req, res, next) => {
     }
 });
 
+projectRouter.get("/myprojects", async (req, res, next) => {
+    
+})
+
+projectRouter.get("/sharedprojects", async (req, res, next) => {
+})
+
 projectRouter.get("/:projectId", async (req, res, next) => {
     try {
         const project = await myPrisma.project.findUnique({
@@ -35,15 +42,28 @@ projectRouter.use("/:projectId/notes", noteRouter)
 
 projectRouter.post("/", async (req, res, next) => {
     // Make title a string
-    const { title } = req.body;
+    const { title, userId } = req.body;
     try {
-        const project = await myPrisma.project.create({
-            data: {
-                title: title,
-            },
-            
+        const user = await myPrisma.user.findUnique({
+            where: {
+                id: parseInt(userId)
+            }
         })
-        res.status(StatusCodes.CREATED).json(project);
+        if (user) {
+            const project = await myPrisma.project.create({
+                data: {
+                    title: title,
+                    createdBy: {
+                        connect: {
+                            id: user.id
+                        }
+                    }
+                },
+            })
+            res.status(StatusCodes.CREATED).json(project);
+        } else {
+            next(new Error("Failed to find user"))
+        }
     } catch (err) {
         next(new Error("Failed to create project"));
     }

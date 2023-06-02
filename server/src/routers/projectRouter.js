@@ -24,6 +24,10 @@ exports.projectRouter.get('/', (req, res, next) => __awaiter(void 0, void 0, voi
         next(new Error("No projects exist"));
     }
 }));
+exports.projectRouter.get("/myprojects", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+}));
+exports.projectRouter.get("/sharedprojects", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+}));
 exports.projectRouter.get("/:projectId", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const project = yield myPrisma_1.myPrisma.project.findUnique({
@@ -40,14 +44,29 @@ exports.projectRouter.get("/:projectId", (req, res, next) => __awaiter(void 0, v
 exports.projectRouter.use("/:projectId/notes", noteRouter_1.noteRouter);
 exports.projectRouter.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     // Make title a string
-    const { title } = req.body;
+    const { title, userId } = req.body;
     try {
-        const project = yield myPrisma_1.myPrisma.project.create({
-            data: {
-                title: title,
-            },
+        const user = yield myPrisma_1.myPrisma.user.findUnique({
+            where: {
+                id: parseInt(userId)
+            }
         });
-        res.status(http_status_codes_1.StatusCodes.CREATED).json(project);
+        if (user) {
+            const project = yield myPrisma_1.myPrisma.project.create({
+                data: {
+                    title: title,
+                    createdBy: {
+                        connect: {
+                            id: user.id
+                        }
+                    }
+                },
+            });
+            res.status(http_status_codes_1.StatusCodes.CREATED).json(project);
+        }
+        else {
+            next(new Error("Failed to find user"));
+        }
     }
     catch (err) {
         next(new Error("Failed to create project"));
