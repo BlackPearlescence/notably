@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import axios from "axios";
 
+
 interface ProjectState {
     isCreateProjectModalShown: boolean,
     isViewProjectModalShown: boolean,
@@ -10,6 +11,9 @@ interface ProjectState {
     projectError: string | null,
     projectStatus: "idle" | "loading" | "succeeded" | "failed",
     projects: any[],
+    sharedProjectError: string | null,
+    sharedProjectStatus: "idle" | "loading" | "succeeded" | "failed",
+    sharedProjects: any[],
     addProjectError: string | null,
     addProjectStatus: "idle" | "loading" | "succeeded" | "failed",
     deleteProjectError: string | null,
@@ -21,6 +25,8 @@ interface ProjectState {
     updateProjectError: string | null,
 }
 
+
+
 const initialState: ProjectState = {
     isCreateProjectModalShown: false,
     isViewProjectModalShown: false,
@@ -28,9 +34,12 @@ const initialState: ProjectState = {
     isDeleteProjectModalShown: false,
     projectError: null,
     projectStatus: "idle",
+    projects: [],
+    sharedProjectError: null,
+    sharedProjectStatus: "idle",
+    sharedProjects: [],
     addProjectError: null,
     addProjectStatus: "idle",
-    projects: [],
     deleteProjectError: null,
     deleteProjectStatus: "idle",
     selectedProject: null,
@@ -42,11 +51,21 @@ const initialState: ProjectState = {
 
 export const getProjects = createAsyncThunk(
     "project/getProjects",
-    async () => {
-        const resp = await axios.get("/projects");
+    async (userId: number) => {
+        const resp = await axios.get(`/myprojects/${userId}`);
         const projects = await resp.data;
         return projects;
     }
+)
+
+export const getSharedProjects = createAsyncThunk(
+    "project/getSharedProjects",
+    async (userId: number) => {
+        const resp = await axios.get(`/sharedprojects/${userId}`);
+        const projects = await resp.data;
+        return projects;
+    }
+
 )
 
 export const getProject = createAsyncThunk(
@@ -60,12 +79,13 @@ export const getProject = createAsyncThunk(
 
 export const addProject = createAsyncThunk(
     "project/addProject",
-    async (title: string) => {
+    async (project: any) => {
         const resp = await axios.post("/projects", {
-            title: title,
+            title: project.title,
+            userId: project.userId,
         });
-        const project = await resp.data;
-        return project;
+        const newProject = await resp.data;
+        return newProject;
     }
 )
 
@@ -133,6 +153,21 @@ export const projectSlice = createSlice({
             console.log(action.payload);
             state.projectStatus = "loading";
             state.projectError = null;
+        }),
+        builder.addCase(getSharedProjects.fulfilled, (state, action) => {
+            console.log(action.payload);
+            state.sharedProjectStatus = "succeeded";
+            state.sharedProjects = action.payload;
+        }),
+        builder.addCase(getSharedProjects.rejected, (state, action) => {
+            console.log(action.payload);
+            state.sharedProjectStatus = "failed";
+            state.sharedProjectError = action.error.message || null;
+        }),
+        builder.addCase(getSharedProjects.pending, (state, action) => {
+            console.log(action.payload);
+            state.sharedProjectStatus = "loading";
+            state.sharedProjectError = null;
         }),
         builder.addCase(addProject.fulfilled, (state, action) => {
             console.log(action.payload);
@@ -212,6 +247,7 @@ export const selectIsViewProjectModalShown = (state: RootState) => state.project
 export const selectIsEditProjectModalShown = (state: RootState) => state.project.isEditProjectModalShown;
 export const selectIsDeleteProjectModalShown = (state: RootState) => state.project.isDeleteProjectModalShown;
 export const selectProjects = (state: RootState) => state.project.projects;
+export const selectSharedProjects = (state: RootState) => state.project.sharedProjects;
 export const selectSelectedProject = (state: RootState) => state.project.selectedProject;
 export const selectGetProjectStatus = (state: RootState) => state.project.getProjectStatus;
 

@@ -10,7 +10,7 @@ import { verifyToken } from '../verifyToken';
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import cors from "cors";
-import hcaptcha from "express-hcaptcha";
+// import hcaptcha from "express-hcaptcha";
 require('dotenv').config();
 
 export const authRouter = Router();
@@ -69,7 +69,7 @@ authRouter.post("/login", async (req, res, next) => {
             }
             const payload = { id: user.id, email: user.email }
             const token = jwt.sign(payload, process.env.JWT_SECRET!, {
-                expiresIn: "1m",
+                expiresIn: "1h",
             })
             res.cookie("notejwt", token, { httpOnly: true });
             return res.json({ message: "Successfully logged in."})

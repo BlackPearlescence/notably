@@ -89,6 +89,7 @@ export const { showLoginModal, hideLoginModal, toggleLoginPageType } = authSlice
 export const selectIsLoginModalShown = (state: RootState) => state.auth.isLoginModalShown;
 export const selectLoginPageType = (state: RootState) => state.auth.loginPageType;
 export const selectIsLoggedIn = (state: RootState) => state.auth.isLoggedIn;
+export const selectUserDataStatus = (state: RootState) => state.auth.userDataStatus;
 export const selectUserData = (state: RootState) => state.auth.userData;
 
 export default authSlice.reducer;

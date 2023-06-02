@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.scss';
 import 'draft-js/dist/Draft.css';
@@ -7,7 +7,7 @@ import 'quill/dist/quill.snow.css'; // Import Quill's CSS styles
 import { NavigationBar } from './components/bars/NavigationBar';
 import { LandingPage } from './pages/LandingPage';
 import { Footer } from './components/bars/Footer';
-import { Route, Routes, Outlet } from 'react-router-dom';
+import { Route, Routes, Outlet, useNavigate } from 'react-router-dom';
 import { LoginPage } from './pages/LoginPage';
 import { PricingPage } from './pages/PricingPage';
 import { FeaturePage } from './pages/FeaturePage';
@@ -21,8 +21,17 @@ import { RenameProjectModal } from './components/projects/RenameProjectModal';
 import { DeleteConfirmProjectModal } from './components/projects/DeleteConfirmProjectModal';
 import { NoteTakingPage } from './pages/NoteTakingPage';
 import { NoteModal } from './components/notes/NoteModal';
+import { useAppDispatch, useAppSelector } from './store/hooks';
+import { checkIfLoggedIn, selectIsLoggedIn, selectUserData, selectUserDataStatus } from './store/slices/authSlice';
 
 function App() {
+
+  const dispatch = useAppDispatch()
+  const isLoggedInState = useAppSelector(selectIsLoggedIn)
+  const userDataStatusState = useAppSelector(selectUserDataStatus)
+  const userDataState = useAppSelector(selectUserData)
+  const navigate = useNavigate();
+  
 
   // const SiteLayout = () => {
   //   return (
@@ -33,6 +42,7 @@ function App() {
   //     </>
   //   )
   // }
+
 
   const NoteAppLayout = () => {
     return (

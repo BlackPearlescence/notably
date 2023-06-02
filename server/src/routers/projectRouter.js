@@ -15,31 +15,68 @@ const myPrisma_1 = require("../myPrisma");
 const http_status_codes_1 = require("http-status-codes");
 const noteRouter_1 = require("./noteRouter");
 exports.projectRouter = (0, express_1.Router)({ mergeParams: true });
-exports.projectRouter.get('/', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.projectRouter.get('/:userId', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const projects = yield myPrisma_1.myPrisma.project.findMany();
-        res.status(http_status_codes_1.StatusCodes.OK).json(projects);
+        const user = yield myPrisma_1.myPrisma.user.findUnique({
+            where: {
+                id: parseInt(req.params.userId)
+            },
+            include: {
+                projects: true,
+                sharedProjects: true
+            }
+        });
+        if (user) {
+            res.status(http_status_codes_1.StatusCodes.OK).json({
+                projects: user.projects,
+                sharedProjects: user.sharedProjects
+            });
+        }
+        else {
+            next(new Error("Failed to find user"));
+        }
     }
     catch (err) {
         next(new Error("No projects exist"));
     }
 }));
-exports.projectRouter.get("/myprojects", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { userId } = req.body;
+exports.projectRouter.get("/myprojects/:userId", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userId } = req.params;
     try {
         const user = yield myPrisma_1.myPrisma.user.findUnique({
             where: {
-                id: parseInt(req.body.userId)
+                id: parseInt(userId)
+            },
+            include: {
+                projects: true
             }
         });
         if (user) {
             res.status(http_status_codes_1.StatusCodes.OK).json(user.projects);
         }
     }
-    finally {
+    catch (_a) {
+        next(new Error("Failed to find user"));
     }
 }));
-exports.projectRouter.get("/sharedprojects", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+exports.projectRouter.get("/sharedprojects/:userId", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const { userId } = req.params;
+    try {
+        const user = yield myPrisma_1.myPrisma.user.findUnique({
+            where: {
+                id: parseInt(userId)
+            },
+            include: {
+                sharedProjects: true
+            }
+        });
+        if (user) {
+            res.status(http_status_codes_1.StatusCodes.OK).json(user.sharedProjects);
+        }
+    }
+    catch (_b) {
+        next(new Error("Failed to find user"));
+    }
 }));
 exports.projectRouter.get("/:projectId", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -56,7 +93,6 @@ exports.projectRouter.get("/:projectId", (req, res, next) => __awaiter(void 0, v
 }));
 exports.projectRouter.use("/:projectId/notes", noteRouter_1.noteRouter);
 exports.projectRouter.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    // Make title a string
     const { title, userId } = req.body;
     try {
         const user = yield myPrisma_1.myPrisma.user.findUnique({

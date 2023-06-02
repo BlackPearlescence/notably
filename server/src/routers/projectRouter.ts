@@ -9,30 +9,66 @@ export const projectRouter = Router({ mergeParams: true });
 
 
 
-projectRouter.get('/', async (req, res, next) => {
+projectRouter.get('/:userId', async (req, res, next) => {
     try {
-        const projects = await myPrisma.project.findMany()
-        res.status(StatusCodes.OK).json(projects);
+        const user = await myPrisma.user.findUnique({
+            where: {
+                id: parseInt(req.params.userId)
+            },
+            include: {
+                projects: true,
+                sharedProjects: true
+            }
+        })
+        if(user) {
+            res.status(StatusCodes.OK).json({
+                projects: user.projects,
+                sharedProjects: user.sharedProjects
+            });
+        } else {
+            next(new Error("Failed to find user"));
+        }
     } catch (err) {
         next(new Error("No projects exist"));
     }
 });
 
-projectRouter.get("/myprojects", async (req, res, next) => {
-    const { userId } = req.body;
+projectRouter.get("/myprojects/:userId", async (req, res, next) => {
+    const { userId } = req.params;
     try {
         const user = await myPrisma.user.findUnique({
             where: {
-                id: parseInt(req.body.userId)
+                id: parseInt(userId)
+            },
+            include: {
+                projects: true
             }
         })
         if (user) {
             res.status(StatusCodes.OK).json(user.projects);
         }
+    } catch {
+        next(new Error("Failed to find user"));
     }
 })
 
-projectRouter.get("/sharedprojects", async (req, res, next) => {
+projectRouter.get("/sharedprojects/:userId", async (req, res, next) => {
+    const { userId } = req.params;
+    try {
+        const user = await myPrisma.user.findUnique({
+            where: {
+                id: parseInt(userId)
+            },
+            include: {
+                sharedProjects: true
+            }
+        })
+        if (user) {
+            res.status(StatusCodes.OK).json(user.sharedProjects);
+        }
+    } catch {
+        next(new Error("Failed to find user"));
+    }
 })
 
 projectRouter.get("/:projectId", async (req, res, next) => {
@@ -51,7 +87,6 @@ projectRouter.get("/:projectId", async (req, res, next) => {
 projectRouter.use("/:projectId/notes", noteRouter)
 
 projectRouter.post("/", async (req, res, next) => {
-    // Make title a string
     const { title, userId } = req.body;
     try {
         const user = await myPrisma.user.findUnique({

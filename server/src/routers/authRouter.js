@@ -22,6 +22,7 @@ const passport_local_1 = require("passport-local");
 const http_status_codes_1 = require("http-status-codes");
 const verifyToken_1 = require("../verifyToken");
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
+// import hcaptcha from "express-hcaptcha";
 require('dotenv').config();
 exports.authRouter = (0, express_1.Router)();
 passport_1.default.use(new passport_local_1.Strategy({ usernameField: "email" }, (email, password, done) => __awaiter(void 0, void 0, void 0, function* () {
@@ -72,7 +73,7 @@ exports.authRouter.post("/login", (req, res, next) => __awaiter(void 0, void 0, 
             }
             const payload = { id: user.id, email: user.email };
             const token = jsonwebtoken_1.default.sign(payload, process.env.JWT_SECRET, {
-                expiresIn: "1m",
+                expiresIn: "1h",
             });
             res.cookie("notejwt", token, { httpOnly: true });
             return res.json({ message: "Successfully logged in." });

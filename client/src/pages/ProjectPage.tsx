@@ -3,17 +3,35 @@ import styles from "./ProjectPage.module.scss";
 import { HiPlusCircle } from "react-icons/hi";
 import { ProjectCard } from "../components/projects/ProjectCard";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { getProjects, selectProjects, showCreateProjectModal } from "../store/slices/projectSlice";
+import { getProjects, selectProjects, selectSharedProjects, showCreateProjectModal } from "../store/slices/projectSlice";
 import { useNavigate } from "react-router-dom";
+import { checkIfLoggedIn, selectIsLoggedIn, selectUserData } from "../store/slices/authSlice";
+
 
 export const ProjectPage: React.FC = () => {
 
+
     const dispatch = useAppDispatch();
     const projectList = useAppSelector(selectProjects);
+    const sharedProjectList = useAppSelector(selectSharedProjects);
+    const userDataState = useAppSelector(selectUserData)
+    const isLoggedInState = useAppSelector(selectIsLoggedIn)
+    const navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(getProjects())
+        dispatch(getProjects(userDataState.id))
     },[])
+
+    useEffect(() => {
+        dispatch(checkIfLoggedIn())
+        if(!isLoggedInState) {
+          navigate("/")  
+        }
+    },[isLoggedInState])
+
+    if(!projectList) {
+        return <div>Loading...</div>
+    }
 
     return (
         <div className={styles.projectWrapper}>
@@ -21,7 +39,7 @@ export const ProjectPage: React.FC = () => {
                 <h3>Create a New Project</h3>
                 <HiPlusCircle size={100} color="white"/>
             </div>
-            {projectList.map(project => <ProjectCard key={project.id} project={project} />)}
+            {projectList && projectList?.map(project => <ProjectCard key={project.id} project={project} /> )}
         </div>
     )
 }
