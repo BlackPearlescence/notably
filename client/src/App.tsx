@@ -32,7 +32,10 @@ function App() {
   const userDataState = useAppSelector(selectUserData)
   const navigate = useNavigate();
   
-
+  // if (userDataStatusState === "succeeded") {
+  //   dispatch(checkIfLoggedIn())
+  // }
+  // dispatch(checkIfLoggedIn())
   // const SiteLayout = () => {
   //   return (
   //     <>
@@ -42,7 +45,9 @@ function App() {
   //     </>
   //   )
   // }
-
+  useEffect(() => {
+    dispatch(checkIfLoggedIn())
+},[])
 
   const NoteAppLayout = () => {
     return (

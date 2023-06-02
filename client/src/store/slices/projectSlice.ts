@@ -52,7 +52,7 @@ const initialState: ProjectState = {
 export const getProjects = createAsyncThunk(
     "project/getProjects",
     async (userId: number) => {
-        const resp = await axios.get(`/myprojects/${userId}`);
+        const resp = await axios.get(`/projects/myprojects/${userId}`);
         const projects = await resp.data;
         return projects;
     }
@@ -61,7 +61,7 @@ export const getProjects = createAsyncThunk(
 export const getSharedProjects = createAsyncThunk(
     "project/getSharedProjects",
     async (userId: number) => {
-        const resp = await axios.get(`/sharedprojects/${userId}`);
+        const resp = await axios.get(`/projects/sharedprojects/${userId}`);
         const projects = await resp.data;
         return projects;
     }
