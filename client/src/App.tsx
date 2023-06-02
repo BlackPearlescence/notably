@@ -24,40 +24,31 @@ import { NoteModal } from './components/notes/NoteModal';
 
 function App() {
 
-  const SiteLayout = () => {
-    return (
-      <>
-        <NavigationBar />
-        <Outlet />
-        <Footer />
-      </>
-    )
-  }
+  // const SiteLayout = () => {
+  //   return (
+  //     <>
+  //       <NavigationBar />
+  //       <Outlet />
+  //       <Footer />
+  //     </>
+  //   )
+  // }
 
-  const NoteAppLayout = () => {
-    return (
-      <>
-        <NoteTopBar />
-        <Outlet />
-      </>
-    )
-  }
+  // const NoteAppLayout = () => {
+  //   return (
+  //     <>
+  //       <NoteTopBar />
+  //       <Outlet />
+  //     </>
+  //   )
+  // }
 
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<SiteLayout />}>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="pricing" element={<PricingPage />} />
-          <Route path="features" element={<FeaturePage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="thanks" element={<ThankYouPage />} />
-        </Route>
-        <Route path="/" element={<NoteAppLayout />}>
-          <Route path="projects" element={<ProjectPage />} />
-          <Route path="notes/:projectId" element={<NoteTakingPage />} /> 
-        </Route>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/projects" element={<ProjectPage />} />
+          <Route path="/notes/:projectId" element={<NoteTakingPage />} /> 
       </Routes>
       <NewProjectModal />
       <ViewProjectModal />

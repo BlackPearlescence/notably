@@ -15,7 +15,7 @@ export const ViewProjectModal: React.FC = () => {
     const updatedAtString = updatedAt.toLocaleDateString() + " " + updatedAt.toLocaleTimeString()
 
     if(!selectedProjectState){
-        return <div>Loading...</div>
+        return null
     }
     return(
         <Modal show={selectViewProjectModalState} onHide={() => dispatch(hideViewProjectModal())} centered size="lg">
