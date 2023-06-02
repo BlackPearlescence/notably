@@ -12,6 +12,7 @@ import { ColorPickerDropdown } from "./ColorPickerDropdown";
 import { Color } from "../../constants/colors";
 import { selectSelectedProject } from "../../store/slices/projectSlice";
 import { useParams } from "react-router-dom";
+import { selectUserData } from "../../store/slices/authSlice";
 
 
 
@@ -23,6 +24,7 @@ export const NoteModal: FC = () => {
     const currentNoteState = useAppSelector(selectSelectedNote)
     const isEditModeState = useAppSelector(selectIsEdit)
     const isNewNoteState = useAppSelector(selectIsNewNote)
+    const userDataState = useAppSelector(selectUserData)
     const dispatch = useAppDispatch()
     const [noteValue, setNoteValue] = useState<string>("");
     const [noteTitle, setNoteTitle] = useState<string>("");
@@ -106,7 +108,8 @@ export const NoteModal: FC = () => {
                 title: noteTitle,
                 content: noteValue,
                 color: color,
-                projectId: currentProjectState.id
+                projectId: currentProjectState.id,
+                userId: userDataState.id,
             }))
         } else {
             dispatch(updateNote({

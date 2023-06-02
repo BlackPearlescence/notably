@@ -47,7 +47,7 @@ exports.noteRouter.get("/:noteId", (req, res, next) => __awaiter(void 0, void 0,
     }
 }));
 exports.noteRouter.post("/", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const { title, content, color } = req.body;
+    const { title, content, color, userId } = req.body;
     const { projectId } = req.params;
     console.log(projectId);
     try {
@@ -64,7 +64,7 @@ exports.noteRouter.post("/", (req, res, next) => __awaiter(void 0, void 0, void 
                 },
                 createdBy: {
                     connect: {
-                        id: 1
+                        id: parseInt(userId)
                     }
                 },
             }

@@ -7,10 +7,11 @@ import { TiSortAlphabeticallyOutline } from "react-icons/ti";
 import { useMediaQuery } from "react-responsive";
 import { screenSizes } from "../screenSizes";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { getNotes, selectNote, selectNotes, selectSelectedNote, showNoteModal, toEditMode, updateExistingNote } from "../store/slices/noteSlice";
+import { getNotes, makeNewNote, selectNote, selectNotes, selectSelectedNote, showNoteModal, toEditMode, updateExistingNote } from "../store/slices/noteSlice";
 import { getProject, selectSelectedProject } from "../store/slices/projectSlice";
 import { current } from "@reduxjs/toolkit";
 import { useParams } from "react-router-dom";
+import { selectUserData } from "../store/slices/authSlice";
 
 export const NoteTakingPage = () => {
     const [isColorView, setIsColorView] = useState<boolean>(false);
@@ -21,6 +22,7 @@ export const NoteTakingPage = () => {
     const dispatch = useAppDispatch();
     const notesState = useAppSelector(selectNotes)
     const currentProjectState = useAppSelector(selectSelectedProject)
+    const userDataState = useAppSelector(selectUserData)
     const { projectId } = useParams();
     
     useEffect(() => {
@@ -51,12 +53,13 @@ export const NoteTakingPage = () => {
 
     const handleAddNote = () => {
         dispatch(toEditMode())
-        dispatch(updateExistingNote())
+        dispatch(makeNewNote())
         dispatch(showNoteModal())
         dispatch(selectNote({
             title: "",
             content: "",
-            color: "#ffffff"
+            color: "#ffffff",
+            userId: userDataState.id,
         }))
     }
 
@@ -96,7 +99,7 @@ export const NoteTakingPage = () => {
                             <HiOutlineFolder size={iconSize} color="010C80"/>
                         </div>
                     )} */}
-                    <div>
+                    <div onClick={handleAddNote}>
                         <HiOutlineDocumentAdd size={iconSize} color="010C80" onClick={handleAddNote}/>
                     </div>
                     {/* <div>

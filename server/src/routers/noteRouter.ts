@@ -49,7 +49,7 @@ noteRouter.get("/:noteId", async (req, res, next) => {
 
 
 noteRouter.post("/", async (req: Request<noteRequestParams,any,any>, res, next) => {
-    const { title, content, color } = req.body;
+    const { title, content, color, userId } = req.body;
     const { projectId } = req.params;
     console.log(projectId)
     try {
@@ -68,7 +68,7 @@ noteRouter.post("/", async (req: Request<noteRequestParams,any,any>, res, next) 
                 },
                 createdBy: {
                     connect: {
-                        id: 1
+                        id: parseInt(userId)
                     }
                 },
             }
