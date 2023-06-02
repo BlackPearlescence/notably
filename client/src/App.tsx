@@ -34,21 +34,24 @@ function App() {
   //   )
   // }
 
-  // const NoteAppLayout = () => {
-  //   return (
-  //     <>
-  //       <NoteTopBar />
-  //       <Outlet />
-  //     </>
-  //   )
-  // }
+  const NoteAppLayout = () => {
+    return (
+      <>
+        <NoteTopBar />
+        <Outlet />
+      </>
+    )
+  }
 
   return (
     <div className="App">
       <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/projects" element={<ProjectPage />} />
-          <Route path="/notes/:projectId" element={<NoteTakingPage />} /> 
+          <Route path="/" element={<NoteAppLayout/>}>
+            <Route path="/projects" element={<ProjectPage />} />
+            <Route path="/notes/:projectId" element={<NoteTakingPage />} /> 
+          </Route>
+          
       </Routes>
       <NewProjectModal />
       <ViewProjectModal />

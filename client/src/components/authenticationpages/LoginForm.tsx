@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef } from "react";
 import HCaptcha from "@hcaptcha/react-hcaptcha";
 import styles from "./LoginForm.module.scss";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { attemptToLogin, selectLoginPageType, toggleLoginPageType } from "../../store/slices/authSlice";
+import { attemptToLogin, selectIsLoggedIn, selectLoginPageType, toggleLoginPageType } from "../../store/slices/authSlice";
 import { ErrorMessage, Field, Form, Formik, useFormik } from "formik";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface AuthFormValues {
     email: string;
@@ -15,6 +16,7 @@ interface AuthFormValues {
 export const LoginForm: React.FC = () => {
 
     const loginPageType: "login" | "register" = useAppSelector(selectLoginPageType);
+    const isLoggeedInState = useAppSelector(selectIsLoggedIn);
     const [emailFieldStyle, setEmailFieldStyle] = useState<string>("");
     const [passwordFieldStyle, setPasswordFieldStyle] = useState<string>("");
     const [confirmPasswordFieldStyle, setConfirmPasswordFieldStyle] = useState<string>("");
@@ -28,6 +30,13 @@ export const LoginForm: React.FC = () => {
     const [registerSiteKey, setRegisterSiteKey] = useState<string>("")
     const loginCaptchaRef = useRef<HCaptcha>(null);
     const registerCaptchaRef = useRef<HCaptcha>(null);
+    const dispatch = useAppDispatch();
+    const initialValues: AuthFormValues = {
+        email: "",
+        password: "",
+        confirmPassword: ""
+    }
+    const navigate = useNavigate()
 
     useEffect(() => {
         const getLoginSiteKey = async () => {
@@ -63,12 +72,7 @@ export const LoginForm: React.FC = () => {
 
     
 
-    const dispatch = useAppDispatch();
-    const initialValues: AuthFormValues = {
-        email: "",
-        password: "",
-        confirmPassword: ""
-    }
+    
 
     const handleSubmit = (values: AuthFormValues) => {
         // console.log(values);
@@ -76,6 +80,9 @@ export const LoginForm: React.FC = () => {
             // dispatch(login(values))
             console.log("blah")
             dispatch(attemptToLogin(values))
+            if(isLoggeedInState) {
+                navigate("/projects")  
+            }
         } else {
             // dispatch(register(values))
             const registerProcess = async () => {
